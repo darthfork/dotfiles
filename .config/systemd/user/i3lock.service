@@ -1,0 +1,16 @@
+# Should be put in /etc/systemd/system/ or $HOME/.config/systemd/
+# and enabled with systemctl
+
+[Unit]
+Description=i3lock
+Before=sleep.target
+
+[Service]
+User=abhishek
+Type=forking
+Environment=DISPLAY=:0
+Environment="PATH=/home/abhishek/bin"
+ExecStart=/home/abhishek/bin/better_i3_lock
+
+[Install]
+WantedBy=suspend.target

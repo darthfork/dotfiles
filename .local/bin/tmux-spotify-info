@@ -1,0 +1,16 @@
+#!/usr/bin/env osascript
+# Returns the current playing song in Spotify for OSX
+
+tell application "Spotify"
+  if it is running then
+    set track_name to name of current track
+    set artist_name to artist of current track
+    set song to "♫ " & artist_name & " - " & track_name & " "
+    if length of song > 50 then
+        set out to text 1 thru 45 of song 
+        return out & " ... "
+    else
+        return song
+    end if
+  end if
+end tell

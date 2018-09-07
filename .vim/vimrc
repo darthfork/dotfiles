@@ -1,0 +1,79 @@
+let mapleader=","
+filetype plugin indent on
+runtime ftplugin/man.vim
+syntax enable
+
+if !has('nvim')
+    set term=screen-256color
+endif
+set background=dark
+set backspace=indent,eol,start
+set colorcolumn=80
+set encoding=utf-8
+set keywordprg=:Man
+set laststatus=2
+set nocompatible
+set noswapfile
+set number
+set showmatch
+set smartcase
+set splitright
+set guicursor=
+set expandtab shiftwidth=4 smarttab softtabstop=4 tabstop=4 smartindent
+
+if has('persistent_undo')
+    set undodir=$HOME/.vim/undo
+    set undolevels=10000
+    set undofile
+endif
+
+call plug#begin('~/.vim/plugged')
+    Plug 'mhinz/vim-signify'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'vim-syntastic/syntastic'
+    Plug 'kovisoft/slimv'
+    Plug 'kristijanhusak/vim-hybrid-material'
+call plug#end()
+
+colorscheme hybrid_reverse
+
+inoremap <C-c> <Esc>
+vnoremap <C-c> <Esc>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-p> :FZF --bind ctrl-p:abort<cr>
+nnoremap <C-t> :Tags <cr>
+nnoremap <leader>ss :mksession! ~/.vim/sessions/default <cr> " Save session
+nnoremap <leader>ls :source ~/.vim/sessions/default <cr>     " Load session
+nnoremap <leader>rw :%s/\s\+$//e<CR>
+nnoremap <leader>jq :%!jq '.'<CR>
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='hybrid' " Alternate - zenburn
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=docs --exclude=.venv'
+let g:syntastic_c_compiler_options = "-std=gnu11 -g -Wall -Wextra -fPIC -I /usr/include -Isrc/ -Isrc/include/"
+
+highlight BadWhitespace ctermbg=red guibg=red
+autocmd FileType c          set ai ts=4 sw=4 si sta et
+autocmd FileType cpp        set ai ts=4 sw=4 si sta et
+autocmd FileType python     set ai ts=4 sw=4 si sta et
+autocmd FileType bash       set ai ts=4 sw=4 si sta et
+autocmd FileType haml       set ai ts=2 sw=2 si sta et
+autocmd FileType html       set ai ts=2 sw=2 si sta et
+autocmd FileType javascript set ai ts=2 sw=2 si sta et
+autocmd FileType markdown   set ai ts=2 sw=2 si sta et
+autocmd FileType rst        set ai ts=4 sw=4 si sta et
+autocmd FileType ruby       set ai ts=2 sw=2 si sta et
+autocmd FileType yaml       set ai ts=2 sw=2 si sta et
+autocmd FileType go         set ai ts=8 sw=8 si sta noet
+autocmd FileType make       set ai ts=8 sw=8 si sta noet
