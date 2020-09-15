@@ -49,6 +49,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-p> :FZF --bind ctrl-p:abort<cr>
+nnoremap <C-b> :Buffers<cr>
 nnoremap <C-t> :Tags <cr>
 nnoremap <leader>ss :mksession! ~/.vim/sessions/default <cr> " Save session
 nnoremap <leader>ls :source ~/.vim/sessions/default <cr>     " Load session
@@ -74,6 +75,7 @@ autocmd FileType javascript set ai ts=2 sw=2 si sta et
 autocmd FileType markdown   set ai ts=2 sw=2 si sta et
 autocmd FileType rst        set ai ts=4 sw=4 si sta et
 autocmd FileType ruby       set ai ts=2 sw=2 si sta et
+autocmd FileType terraform  set ai ts=2 sw=2 si sta et
 autocmd FileType yaml       set ai ts=2 sw=2 si sta et
 autocmd FileType go         set ai ts=8 sw=8 si sta noet
 autocmd FileType make       set ai ts=8 sw=8 si sta noet
