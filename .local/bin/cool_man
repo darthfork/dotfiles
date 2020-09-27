@@ -1,0 +1,8 @@
+#!/bin/bash
+if  [ $# -eq 0 ]; then
+    man -k . | awk '{print $1}' | fzf  | xargs -r man
+    # comment above and uncomment below if you are running i3wm and dmenu
+    # man -k . | dmenu -l 30 | awk '{print $1}' | xargs -r man
+else
+    man "$@"
+fi

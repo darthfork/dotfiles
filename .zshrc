@@ -1,8 +1,3 @@
-if [ "$(uname)" == "Linux" ]; then
-    export HOME="/home/arai"
-elif [ "$(uname)" == "Darwin" ]; then
-    export HOME="/Users/arai"
-fi;
 export ZSH="$HOME/.oh-my-zsh"
 export TERM='xterm-256color'
 export EDITOR='vim'
@@ -18,8 +13,6 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.start_ssh_agent.sh
 
 # User specific environment and startup programs
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
-
 if [[ -d $HOME/.local/bin ]]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi;
@@ -32,13 +25,33 @@ if [[ -d $HOME/.fzf/bin ]]; then
     export PATH="$PATH:$HOME/.fzf/bin"
 fi;
 
-function dev_docker {
+function dorker {
     docker run -it\
       -v $HOME/.ssh:/root/.ssh\
       -v $HOME/workspace:/workspace\
       -v $HOME/.aws:/root/.aws\
-      -h arai_fedora_docker\
-      abhi56rai/fedora_dev:latest
+      -v /var/run/docker.sock:/var/run/docker.sock\
+      --user $(id -u):$(id -g)\
+      -e USER=$USER\
+      -h dorker\
+      abhi56rai/dorker:latest
+}
+
+function get_code {
+    yubikey_connected=$(ykman list)
+    if [ -z "$yubikey_connected" ]; then
+        echo "No yubikey found"
+        return
+    fi
+    if [ -z $1 ]; then
+        ykman oath code
+    else
+        ykman oath code $1 | tee $(tty) | awk '{print $2}' | xclip -selection clipboard
+    fi
+}
+
+function gh_docker_login {
+    cat $HOME/.creds/GH_TOKEN.txt | docker login docker.pkg.github.com -u darthfork --password-stdin
 }
 
 function enable_kube_completion {
@@ -46,11 +59,11 @@ function enable_kube_completion {
     source <(kubectl completion zsh)
 }
 
-alias ll="ls -alh"
 alias virsh="virsh --connect qemu:///system"
 alias python2="ipython2"
 alias python="ipython3"
-alias tmux="/usr/bin/tmux attach -t Base || /usr/bin/tmux new -s Base"
-alias tmuxb="/usr/bin/tmux attach -t Alt || /usr/bin/tmux new -s Alt"
+alias man="$HOME/.local/bin/cool_man"
+alias tmux="tmux attach -t Base || tmux new -s Base"
+alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
