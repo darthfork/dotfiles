@@ -21,10 +21,6 @@ if [[ -d $HOME/workspace/go ]]; then
     export GOPATH=$HOME/workspace/go
 fi;
 
-if [[ -d $HOME/.fzf/bin ]]; then
-    export PATH="$PATH:$HOME/.fzf/bin"
-fi;
-
 function dorker {
     docker run -it\
       -v $HOME/.ssh:/root/.ssh\
