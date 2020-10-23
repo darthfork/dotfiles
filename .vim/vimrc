@@ -36,8 +36,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'sheerun/vim-polyglot'
     Plug 'vim-syntastic/syntastic'
-    Plug 'kovisoft/slimv'
     Plug 'kristijanhusak/vim-hybrid-material'
+    Plug 'neoclide/coc.nvim'
 call plug#end()
 
 colorscheme hybrid_reverse
@@ -63,6 +63,17 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=docs --exclude=.venv'
 let g:syntastic_c_compiler_options = "-std=gnu11 -g -Wall -Wextra -fPIC -I /usr/include -Isrc/ -Isrc/include/"
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 highlight BadWhitespace ctermbg=red guibg=red
 autocmd FileType c          set ai ts=4 sw=4 si sta et

@@ -1,0 +1,9 @@
+{
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-15",
+            "path": "/Library/Java/JavaVirtualMachines/jdk-15.0.1.jdk/Contents/Home",
+            "default": true
+        }
+    ]
+}
