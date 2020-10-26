@@ -21,31 +21,6 @@ if [[ -d $HOME/workspace/go ]]; then
     export GOPATH=$HOME/workspace/go
 fi;
 
-function dorker {
-    docker run -it\
-      -v $HOME/.ssh:/root/.ssh\
-      -v $HOME/workspace:/workspace\
-      -v $HOME/.aws:/root/.aws\
-      -v /var/run/docker.sock:/var/run/docker.sock\
-      --user $(id -u):$(id -g)\
-      -e USER=$USER\
-      -h dorker\
-      abhi56rai/dorker:latest
-}
-
-function get_code {
-    yubikey_connected=$(ykman list)
-    if [ -z "$yubikey_connected" ]; then
-        echo "No yubikey found"
-        return
-    fi
-    if [ -z $1 ]; then
-        ykman oath code
-    else
-        ykman oath code $1 | tee $(tty) | awk '{print $2}' | xclip -selection clipboard
-    fi
-}
-
 function gh_docker_login {
     cat $HOME/.creds/GH_TOKEN.txt | docker login docker.pkg.github.com -u darthfork --password-stdin
 }
