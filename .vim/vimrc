@@ -51,10 +51,11 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-p> :FZF --bind ctrl-p:abort<cr>
 nnoremap <C-b> :Buffers<cr>
 nnoremap <C-t> :Tags <cr>
-nnoremap <leader>ss :mksession! ~/.vim/sessions/default <cr> " Save session
-nnoremap <leader>ls :source ~/.vim/sessions/default <cr>     " Load session
+nnoremap <silent><leader>ss :mksession! ~/.vim/sessions/default <cr> " Save session
+nnoremap <silent><leader>ls :source ~/.vim/sessions/default <cr>     " Load session
 nnoremap <leader>rw :%s/\s\+$//e<CR>
 nnoremap <leader>jq :%!jq '.'<CR>
+nnoremap <silent><Leader>g :GitBlame<CR>
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='hybrid' " Alternate - zenburn
