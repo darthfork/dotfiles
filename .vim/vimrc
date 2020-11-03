@@ -38,6 +38,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-syntastic/syntastic'
     Plug 'kristijanhusak/vim-hybrid-material'
     Plug 'neoclide/coc.nvim'
+    Plug 'vimwiki/vimwiki'
 call plug#end()
 
 colorscheme hybrid_reverse
@@ -57,6 +58,7 @@ nnoremap <leader>rw :%s/\s\+$//e<CR>
 nnoremap <leader>jq :%!jq '.'<CR>
 nnoremap <silent><Leader>g :GitBlame<CR>
 
+let g:vimwiki_list = [{'path': '~/workspace/notes/'}]
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='hybrid' " Alternate - zenburn
 let g:airline_powerline_fonts = 0
