@@ -1,0 +1,11 @@
+[Unit]
+Description=Redshift to set color temperature
+PartOf=graphical-login.target
+
+[Service]
+Environment=DISPLAY=:0
+User=arai
+ExecStart=/usr/bin/redshift -O 3600
+
+[Install]
+WantedBy=graphical-login.target

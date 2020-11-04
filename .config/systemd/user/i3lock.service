@@ -10,7 +10,7 @@ User=abhishek
 Type=forking
 Environment=DISPLAY=:0
 Environment="PATH=/home/abhishek/bin"
-ExecStart=/home/abhishek/bin/better_i3_lock
+ExecStart=/home/arai/.local/bin/better_i3_lock
 
 [Install]
 WantedBy=suspend.target
