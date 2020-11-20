@@ -6,6 +6,8 @@ syntax enable
 if !has('nvim')
     set term=screen-256color
 endif
+
+set termguicolors
 set background=dark
 set backspace=indent,eol,start
 set colorcolumn=80
@@ -37,7 +39,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'sheerun/vim-polyglot'
     Plug 'vim-syntastic/syntastic'
     Plug 'kristijanhusak/vim-hybrid-material'
-    Plug 'neoclide/coc.nvim'
+    Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
     Plug 'vimwiki/vimwiki'
 call plug#end()
 
@@ -58,15 +60,15 @@ nnoremap <leader>rw :%s/\s\+$//e<CR>
 nnoremap <leader>jq :%!jq '.'<CR>
 nnoremap <silent><Leader>g :GitBlame<CR>
 
-let g:vimwiki_list = [{'path': '~/workspace/notes/'}]
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='hybrid' " Alternate - zenburn
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=docs --exclude=.venv'
+let g:vimwiki_list = [{'path': '~/Documents/notes/'}]
 let g:syntastic_c_compiler_options = "-std=gnu11 -g -Wall -Wextra -fPIC -I /usr/include -Isrc/ -Isrc/include/"
-
+let g:fzf_layout = { 'down':  '40%'}
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
