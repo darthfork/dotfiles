@@ -1,0 +1,13 @@
+version: "3"
+services:
+  dorker:
+    image: darthfork/dorker:latest
+    hostname: dorker
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - /Users/abhishekrai/.ssh:/root/.ssh
+      - /Users/abhishekrai/workspace:/workspace
+      - /Users/abhishekrai/.aws:/root/.aws
+      - /var/run/docker.sock:/var/run/docker.sock
+    entrypoint: /bin/bash

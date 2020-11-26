@@ -1,8 +1,9 @@
 #!/bin/bash
-docker run -it\
-    -v $HOME/.ssh:/root/.ssh\
-    -v $HOME/workspace:/workspace\
-    -v $HOME/.aws:/root/.aws\
-    -v /var/run/docker.sock:/var/run/docker.sock\
-    -h dorker\
-    abhi56rai/dorker:latest
+docker-compose -f "$HOME/.config/docker-compose.yml" run dorker
+# docker run -it\
+#     -v $HOME/.ssh:/root/.ssh\
+#     -v $HOME/workspace:/workspace\
+#     -v $HOME/.aws:/root/.aws\
+#     -v /var/run/docker.sock:/var/run/docker.sock\
+#     -h dorker\
+#     darthfork/dorker:latest /bin/bash
