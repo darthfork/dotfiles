@@ -3,8 +3,10 @@ services:
   dorker:
     image: darthfork/dorker:latest
     hostname: dorker
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
+    stdin_open: true
+    tty: true
+    environment:
+      - AWS_PROFILE
     volumes:
       - /Users/abhishekrai/.ssh:/root/.ssh
       - /Users/abhishekrai/workspace:/workspace
