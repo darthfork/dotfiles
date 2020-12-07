@@ -1,9 +1,13 @@
-#!/bin/bash
-docker-compose -f "$HOME/.config/docker-compose.yml" run dorker
-# docker run -it\
-#     -v $HOME/.ssh:/root/.ssh\
-#     -v $HOME/workspace:/workspace\
-#     -v $HOME/.aws:/root/.aws\
-#     -v /var/run/docker.sock:/var/run/docker.sock\
-#     -h dorker\
-#     darthfork/dorker:latest /bin/bash
+#!/usr/bin/env bash
+
+if [ "$(uname -s)" == "Darwin" ]; then
+    docker-compose -f "$HOME/.config/docker-compose.yml" run dorker
+elif [ "$(uname -s)" == "Linux" ]; then
+    podman run -it\
+        -v "$HOME"/.ssh:/root/.ssh\
+        -v "$HOME"/workspace:/workspace:z\
+        -v "$HOME"/.aws:/root/.aws\
+        -v /var/run/docker.sock:/var/run/docker.sock\
+        -h dorker\
+        darthfork/dorker:latest /bin/bash
+fi
