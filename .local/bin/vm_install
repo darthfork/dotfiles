@@ -1,0 +1,62 @@
+#!/bin/bash
+
+NETWORK1="bridge:br0"
+NETWORK2="default"
+DOMAIN=""
+
+usage(){
+cat <<EOF
+Usage: $0 [options]
+
+-i|--iso name of the iso
+-d|--domain name of the domain/host
+-n|--nat NAT network
+EOF
+}
+
+while [[ $# -gt 0 ]]
+do
+    key="$1"
+    case $key in
+        -i|--iso)
+            ISO="$2"
+            shift
+            shift
+            ;;
+        -n|--nat)
+            NETWORK1="default"
+            NETWORK2="bridge:br0"
+            shift
+            ;;
+        -d|--domain)
+            DOMAIN="$2"
+            shift
+            shift
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+if [[ -z "$DOMAIN" ]]; then
+    echo "Please provide a domain/host name"
+    usage
+    exit 1;
+fi
+
+virt-install\
+    --connect qemu:///system\
+    --network $NETWORK1\
+    --network $NETWORK2\
+    --cdrom /home/abhishek/libvirt_pool/"$ISO".iso\
+    --name "$DOMAIN"\
+    --ram=4096\
+    --vcpus=2\
+    --disk path=/home/images/"$DOMAIN.qcow2",size=20,sparse=yes\
+    --check disk_size=off
