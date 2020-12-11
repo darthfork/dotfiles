@@ -11,5 +11,6 @@ services:
       - /Users/abhishekrai/.ssh:/root/.ssh
       - /Users/abhishekrai/workspace:/workspace
       - /Users/abhishekrai/.aws:/root/.aws
+      - /Users/abhishekrai/.kube:/root/.kube
       - /var/run/docker.sock:/var/run/docker.sock
     entrypoint: /bin/bash
