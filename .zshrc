@@ -9,7 +9,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/.start_ssh_agent.sh
 
 # User specific environment and startup programs
 if [[ -d $HOME/.local/bin ]]; then
@@ -20,14 +19,11 @@ if [[ -d $HOME/workspace/go ]]; then
   export GOPATH=$HOME/workspace/go
 fi;
 
+source start_ssh_agent.sh
+
 function aws_creds {
   export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
   export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
-}
-
-function enable_kube_completion {
-  autoload -U +X compinit && compinit
-  source <(kubectl completion zsh)
 }
 
 alias virsh="virsh --connect qemu:///system"
