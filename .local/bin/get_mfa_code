@@ -9,6 +9,6 @@ if [ -z $1 ]; then
     ykman oath code
 else
     # uncomment for linux
-    # ykman oath code $1 | tee $(tty) | awk '{print $2}' | xclip -selection clipboard
-    ykman oath code $1 | tee $(tty) | awk '{print $2}' | pbcopy
+    # ykman oath code $1 | tee /dev/tty | awk '{print $2}' | xclip -selection clipboard
+    ykman oath code $1 | tee /dev/tty | awk '{print $2}' | pbcopy
 fi
