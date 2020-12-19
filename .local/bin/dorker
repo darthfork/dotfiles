@@ -10,5 +10,5 @@ elif [ "$(uname -s)" == "Linux" ]; then
         -v "$HOME"/.kube:/root/.kube:z\
         -v /var/run/docker.sock:/var/run/docker.sock:z\
         -h dorker\
-        darthfork/dorker:latest /bin/bash
+        docker.io/darthfork/dorker:latest /bin/bash
 fi

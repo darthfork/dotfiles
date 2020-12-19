@@ -8,9 +8,9 @@ services:
     environment:
       - AWS_PROFILE
     volumes:
-      - /Users/abhishekrai/.ssh:/root/.ssh
-      - /Users/abhishekrai/workspace:/workspace
-      - /Users/abhishekrai/.aws:/root/.aws
-      - /Users/abhishekrai/.kube:/root/.kube
+      - $HOME/.ssh:/root/.ssh
+      - $HOME/workspace:/workspace
+      - $HOME/.aws:/root/.aws
+      - $HOME/.kube:/root/.kube
       - /var/run/docker.sock:/var/run/docker.sock
     entrypoint: /bin/bash
