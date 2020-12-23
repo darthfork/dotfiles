@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 mac_battery_info(){
     percentage=$(pmset -g batt | tail -n -1 | awk '{print $3}' | sed 's/;//g')

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ICON=$HOME/.config/i3/icon.png
 TMPBG=/tmp/screen.png
 scrot /tmp/screen.png

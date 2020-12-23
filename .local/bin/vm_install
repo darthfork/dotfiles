@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NETWORK1="bridge:br0"
 NETWORK2="default"

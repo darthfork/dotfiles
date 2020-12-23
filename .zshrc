@@ -12,18 +12,19 @@ source $ZSH/oh-my-zsh.sh
 
 # User specific environment and startup programs
 if [[ -d $HOME/.local/bin ]]; then
-  export PATH="$PATH:$HOME/.local/bin"
+    export PATH="$PATH:$HOME/.local/bin"
 fi;
 
 if [[ -d $HOME/workspace/go ]]; then
-  export GOPATH=$HOME/workspace/go
+    export GOPATH=$HOME/workspace/go
 fi;
 
 source start_ssh_agent.sh
 
 function aws_creds {
-  export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
-  export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
+    export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
+    export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
+    export AWS_ACCOUNT_NUMBER=$(aws sts get-caller-identity --query Account --output text)
 }
 
 alias virsh="virsh --connect qemu:///system"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 yubikey_connected=$(ykman list)
 if [ -z "$yubikey_connected" ]; then

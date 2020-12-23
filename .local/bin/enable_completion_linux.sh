@@ -16,5 +16,5 @@ fi
 cat << EOF >> /etc/zshrc
 autoload -U +X compinit && compinit
 source <(kubectl completion zsh)
-source $(command -v aws_zsh_completer.sh)
+complete -C '$(command -v aws_completer)' aws
 EOF
