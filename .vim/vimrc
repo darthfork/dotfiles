@@ -88,7 +88,6 @@ autocmd FileType c          set ai ts=4 sw=4 si sta et
 autocmd FileType cpp        set ai ts=4 sw=4 si sta et
 autocmd FileType python     set ai ts=4 sw=4 si sta et
 autocmd FileType bash       set ai ts=4 sw=4 si sta et
-autocmd FileType haml       set ai ts=2 sw=2 si sta et
 autocmd FileType html       set ai ts=2 sw=2 si sta et
 autocmd FileType javascript set ai ts=2 sw=2 si sta et
 autocmd FileType markdown   set ai ts=2 sw=2 si sta et

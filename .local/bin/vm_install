@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
-NETWORK1="bridge:br0"
-NETWORK2="default"
-DOMAIN=""
+ISO=""
+NETWORK="default"
+NAME=""
+POOL="$HOME/libvirt_pool"
 
 usage(){
 cat <<EOF
 Usage: $0 [options]
 
--i|--iso name of the iso
--d|--domain name of the domain/host
--n|--nat NAT network
+-i|--iso name of iso file in the storage pool
+-n|--name name of the domain/host
+-b|--bridge Bridged network
 EOF
 }
 
@@ -23,19 +24,14 @@ do
             shift
             shift
             ;;
-        -n|--nat)
-            NETWORK1="default"
-            NETWORK2="bridge:br0"
+        -b|--bridged)
+            NETWORK="bridge:br0"
             shift
             ;;
-        -d|--domain)
-            DOMAIN="$2"
+        -n|--name)
+            NAME="$2"
             shift
             shift
-            ;;
-        -h|--help)
-            usage
-            exit 0
             ;;
         *)
             usage
@@ -44,19 +40,24 @@ do
     esac
 done
 
-if [[ -z "$DOMAIN" ]]; then
+if [[ -z "$NAME" ]]; then
     echo "Please provide a domain/host name"
+    usage
+    exit 1;
+fi
+
+ if [[ -z "$ISO" ]]; then
+    echo "Please provide installation cdrom"
     usage
     exit 1;
 fi
 
 virt-install\
     --connect qemu:///system\
-    --network $NETWORK1\
-    --network $NETWORK2\
-    --cdrom /home/abhishek/libvirt_pool/"$ISO".iso\
-    --name "$DOMAIN"\
+    --network $NETWORK\
+    --cdrom "$POOL/$ISO"\
+    --name "$NAME"\
     --ram=4096\
     --vcpus=2\
-    --disk path=/home/images/"$DOMAIN.qcow2",size=20,sparse=yes\
+    --disk path="$POOL/$NAME.qcow2",size=20,sparse=yes\
     --check disk_size=off
