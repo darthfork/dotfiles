@@ -8,9 +8,15 @@ services:
     environment:
       - AWS_PROFILE
     volumes:
-      - $HOME/.ssh:/root/.ssh
-      - $HOME/workspace:/workspace
-      - $HOME/.aws:/root/.aws
-      - $HOME/.kube:/root/.kube
+      - $HOME/workspace:/darthfork/workspace
+      - $HOME/.ssh:/darthfork/.ssh
+      - $HOME/.aws:/darthfork/.aws
+      - $HOME/.kube:/darthfork/.kube
+      - $HOME/.helm:/darthfork/.helm
+      - $HOME/.vim:/darthfork/.vim
+      - $SSH_AUTH_SOCK:/tmp/ssh_auth_sock
       - /var/run/docker.sock:/var/run/docker.sock
     entrypoint: /bin/bash
+    # Set this value in ~/.env
+    group_add:
+      - $DOCKER_GROUP_ID

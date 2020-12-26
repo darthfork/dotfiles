@@ -10,7 +10,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source start_ssh_agent.sh
 
 # Default path for linux machines
 # export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
@@ -22,6 +21,8 @@ fi;
 if [[ -d $HOME/workspace/go ]]; then
     export GOPATH=$HOME/workspace/go
 fi;
+
+source start_ssh_agent.sh
 
 function aws_creds {
     export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)

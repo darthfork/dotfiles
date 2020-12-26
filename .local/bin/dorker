@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 
 if [ "$(uname -s)" == "Darwin" ]; then
-    docker-compose -f "$HOME/.config/docker-compose.yml" run dorker
+    # Set $DOCKER_GROUP_ID before running this
+    docker-compose -f "$HOME"/.config/docker-compose.yml run dorker
 elif [ "$(uname -s)" == "Linux" ]; then
     podman run -it\
-        -v "$HOME"/.ssh:/root/.ssh\
-        -v "$HOME"/workspace:/workspace:z\
-        -v "$HOME"/.aws:/root/.aws:z\
-        -v "$HOME"/.kube:/root/.kube:z\
+        -v "$HOME"/.ssh:/darthfork/.ssh:z\
+        -v "$HOME"/workspace:/darthfork/workspace:z\
+        -v "$HOME"/.aws:/darthfork/.aws:z\
+        -v "$HOME"/.kube:/darthfork/.kube:z\
+        -v "$HOME"/.helm:/darthfork/.helm:z\
+        -v "$HOME"/.vim:/darthfork/.vim:z\
+        -v "$SSH_AUTH_SOCK":/tmp/ssh_auth_sock:z\
         -v /var/run/docker.sock:/var/run/docker.sock:z\
+        --group-add "$(getent group docker | awk -F: '{print $3}')"\
         -h dorker\
         docker.io/darthfork/dorker:latest /bin/bash
 fi
