@@ -17,6 +17,7 @@ services:
       - $SSH_AUTH_SOCK:/tmp/ssh_auth_sock
       - /var/run/docker.sock:/var/run/docker.sock
     entrypoint: /bin/bash
-    # Set this value in ~/.env
-    group_add:
-      - $DOCKER_GROUP_ID
+    # To use docker cli uncomment below and
+    # set this value in environment variables or ~/.env
+    # group_add:
+    #   - $DOCKER_GROUP_ID
