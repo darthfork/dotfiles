@@ -13,6 +13,7 @@
 	lg = "log --graph --abbrev-commit --pretty=format:'%C(bold green)%h%C(reset) - %C(bold red)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 	branches = "branch -a"
 	newbranch = "!f() { git checkout master; git pull origin master; git checkout -b $1; }; f"
+	showcommit = "!f() { git diff $1~; }; f"
 [pager]
 	diff = less
 	branch =
@@ -27,3 +28,5 @@
 	allow = always
 [pull]
 	rebase = false
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
