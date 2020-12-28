@@ -32,20 +32,6 @@ if has('persistent_undo')
     set undofile
 endif
 
-call plug#begin('~/.vim/plugged')
-    Plug 'mhinz/vim-signify'
-    Plug 'christoomey/vim-tmux-navigator'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'vim-syntastic/syntastic'
-    Plug 'kristijanhusak/vim-hybrid-material'
-    Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-    Plug 'vimwiki/vimwiki'
-call plug#end()
-
 colorscheme hybrid_reverse
 
 inoremap <C-c> <Esc>
