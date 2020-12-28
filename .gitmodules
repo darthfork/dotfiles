@@ -1,33 +1,33 @@
-[submodule ".vim/pack/vendor/start/vim-signify"]
-	path = .vim/pack/vendor/start/vim-signify
+[submodule ".vim/pack/plugins/start/vim-signify"]
+	path = .vim/pack/plugins/start/vim-signify
 	url = git@github.com:mhinz/vim-signify.git
-[submodule ".vim/pack/vendor/start/vim-tmux-navigator"]
-	path = .vim/pack/vendor/start/vim-tmux-navigator
+[submodule ".vim/pack/plugins/start/vim-tmux-navigator"]
+	path = .vim/pack/plugins/start/vim-tmux-navigator
 	url = git@github.com:christoomey/vim-tmux-navigator.git
-[submodule ".vim/pack/vendor/start/fzf.vim"]
-	path = .vim/pack/vendor/start/fzf.vim
-	url = git@github.com:junegunn/fzf.vim.git
-[submodule ".vim/pack/vendor/start/vim-airline"]
-	path = .vim/pack/vendor/start/vim-airline
-	url = git@github.com:vim-airline/vim-airline.git
-[submodule ".vim/pack/vendor/start/vim-airline-themes"]
-	path = .vim/pack/vendor/start/vim-airline-themes
-	url = git@github.com:vim-airline/vim-airline-themes.git
-[submodule ".vim/pack/vendor/start/vim-polyglot"]
-	path = .vim/pack/vendor/start/vim-polyglot
-	url = git@github.com:sheerun/vim-polyglot.git
-[submodule ".vim/pack/vendor/start/syntastic"]
-	path = .vim/pack/vendor/start/syntastic
-	url = git@github.com:vim-syntastic/syntastic
-[submodule ".vim/pack/vendor/start/vim-hybrid-material"]
-	path = .vim/pack/vendor/start/vim-hybrid-material
-	url = git@github.com:kristijanhusak/vim-hybrid-material
-[submodule ".vim/pack/vendor/start/coc.nvim"]
-	path = .vim/pack/vendor/start/coc.nvim
-	url = git@github.com:neoclide/coc.nvim
-[submodule ".vim/pack/vendor/start/vimwiki"]
-	path = .vim/pack/vendor/start/vimwiki
-	url = git@github.com:vimwiki/vimwiki
-[submodule ".vim/pack/vendor/start/fzf"]
-	path = .vim/pack/vendor/start/fzf
+[submodule ".vim/pack/plugins/start/fzf"]
+	path = .vim/pack/plugins/start/fzf
 	url = git@github.com:junegunn/fzf.git
+[submodule ".vim/pack/plugins/start/fzf.vim"]
+	path = .vim/pack/plugins/start/fzf.vim
+	url = git@github.com:junegunn/fzf.vim.git
+[submodule ".vim/pack/plugins/start/vim-airline"]
+	path = .vim/pack/plugins/start/vim-airline
+	url = git@github.com:vim-airline/vim-airline.git
+[submodule ".vim/pack/plugins/start/vim-airline-themes"]
+	path = .vim/pack/plugins/start/vim-airline-themes
+	url = git@github.com:vim-airline/vim-airline-themes.git
+[submodule ".vim/pack/plugins/start/vim-polyglot"]
+	path = .vim/pack/plugins/start/vim-polyglot
+	url = git@github.com:sheerun/vim-polyglot.git
+[submodule ".vim/pack/plugins/start/syntastic"]
+	path = .vim/pack/plugins/start/syntastic
+	url = git@github.com:vim-syntastic/syntastic.git
+[submodule ".vim/pack/plugins/start/vim-hybrid-material"]
+	path = .vim/pack/plugins/start/vim-hybrid-material
+	url = git@github.com:kristijanhusak/vim-hybrid-material.git
+[submodule ".vim/pack/plugins/start/coc.nvim"]
+	path = .vim/pack/plugins/start/coc.nvim
+	url = git@github.com:neoclide/coc.nvim.git
+[submodule ".vim/pack/plugins/start/vimwiki"]
+	path = .vim/pack/plugins/start/vimwiki
+	url = git@github.com:vimwiki/vimwiki
