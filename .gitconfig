@@ -1,22 +1,29 @@
 [color]
-    ui = true
-    pager = false
+	ui = true
+	pager = true
 [user]
-    name = Abhishek Rai
-    email = rai.abhishek90@gmail.com
-    signingKey = 72471FC55B6D8AC3008B71EB22E13F39CDE58A8C
+	name = Abhishek Rai
+	email = rai.abhishek90@gmail.com
+	signingKey = 72471FC55B6D8AC3008B71EB22E13F39CDE58A8C
 [core]
-    editor = vim
-    excludesfile = ~/.gitignore
-    pager = tig
+	editor = vim
+	excludesfile = ~/.gitignore
 [alias]
-    pr = "!f() { git checkout master; git branch -D pr/$1 || true; git fetch upstream refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-    newbranch = "!f() { git checkout master; git pull upstream master; git checkout -b $1; }; f"
+	pr = "!f() { git checkout master; git branch -D pr/$1 || true; git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+	lg = "log --graph --abbrev-commit --pretty=format:'%C(bold green)%h%C(reset) - %C(bold red)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+	branches = "branch -a"
+	newbranch = "!f() { git checkout master; git pull origin master; git checkout -b $1; }; f"
+[pager]
+	diff = less
+	branch =
+	log = less
 [diff]
-    tool = vimdiff
+	tool = vimdiff
 [difftool]
-    prompt = false
+	prompt = false
 [commit]
-    gpgSign = true
+	gpgSign = true
 [protocol "keybase"]
-    allow = always
+	allow = always
+[pull]
+	rebase = false
