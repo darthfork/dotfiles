@@ -31,3 +31,6 @@
 [submodule ".vim/pack/plugins/start/vimwiki"]
 	path = .vim/pack/plugins/start/vimwiki
 	url = git@github.com:vimwiki/vimwiki
+[submodule ".vim/pack/plugins/opt/vim-go"]
+	path = .vim/pack/plugins/opt/vim-go
+	url = git@github.com:fatih/vim-go.git

@@ -34,20 +34,18 @@ endif
 
 colorscheme hybrid_reverse
 
-inoremap <C-c> <Esc>
-vnoremap <C-c> <Esc>
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap <C-p> :FZF --bind ctrl-p:abort<cr>
-nnoremap <C-b> :Buffers<cr>
-nnoremap <C-t> :Tags <cr>
-nnoremap <silent><leader>ss :mksession! ~/.vim/sessions/default <cr> " Save session
-nnoremap <silent><leader>ls :source ~/.vim/sessions/default <cr>     " Load session
-nnoremap <leader>rw :%s/\s\+$//e<CR>
-nnoremap <leader>jq :%!jq '.'<CR>
-nnoremap <silent><Leader>g :GitBlame<CR>
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+nmap <C-p> :FZF --bind ctrl-p:abort<cr>
+nmap <C-b> :Buffers<cr>
+nmap <C-t> :Tags <cr>
+nmap <leader>rw :%s/\s\+$//e<CR>
+nmap <leader>jq :%!jq '.'<CR>
+nmap <silent><Leader>g :GitBlame<CR>
+nmap <leader>ss :mksession! ~/.vim/sessions/default <cr> " Save session
+nmap <leader>ls :source ~/.vim/sessions/default <cr>     " Load session
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='hybrid' " Alternate - zenburn
@@ -58,6 +56,7 @@ let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=docs --exclude=.venv
 let g:vimwiki_list = [{'path': '~/Documents/notes/'}]
 let g:syntastic_c_compiler_options = "-std=gnu11 -g -Wall -Wextra -fPIC -I /usr/include -Isrc/ -Isrc/include/"
 let g:fzf_layout = { 'down':  '40%'}
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -72,6 +71,8 @@ endfunction
 highlight BadWhitespace ctermbg=red guibg=red
 autocmd FileType c          set ai ts=4 sw=4 si sta et
 autocmd FileType cpp        set ai ts=4 sw=4 si sta et
+autocmd FileType go         set ai ts=8 sw=8 si sta noet
+autocmd FileType go         packadd vim-go
 autocmd FileType python     set ai ts=4 sw=4 si sta et
 autocmd FileType bash       set ai ts=4 sw=4 si sta et
 autocmd FileType html       set ai ts=2 sw=2 si sta et
@@ -81,5 +82,4 @@ autocmd FileType rst        set ai ts=4 sw=4 si sta et
 autocmd FileType ruby       set ai ts=2 sw=2 si sta et
 autocmd FileType terraform  set ai ts=2 sw=2 si sta et
 autocmd FileType yaml       set ai ts=2 sw=2 si sta et
-autocmd FileType go         set ai ts=8 sw=8 si sta noet
 autocmd FileType make       set ai ts=8 sw=8 si sta noet
