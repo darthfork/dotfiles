@@ -55,6 +55,7 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=docs --exclude=.venv'
 let g:vimwiki_list = [{'path': '~/Documents/notes/'}]
 let g:syntastic_c_compiler_options = "-std=gnu11 -g -Wall -Wextra -fPIC -I /usr/include -Isrc/ -Isrc/include/"
+let g:syntastic_python_python_exec = 'python3'
 let g:fzf_layout = { 'down':  '40%'}
 
 inoremap <silent><expr> <TAB>
