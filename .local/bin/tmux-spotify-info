@@ -2,8 +2,8 @@
 
 if [ "$(uname)" == "Linux" ];
 then
-    echo $(spotifycli --statusshort)
+    spotifycli --statusshort 2>&1
 elif [ "$(uname)" == "Darwin" ];
 then
-    echo $("$HOME/.local/bin/spotify-status-macos")
+    "$HOME/.local/bin/spotify-status-macos"
 fi

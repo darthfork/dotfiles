@@ -4,11 +4,11 @@ runtime ftplugin/man.vim
 syntax enable
 
 if !has('nvim')
-    set term=screen-256color
+  set term=screen-256color
 endif
 
 if system("uname") == "Darwin\n"
-    set termguicolors
+  set termguicolors
 endif
 
 set background=dark
@@ -27,9 +27,9 @@ set guicursor=
 set expandtab shiftwidth=4 smarttab softtabstop=4 tabstop=4 smartindent
 
 if has('persistent_undo')
-    set undodir=$HOME/.vim/undo
-    set undolevels=10000
-    set undofile
+  set undodir=$HOME/.vim/undo
+  set undolevels=10000
+  set undofile
 endif
 
 colorscheme hybrid_reverse
@@ -53,7 +53,7 @@ let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=docs --exclude=.venv'
-let g:vimwiki_list = [{'path': '~/Documents/notes/'}]
+let g:vimwiki_list = [{'path': '~/Documents/notes/', 'path_html': '~/workspace/vimwiki_html'}]
 let g:syntastic_c_compiler_options = "-std=gnu11 -g -Wall -Wextra -fPIC -I /usr/include -Isrc/ -Isrc/include/"
 let g:syntastic_python_python_exec = 'python3'
 let g:fzf_layout = { 'down':  '40%'}
