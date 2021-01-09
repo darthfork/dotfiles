@@ -34,3 +34,6 @@
 [submodule ".vim/pack/plugins/opt/vim-go"]
 	path = .vim/pack/plugins/opt/vim-go
 	url = git@github.com:fatih/vim-go.git
+[submodule ".vim/pack/plugins/opt/rust.vim"]
+	path = .vim/pack/plugins/opt/rust.vim
+	url = git@github.com:rust-lang/rust.vim.git
