@@ -18,9 +18,7 @@ if [[ -d $HOME/.local/bin ]]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi;
 
-if [[ -d $HOME/workspace/go ]]; then
-    export GOPATH=$HOME/workspace/go
-fi;
+export GOPATH=$HOME/.config/go
 
 source start_ssh_agent.sh
 
