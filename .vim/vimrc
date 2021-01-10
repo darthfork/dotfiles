@@ -81,8 +81,8 @@ autocmd FileType python     set ai ts=4 sw=4 si sta et
 autocmd FileType bash       set ai ts=4 sw=4 si sta et
 autocmd FileType html       set ai ts=2 sw=2 si sta et
 autocmd FileType javascript set ai ts=2 sw=2 si sta et
-autocmd FileType markdown   set ai ts=2 sw=2 si sta et
-autocmd FileType rst        set ai ts=4 sw=4 si sta et
+autocmd FileType markdown   set ai ts=2 sw=2 si sta et spell spelllang=en_us
+autocmd FileType rst        set ai ts=4 sw=4 si sta et spell spelllang=en_us
 autocmd FileType ruby       set ai ts=2 sw=2 si sta et
 autocmd FileType terraform  set ai ts=2 sw=2 si sta et
 autocmd FileType yaml       set ai ts=2 sw=2 si sta et
