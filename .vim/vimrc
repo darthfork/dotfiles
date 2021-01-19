@@ -12,10 +12,12 @@ if system("uname") == "Darwin\n"
 endif
 
 set background=dark
+set wildmenu
 set backspace=indent,eol,start
 set colorcolumn=80
 set encoding=utf-8
 set keywordprg=:Man
+set incsearch hlsearch
 set laststatus=2
 set nocompatible
 set noswapfile
