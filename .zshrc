@@ -2,6 +2,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export TERM="xterm-256color"
 export EDITOR="vim"
 export AWS_PAGER=""
+export GPG_TTY=$(tty)
 
 ZSH_THEME="agnoster"
 DEFAULT_USER=`whoami`
@@ -18,7 +19,11 @@ if [[ -d $HOME/.local/bin ]]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi;
 
-export GOPATH=$HOME/.config/go
+if [[ -d $HOME/.cargo/bin ]]; then
+    export PATH="$PATH:$HOME/.cargo/bin"
+fi;
+
+export GOPATH=$HOME/.config/golang
 
 source start_ssh_agent.sh
 
