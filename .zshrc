@@ -12,8 +12,13 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Default path for linux machines
-# export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
+# Linux specific customizations
+if [[ "$(uname)" -eq "Linux" ]];
+then
+    alias open="xdg-open"
+    export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
+fi;
+
 
 if [[ -d $HOME/.local/bin ]]; then
     export PATH="$PATH:$HOME/.local/bin"
@@ -42,10 +47,5 @@ alias virsh="virsh --connect qemu:///system"
 alias man="$HOME/.local/bin/cool_man"
 alias tmux="tmux attach -t Base || tmux new -s Base"
 alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
-
-if [[ "$(uname)" -eq "Linux" ]];
-then
-    alias open="xdg-open"
-fi;
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
