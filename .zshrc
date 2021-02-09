@@ -19,10 +19,7 @@ then
     export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
 fi;
 
-
-if [[ -d $HOME/.local/bin ]]; then
-    export PATH="$PATH:$HOME/.local/bin"
-fi;
+export PATH="$PATH:$HOME/.local/bin"
 
 if [[ -d $HOME/.cargo/bin ]]; then
     export PATH="$PATH:$HOME/.cargo/bin"
@@ -49,3 +46,4 @@ alias tmux="tmux attach -t Base || tmux new -s Base"
 alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source $HOME/.nix-profile/etc/profile.d/nix.sh
