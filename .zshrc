@@ -26,6 +26,7 @@ if [[ -d $HOME/.cargo/bin ]]; then
 fi;
 
 export GOPATH=$HOME/.config/golang
+export LPASS_AGENT_TIMEOUT=28800
 
 source start_ssh_agent.sh
 
