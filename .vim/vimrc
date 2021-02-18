@@ -12,20 +12,15 @@ if system("uname") == "Darwin\n"
 endif
 
 set background=dark
-set wildmenu
 set backspace=indent,eol,start
 set colorcolumn=80
 set encoding=utf-8
 set keywordprg=:Man
-set incsearch hlsearch
 set laststatus=2
-set nocompatible
-set noswapfile
 set number
-set showmatch
-set smartcase
 set splitright
-set guicursor=
+set nocompatible noswapfile
+set wildmenu incsearch hlsearch showmatch smartcase
 set expandtab shiftwidth=4 smarttab softtabstop=4 tabstop=4 smartindent
 
 if has('persistent_undo')
@@ -43,15 +38,16 @@ nmap <C-l> <C-w>l
 nmap <C-p> :FZF --bind ctrl-p:abort<cr>
 nmap <C-b> :Buffers<cr>
 nmap <C-t> :Tags <cr>
+nmap <C-n> :NERDTreeToggle<cr>
 nmap <leader>rw :%s/\s\+$//e<CR>
 nmap <leader>jq :%!jq '.'<CR>
 nmap <silent><Leader>g :GitBlame<CR>
-nmap <leader>ss :mksession! ~/.vim/sessions/default <cr> " Save session
-nmap <leader>ls :source ~/.vim/sessions/default <cr>     " Load session
+nmap <leader>ss :mksession! ~/.vim/sessions/default <cr>
+nmap <leader>ls :source ~/.vim/sessions/default <cr>
 
+let g:NERDTreeShowHidden=1
+let g:airline_theme='hybridline' " Alternate - zenburn
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='hybrid' " Alternate - zenburn
-let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=docs --exclude=.venv'
