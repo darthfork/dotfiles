@@ -35,17 +35,16 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
+nmap <C-n> :Lexplore<cr>
 nmap <C-p> :FZF --bind ctrl-p:abort<cr>
 nmap <C-b> :Buffers<cr>
 nmap <C-t> :Tags <cr>
-nmap <C-n> :NERDTreeToggle<cr>
 nmap <leader>rw :%s/\s\+$//e<CR>
 nmap <leader>jq :%!jq '.'<CR>
-nmap <silent><Leader>g :GitBlame<CR>
 nmap <leader>ss :mksession! ~/.vim/sessions/default <cr>
 nmap <leader>ls :source ~/.vim/sessions/default <cr>
+nmap <silent><Leader>g :GitBlame<CR>
 
-let g:NERDTreeShowHidden=1
 let g:airline_theme='hybridline' " Alternate - zenburn
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'

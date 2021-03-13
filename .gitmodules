@@ -37,9 +37,6 @@
 [submodule ".vim/pack/plugins/opt/rust.vim"]
 	path = .vim/pack/plugins/opt/rust.vim
 	url = git@github.com:rust-lang/rust.vim.git
-[submodule ".vim/pack/plugins/start/nerdtree"]
-	path = .vim/pack/plugins/start/nerdtree
-	url = git@github.com:preservim/nerdtree.git
 [submodule ".vim/pack/plugins/start/vim-devicons"]
 	path = .vim/pack/plugins/start/vim-devicons
 	url = git@github.com:ryanoasis/vim-devicons.git
