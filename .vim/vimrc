@@ -67,13 +67,19 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" NetRW Settings
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 0
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+let g:netrw_winsize = -28
+
 highlight BadWhitespace ctermbg=red guibg=red
 autocmd FileType c          set ai ts=4 sw=4 si sta et
 autocmd FileType cpp        set ai ts=4 sw=4 si sta et
-autocmd FileType go         set ai ts=8 sw=8 si sta noet list
-autocmd FileType go         packadd vim-go
-autocmd FileType rust       set ai ts=4 sw=4 si sta et
-autocmd FileType rust       packadd rust.vim
+autocmd FileType go         packadd vim-go | set ai ts=8 sw=8 si sta noet list
+autocmd FileType rust       packadd rust.vim | set ai ts=4 sw=4 si sta et
 autocmd FileType python     set ai ts=4 sw=4 si sta et
 autocmd FileType bash       set ai ts=4 sw=4 si sta et
 autocmd FileType html       set ai ts=2 sw=2 si sta et
