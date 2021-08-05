@@ -31,6 +31,8 @@ endif
 
 colorscheme hybrid_reverse
 
+nmap n nzz
+nmap N Nzz
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
