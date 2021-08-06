@@ -1,1 +1,13 @@
-get_mfa_code
+#!/bin/zsh
+
+yubikey_connected=$(ykman list)
+if [ -z "$yubikey_connected" ]; then
+    echo "No yubikey found"
+    exit 0
+fi
+if [ -z $1 ]; then
+    ykman oath accounts code
+else
+    # ykman oath code $1 | tee /dev/tty | awk '{print $2}' | xclip -selection clipboard
+    ykman oath accounts code $1 | tee $(tty) | awk '{print $2}' | tr -d '\n' | pbcopy
+fi
