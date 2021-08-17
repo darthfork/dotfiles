@@ -13,11 +13,10 @@ services:
       - $HOME/.aws:/darthfork/.aws
       - $HOME/.kube:/darthfork/.kube
       - $HOME/.helm:/darthfork/.helm
-      - $HOME/.vim:/darthfork/.vim
       - $SSH_AUTH_SOCK:/tmp/ssh_auth_sock
       - /var/run/docker.sock:/var/run/docker.sock
     entrypoint: /bin/bash
     # To use docker cli uncomment below and
     # set this value in environment variables or ~/.env
-    # group_add:
-    #   - $DOCKER_GROUP_ID
+    group_add:
+      - $DOCKER_GROUP_ID
