@@ -19,13 +19,8 @@ then
     export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
 fi;
 
-export PATH="$PATH:$HOME/.local/bin"
-
-if [[ -d $HOME/.cargo/bin ]]; then
-    export PATH="$PATH:$HOME/.cargo/bin"
-fi;
-
 export GOPATH=$HOME/.config/golang
+export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin"
 export LPASS_AGENT_TIMEOUT=28800
 
 source start_ssh_agent.sh
@@ -47,4 +42,3 @@ alias tmux="tmux attach -t Base || tmux new -s Base"
 alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source $HOME/.nix-profile/etc/profile.d/nix.sh
