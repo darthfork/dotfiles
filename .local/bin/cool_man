@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if  [ $# -eq 0 ]; then
-    man -k . | awk '{print $1}' | fzf | tr -d '\([0-9]\)' | xargs man
+    man -k . | awk -F- '{print $1}' | fzf | tr -d '\([0-9]\)' | xargs man
     # comment above and uncomment below if you are running i3wm and dmenu
     # man -k . | dmenu -l 30 | awk '{print $1}' | xargs -r man
 else
