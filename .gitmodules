@@ -40,3 +40,6 @@
 [submodule ".vim/pack/plugins/start/vim-devicons"]
 	path = .vim/pack/plugins/start/vim-devicons
 	url = git@github.com:ryanoasis/vim-devicons.git
+[submodule ".vim/pack/plugins/opt/vim-terraform"]
+	path = .vim/pack/plugins/opt/vim-terraform
+	url = git@github.com:hashivim/vim-terraform.git
