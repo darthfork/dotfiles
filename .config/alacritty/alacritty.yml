@@ -21,6 +21,8 @@ window:
     columns: 0
     lines: 0
 
+  opacity: 1.0
+
   # Window padding (changes require restart)
   #
   # Blank space added around the window in pixels. This padding is scaled
@@ -97,7 +99,7 @@ font:
     #style: Medium Italic
 
   # Point size
-  size: 10
+  size: 10.5
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -212,12 +214,6 @@ bell:
   animation: EaseOutExpo
   duration: 0
 
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1.0
-
 # Mouse bindings
 #
 # Available fields:
@@ -247,6 +243,19 @@ mouse:
 
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: false
+
+  #url:
+  #  # URL launcher
+  #  #
+  #  # This program is executed when clicking on a text which is recognized as a URL.
+  #  # The URL is always added to the command as the last parameter.
+  #  launcher: xdg-open
+
+  #  # URL modifiers
+  #  #
+  #  # These are the modifiers that need to be held down for opening URLs when clicking
+  #  # on them. The available modifiers are documented in the key binding section.
+  #  #modifiers: Control|Shift
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
