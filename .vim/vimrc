@@ -11,6 +11,7 @@ if system("uname") == "Darwin\n"
   set termguicolors
 endif
 
+set re=2
 set background=dark
 set backspace=indent,eol,start
 set colorcolumn=80
@@ -76,6 +77,9 @@ let g:netrw_browse_split = 0
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_winsize = -28
+
+au BufRead,BufNewFile Earthfile set filetype=Earthfile
+au BufRead,BufNewFile build.earth set filetype=Earthfile
 
 highlight BadWhitespace ctermbg=red guibg=red
 autocmd FileType c          set ai ts=4 sw=4 si sta et
