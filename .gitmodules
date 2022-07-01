@@ -40,3 +40,6 @@
 [submodule ".vim/pack/plugins/opt/vim-terraform"]
 	path = .vim/pack/plugins/opt/vim-terraform
 	url = git@github.com:hashivim/vim-terraform.git
+[submodule ".vim/pack/plugins/start/vim-airline"]
+	path = .vim/pack/plugins/start/vim-airline
+	url = git@github.com:vim-airline/vim-airline.git
