@@ -21,9 +21,15 @@ fi;
 
 export GOPATH=$HOME/.config/golang
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin"
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules --ignore .venv -g ""'
 export LPASS_AGENT_TIMEOUT=28800
 
 source start_ssh_agent.sh
+
+# quick namespace switcher
+function set-ns {
+  kubectl config set-context --current --namespace="$@"
+}
 
 function add_keys {
     ssh-add ~/.ssh/id_rsa ~/.ssh/*.pem
