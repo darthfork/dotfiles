@@ -43,3 +43,6 @@
 [submodule ".vim/pack/plugins/start/vim-airline"]
 	path = .vim/pack/plugins/start/vim-airline
 	url = git@github.com:vim-airline/vim-airline.git
+[submodule ".vim/pack/plugins/start/earthly.vim"]
+	path = .vim/pack/plugins/start/earthly.vim
+	url = git@github.com:earthly/earthly.vim.git
