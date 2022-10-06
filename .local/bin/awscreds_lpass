@@ -2,7 +2,7 @@
 
 # Sample credentials file
 # [default]
-# credential_process = sh -c "$HOME/.local/bin/awscreds_lpass.sh aws_creds"
+# credential_process = sh -c "$HOME/.local/bin/awscreds_lpass personal_aws_creds"
 
 readonly lastPassEntry=$1
 readonly accessKeyId=$(lpass show --username "$lastPassEntry")
