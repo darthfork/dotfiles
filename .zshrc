@@ -1,29 +1,25 @@
-export ZSH="$HOME/.oh-my-zsh"
-export TERM="xterm-256color"
-export EDITOR="vim"
-export AWS_PAGER=""
-export GPG_TTY=$(tty)
-
 ZSH_THEME="agnoster"
 DEFAULT_USER=`whoami`
 plugins=(
   zsh-syntax-highlighting
 )
 
-source $ZSH/oh-my-zsh.sh
-
+export TERM="xterm-256color"
+export EDITOR="vim"
+export AWS_PAGER=""
+export GPG_TTY=$(tty)
 # Linux specific customizations
 if [[ "$(uname)" -eq "Linux" ]];
 then
     alias open="xdg-open"
     export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
 fi;
-
 export GOPATH=$HOME/.config/golang
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin"
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules --ignore .venv -g ""'
 export LPASS_AGENT_TIMEOUT=28800
 
+source $HOME/.oh-my-zsh/oh-my-zsh.sh
 source start_ssh_agent.sh
 
 # quick namespace switcher
@@ -47,4 +43,4 @@ alias man="$HOME/.local/bin/cool_man"
 alias tmux="tmux attach -t Base || tmux new -s Base"
 alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+test -e "${HOME}/.fzf.zsh" && source "${HOME}/.fzf.zsh"
