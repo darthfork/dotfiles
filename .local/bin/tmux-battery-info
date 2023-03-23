@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 mac_battery_info(){
-    percentage=$(pmset -g batt | tail -n -1 | awk '{print $3}' | sed 's/;//g')
-    charge_status=$(pmset -g batt | tail -n -1 | awk '{print $4}' | sed 's/;//g')
-    time_remaining=$(pmset -g batt | tail -n -1 | awk '{print $5 " " $6}' | sed 's/;//g')
+    batt_info=$(pmset -g batt | tail -n -1 | sed 's/;//g')
+    percentage=$(awk '{print $3}' <<< "$batt_info")
+    charge_status=$(awk '{print $4}' <<< "$batt_info")
+    time_remaining=$(awk '{print $5 " " $6}' <<< "$batt_info")
 
-    if [[ "$charge_status" == "charging" || "$charge_status" == "charged" ]]; then
+    if [[ "$charge_status" == "charging" || "$charge_status" == "charged" || "$charge_status" == "finishing" ]]; then
         echo "#[fg=colour112] 🔌  $percentage #[fg=white]$charge_status"
     else
         echo "#[fg=colour172] 🔋  $percentage #[fg=white]$time_remaining"
@@ -13,9 +14,10 @@ mac_battery_info(){
 }
 
 linux_battery_info(){
-    percentage=$(acpitool -b | awk '{printf "%d", $5}')
-    charge_status=$(acpitool -b | awk '{print $4}' | sed 's/,//g')
-    time_remaining=$(acpitool -b | awk '{print $6}' | sed 's/,//g')
+    batt_info=$(acpitool -b | sed 's/,//g')
+    percentage=$(awk '{printf "%d", $5}' <<< "$batt_info")
+    charge_status=$(awk '{print $4}' <<< "$batt_info")
+    time_remaining=$(awk '{print $6}' <<< "$batt_info")
 
     if [[ "$charge_status" == "Charging" || "$charge_status" == "Full" ]]; then
         echo "#[fg=colour112] 🔌  $percentage #[fg=white]$charge_status"
@@ -29,4 +31,3 @@ if [ "$(uname)" == "Linux" ]; then
 elif [ "$(uname)" == "Darwin" ]; then
     mac_battery_info
 fi;
-
