@@ -3,10 +3,6 @@ filetype plugin indent on
 runtime ftplugin/man.vim
 syntax enable
 
-if system("uname") == "Darwin\n"
-  set termguicolors
-endif
-
 set re=2
 set background=dark
 set backspace=indent,eol,start
