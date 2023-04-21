@@ -49,7 +49,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=docs --exclude=.venv --exclude=.terraform'
-let g:vimwiki_list = [{'path': '~/Documents/notes/', 'path_html': '~/.var/www/html/vimwiki'}]
 let g:go_def_mapping_enabled=0
 let g:syntastic_c_compiler_options = "-std=gnu11 -g -Wall -Wextra -fPIC -I /usr/include -Isrc/ -Isrc/include/"
 let g:syntastic_python_python_exec = 'python3'
