@@ -22,7 +22,7 @@ if has('persistent_undo')
   set undofile
 endif
 
-colorscheme hybrid_reverse
+colorscheme retrobox
 
 nmap n nzz
 nmap N Nzz

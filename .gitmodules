@@ -19,9 +19,6 @@
 [submodule ".vim/pack/plugins/start/syntastic"]
 	path = .vim/pack/plugins/start/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
-[submodule ".vim/pack/plugins/start/vim-hybrid-material"]
-	path = .vim/pack/plugins/start/vim-hybrid-material
-	url = https://github.com/kristijanhusak/vim-hybrid-material.git
 [submodule ".vim/pack/plugins/start/coc.nvim"]
 	path = .vim/pack/plugins/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
