@@ -34,11 +34,6 @@ cp -r .config/ "$HOME/.config"
 cp -r .local/bin/ "$HOME/.local/bin"
 cp .gitconfig "$HOME/.gitconfig"
 
-# store docker images in /home/
-echo "Configuring docker storage"
-mkdir -p "$HOME/docker"
-echo "{'data-root': '${HOME}/docker'}" > /etc/docker/daemon.json
-
 # Install node16, yarn and coc
 echo "Installing yarn"
 npm install yarn
