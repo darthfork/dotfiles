@@ -16,7 +16,7 @@ then
 fi;
 export GOPATH=$HOME/.config/golang
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin"
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules --ignore .venv -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --ignore-vcs --hidden -g "!{node_modules,.git}"'
 export LPASS_AGENT_TIMEOUT=28800
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
