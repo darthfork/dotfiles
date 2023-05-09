@@ -43,11 +43,3 @@ pushd "$HOME/.vim/pack/plugins/start/coc.nvim/"; yarn install; popd
 # setup tmux
 echo "Copying tmux config"
 cp -r .tmux.conf "$HOME/.tmux.conf"
-# ex is exiting with exit code 1 for some reason. This needs to be done last to ensure install.sh works.
-echo "Patching .tmux.conf to set default shell to zsh"
-ex "$HOME/.tmux.conf" << HEREDOC
-6 insert
-set -g default-shell $(which zsh)
-.
-xit
-HEREDOC
