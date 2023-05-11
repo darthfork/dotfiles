@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 
 export SSH_ENV="$HOME/.ssh/environment"
 function start_agent {
@@ -18,4 +18,3 @@ if [ -f "${SSH_ENV}" ]; then
 else
     start_agent;
 fi
-
