@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 yubikey_connected=$(ykman list)
 if [ -z "$yubikey_connected" ]; then
     echo "No yubikey found"
@@ -13,8 +15,8 @@ case "${machine}" in
     *)          echo "Unrecognized kernel"; exit 1
 esac
 
-if [ -z $1 ]; then
+if [ -z "$1" ]; then
     ykman oath accounts code
 else
-    ykman oath accounts code $1  | tee $(tty) | awk '{print $2}' | tr -d '\n' | eval ${COPY}
+    ykman oath accounts code "$1"  | tee /dev/tty | awk '{print $2}' | tr -d '\n' | eval "${COPY}"
 fi
