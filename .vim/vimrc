@@ -39,6 +39,7 @@ nmap <leader>jq :%!jq '.'<CR>
 nmap <leader>ss :mksession! ~/.vim/sessions/default <cr>
 nmap <leader>ls :source ~/.vim/sessions/default <cr>
 nmap <silent><Leader>g :GitBlame<CR>
+nnoremap <Leader>/ :Ack!<Space>
 
 let g:airline_theme='hybridline'
 let g:airline#extensions#tabline#enabled = 1
@@ -49,6 +50,11 @@ let g:go_def_mapping_enabled=0
 let g:syntastic_c_compiler_options = "-std=gnu11 -g -Wall -Wextra -fPIC -I /usr/include -Isrc/ -Isrc/include/"
 let g:syntastic_python_python_exec = 'python3'
 let g:fzf_layout = { 'down':  '40%'}
+let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
+let g:ack_autoclose = 1
+let g:ack_use_cword_for_empty_search = 1
+
+cnoreabbrev Ack Ack!
 
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <C-x><C-z> coc#pum#visible() ? coc#pum#stop() : "\<C-x>\<C-z>"
