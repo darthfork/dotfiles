@@ -33,6 +33,6 @@
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [gpg]
 	format = ssh

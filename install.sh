@@ -34,8 +34,8 @@ cp -r .config/ "$HOME/.config"
 cp -r .local/bin/ "$HOME/.local/bin"
 cp .gitconfig "$HOME/.gitconfig"
 
-# Install node16, yarn and coc
-echo "Installing yarn"
+# Install yarn and coc
+echo "Installing yarn and coc.nvim"
 npm install yarn
 echo "Installing COC plugin"
 pushd "$HOME/.vim/pack/plugins/start/coc.nvim/"; yarn install; popd
