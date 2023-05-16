@@ -6,7 +6,7 @@ syntax enable
 set re=2
 set background=dark
 set backspace=indent,eol,start
-set colorcolumn=80
+set colorcolumn=120
 set encoding=utf-8
 set keywordprg=:Man
 set laststatus=2
@@ -39,7 +39,7 @@ nmap <leader>jq :%!jq '.'<CR>
 nmap <leader>ss :mksession! ~/.vim/sessions/default <cr>
 nmap <leader>ls :source ~/.vim/sessions/default <cr>
 nmap <silent><Leader>g :GitBlame<CR>
-nnoremap <Leader>/ :Ack!<Space>
+nmap <Leader>/ :Ack!<Space>
 
 let g:airline_theme='hybridline'
 let g:airline#extensions#tabline#enabled = 1
