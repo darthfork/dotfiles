@@ -21,7 +21,7 @@
 	url = https://github.com/vim-syntastic/syntastic.git
 [submodule ".vim/pack/plugins/start/coc.nvim"]
 	path = .vim/pack/plugins/start/coc.nvim
-	url = https://github.com/neoclide/coc.nvim.git
+	url = git@github.com:neoclide/coc.nvim.git
 [submodule ".vim/pack/plugins/opt/vim-go"]
 	path = .vim/pack/plugins/opt/vim-go
 	url = https://github.com/fatih/vim-go.git
@@ -40,3 +40,6 @@
 [submodule ".vim/pack/plugins/start/ack.vim"]
 	path = .vim/pack/plugins/start/ack.vim
 	url = git@github.com:mileszs/ack.vim.git
+[submodule ".vim/pack/plugins/start/ale"]
+	path = .vim/pack/plugins/start/ale
+	url = git@github.com:dense-analysis/ale.git
