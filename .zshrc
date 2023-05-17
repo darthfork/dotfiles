@@ -39,7 +39,6 @@ function aws_creds {
 }
 
 alias virsh="virsh --connect qemu:///system"
-alias man="$HOME/.local/bin/cool_man"
 alias tmux="tmux attach -t Base || tmux new -s Base"
 alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
 
