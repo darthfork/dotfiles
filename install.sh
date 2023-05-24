@@ -1,45 +1,58 @@
 #!/usr/bin/env bash
+# Installation script for Github codespaces and alike
 
 set -eo pipefail
-
-# Installation script for Github codespaces and alike
 
 # Pull in submoduled vim plugins
 git submodule update --init --recursive
 
 # setup vim
-echo "Copying vim config"
+printf "Copying vim config\n"
 cp -r .vim/ "$HOME/.vim"
 
 # setup zsh
-echo "Installing oh-my-zsh"
+printf "Setup shell\n"
 if zsh --version &> /dev/null ; then
-    # install oh-my-zsh
-    sh -c "$(curl -fssl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    # copy my zshrc to HOME
-    cp ./.zshrc "$HOME/.zshrc"
-    # copy my clone of agnoster theme
-    cp .config/zsh-themes/agnoster.zsh-theme "$HOME/.oh-my-zsh/themes/agnoster.zsh-theme"
-    # install zsh syntax completion
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    printf "install oh-my-zsh\n"
+    bash -c "$(curl -fssl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+    printf "copy my zshrc to \$HOME\n"
+    cp ./.zshrc "$HOME/.zshrc"
+
+    printf "Setup agnoster theme\n"
+    cp .config/zsh-themes/agnoster.zsh-theme "$HOME/.oh-my-zsh/themes/agnoster.zsh-theme"
+
+    printf "install zsh syntax completion\n"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
 else
-    printf "==================================\nzsh is not available\ninstall it manually\n==================================\n"
+    printf "\n==================================\nzsh is not available\n==================================\n"
 fi
 
+# setup homebrew
+if ! brew --version &> /dev/null ; then
+    printf "Installing homebrew\n"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+printf "Installing homebrew packages\n"
+brew bundle
+
 # copy other configs and scripts
-echo "Installing .local/bin and .config"
+printf "Installing .local/bin and .config\n"
 mkdir -p "$HOME/.local/bin" "$HOME/.config"
 cp -r .config/ "$HOME/.config"
 cp -r .local/bin/ "$HOME/.local/bin"
 cp .gitconfig "$HOME/.gitconfig"
 
-# Install yarn and coc
-echo "Installing yarn and coc.nvim"
-npm install yarn
-echo "Installing COC plugin"
-pushd "$HOME/.vim/pack/plugins/start/coc.nvim/"; yarn install; popd
-
 # setup tmux
-echo "Copying tmux config"
+printf "Copying tmux config\n"
 cp -r .tmux.conf "$HOME/.tmux.conf"
+
+# Install yarn and coc
+
+if node --version &> /dev/null ; then
+    printf "Installing yarn and coc.nvim\n"
+    npm install yarn
+    printf "Installing COC plugin\n"
+    pushd "$HOME/.vim/pack/plugins/start/coc.nvim/"; yarn install; popd
+fi
