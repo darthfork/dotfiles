@@ -49,10 +49,12 @@ printf "Copying tmux config\n"
 cp -r .tmux.conf "$HOME/.tmux.conf"
 
 # Install yarn and coc
-
 if node --version &> /dev/null ; then
     printf "Installing yarn and coc.nvim\n"
     npm install yarn
     printf "Installing COC plugin\n"
     pushd "$HOME/.vim/pack/plugins/start/coc.nvim/"; yarn install; popd
 fi
+
+# Install fzf binding
+printf "run \"\$(brew --prefix)/opt/fzf/install\" to install fzf keybindings\n"
