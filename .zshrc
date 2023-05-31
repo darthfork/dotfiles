@@ -17,6 +17,7 @@ fi;
 export GOPATH=$HOME/.config/golang
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin"
 export FZF_DEFAULT_COMMAND='rg --files --ignore-vcs --hidden -g "!{node_modules,.venv,.git}"'
+export MANPAGER="vim -M +MANPAGER - "
 export SHELLCHECK_OPTS="-e SC2155"
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # This allows agnoster to handle the venv prompt
 export LPASS_AGENT_TIMEOUT=28800
