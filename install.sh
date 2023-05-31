@@ -20,7 +20,8 @@ if zsh --version &> /dev/null ; then
     cp ./.zshrc "$HOME/.zshrc"
 
     printf "Setup agnoster theme\n"
-    cp .config/zsh-themes/agnoster.zsh-theme "$HOME/.oh-my-zsh/themes/agnoster.zsh-theme"
+    cp .config/zsh-themes/agnoster-modifications.diff "$HOME/.oh-my-zsh/"
+    pushd "$HOME/.oh-my-zsh/"; git apply agnoster-modifications.diff; popd
 
     printf "install zsh syntax completion\n"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"

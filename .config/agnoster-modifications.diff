@@ -1,0 +1,70 @@
+diff --git a/themes/agnoster.zsh-theme b/themes/agnoster.zsh-theme
+index 88854ecc..3bfec49f 100644
+--- a/themes/agnoster.zsh-theme
++++ b/themes/agnoster.zsh-theme
+@@ -142,7 +142,7 @@ prompt_git() {
+     zstyle ':vcs_info:*' get-revision true
+     zstyle ':vcs_info:*' check-for-changes true
+     zstyle ':vcs_info:*' stagedstr '✚'
+-    zstyle ':vcs_info:*' unstagedstr '±'
++    zstyle ':vcs_info:*' unstagedstr '●'
+     zstyle ':vcs_info:*' formats ' %u%c'
+     zstyle ':vcs_info:*' actionformats ' %u%c'
+     vcs_info
+@@ -221,7 +221,7 @@ prompt_dir() {
+ # Virtualenv: current working virtualenv
+ prompt_virtualenv() {
+   if [[ -n "$VIRTUAL_ENV" && -n "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
+-    prompt_segment blue black "(${VIRTUAL_ENV:t:gs/%/%%})"
++    prompt_segment magenta black "(${VIRTUAL_ENV:t:gs/%/%%})"
+   fi
+ }
+ 
+@@ -247,17 +247,45 @@ prompt_status() {
+ prompt_aws() {
+   [[ -z "$AWS_PROFILE" || "$SHOW_AWS_PROMPT" = false ]] && return
+   case "$AWS_PROFILE" in
+-    *-prod|*production*) prompt_segment red yellow  "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
+-    *) prompt_segment green black "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
++    *-prod|*production*) prompt_segment red black "AWS: $AWS_PROFILE" ;;
++    *) prompt_segment green black "AWS: $AWS_PROFILE" ;;
+   esac
+ }
+ 
++prompt_kubernetes_icon() {
++  KUBERNETES_SYMBOL=$'\xE2\x8E\x88'
++  KUBERNETES_CONTEXT=$1
++
++  case "$KUBERNETES_CONTEXT" in
++    *prod*|*spork*) prompt_segment black red "$KUBERNETES_SYMBOL";;
++    *dev*|*staging*|*qa*) prompt_segment black green "$KUBERNETES_SYMBOL";;
++    *) prompt_segment black yellow "$KUBERNETES_SYMBOL";;
++  esac
++
++}
++
++prompt_kubecontext() {
++  KUBERNETES_BINARY="${KUBERNETES_BINARY:-kubectl}"
++  [[ -z "$KUBECONFIG" && -z "$(${KUBERNETES_BINARY} config current-context 2>/dev/null)" ]] && return
++
++  KUBERNETES_CONTEXT="$(${KUBERNETES_BINARY} config current-context | awk -F- '{print $NF}' 2> /dev/null)"
++  KUBERNETES_CONTEXT="${KUBERNETES_CONTEXT:-N/A}"
++  KUBERNETES_NAMESPACE="$(${KUBERNETES_BINARY} config view --minify -o jsonpath={..namespace} 2>/dev/null)"
++  KUBERNETES_NAMESPACE="${KUBERNETES_NAMESPACE:-default}"
++  KUBERNETES_NAMESPACE="${KUBERNETES_NAMESPACE:+:$KUBERNETES_NAMESPACE}"
++
++  prompt_kubernetes_icon "$KUBERNETES_CONTEXT"
++  prompt_segment $CURRENT_BG default "$KUBERNETES_CONTEXT$KUBERNETES_NAMESPACE"
++
++}
++
+ ## Main prompt
+ build_prompt() {
+   RETVAL=$?
+   prompt_status
+   prompt_virtualenv
+   prompt_aws
++  prompt_kubecontext
+   prompt_context
+   prompt_dir
+   prompt_git
