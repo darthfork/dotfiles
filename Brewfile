@@ -1,5 +1,3 @@
-tap "homebrew/cask"
-
 brew "awscli"
 brew "bazelisk"
 brew "blackbox"
