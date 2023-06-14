@@ -8,6 +8,7 @@ export TERM="xterm-256color"
 export EDITOR="vim"
 export AWS_PAGER=""
 export GPG_TTY=$(tty)
+export skip_global_compinit=1
 # Linux specific customizations
 if [[ "$(uname)" -eq "Linux" ]];
 then
@@ -23,6 +24,11 @@ export LPASS_AGENT_TIMEOUT=28800
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 source start_ssh_agent.sh
+
+# Enable completion for kubectl and aws
+autoload -U +X compinit && compinit
+source <(kubectl completion zsh)
+complete -C '$(command -v aws_completer)' aws
 
 # quick namespace switcher
 function set-ns {
