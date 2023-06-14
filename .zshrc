@@ -12,7 +12,6 @@ export GPG_TTY=$(tty)
 if [[ "$(uname)" -eq "Linux" ]];
 then
     alias open="xdg-open"
-    export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
 fi;
 export GOPATH=$HOME/.config/golang
 export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin"
@@ -28,10 +27,6 @@ source start_ssh_agent.sh
 # quick namespace switcher
 function set-ns {
   kubectl config set-context --current --namespace="$@"
-}
-
-function add_keys {
-    ssh-add ~/.ssh/id_rsa ~/.ssh/*.pem
 }
 
 function aws_creds {
