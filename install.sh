@@ -1,7 +1,32 @@
 #!/usr/bin/env bash
 # Installation script for Github codespaces and alike
-
 set -eo pipefail
+
+function usage(){
+cat <<EOF
+Usage: $0 [options]
+
+--skip-brew | skip brew packages
+--help      | show this help message
+EOF
+}
+
+SKIP_BREW=0
+
+while [[ $# -gt 0 ]]
+do
+    key="$1"
+    case $key in
+        --skip-brew)
+            SKIP_BREW=1
+            shift
+            ;;
+        --help)
+            usage
+            exit 0
+            ;;
+    esac
+done
 
 # Pull in submoduled vim plugins
 git submodule update --init --recursive
@@ -17,10 +42,10 @@ if zsh --version &> /dev/null ; then
     bash -c "$(curl -fssl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
     printf "copy my zshrc to \$HOME\n"
-    cp ./.zshrc "$HOME/.zshrc"
+    install -m644 ./.zshrc "$HOME/.zshrc"
 
     printf "Setup agnoster theme\n"
-    cp .config/zsh-themes/agnoster-modifications.diff "$HOME/.oh-my-zsh/"
+    install -m644 .config/zsh-themes/agnoster-modifications.diff "$HOME/.oh-my-zsh/"
     pushd "$HOME/.oh-my-zsh/"; git apply agnoster-modifications.diff; popd
 
     printf "install zsh syntax completion\n"
@@ -30,24 +55,25 @@ else
 fi
 
 # setup homebrew
-if ! brew --version &> /dev/null ; then
-    printf "Installing homebrew\n"
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if [ $SKIP_BREW -eq 0 ]; then
+    if ! brew --version &> /dev/null ; then
+        printf "Installing homebrew\n"
+        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+    printf "Installing homebrew packages\n"
+    brew bundle
 fi
-
-printf "Installing homebrew packages\n"
-brew bundle
 
 # copy other configs and scripts
 printf "Installing .local/bin and .config\n"
 mkdir -p "$HOME/.local/bin" "$HOME/.config"
 cp -r .config/ "$HOME/.config"
 cp -r .local/bin/ "$HOME/.local/bin"
-cp .gitconfig "$HOME/.gitconfig"
+install -m644 .gitconfig "$HOME/.gitconfig"
 
 # setup tmux
 printf "Copying tmux config\n"
-cp -r .tmux.conf "$HOME/.tmux.conf"
+install -m644 .tmux.conf "$HOME/.tmux.conf"
 
 # Install yarn and coc
 if node --version &> /dev/null ; then
