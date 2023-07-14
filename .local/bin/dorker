@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 # Set $DOCKER_GROUP_ID before running this
-docker-compose -f "$HOME"/.config/dorker-compose.yml run dorker
+docker-compose -f "$HOME"/.config/utils/dorker-compose.yml run dorker

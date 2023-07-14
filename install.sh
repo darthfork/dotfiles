@@ -45,7 +45,7 @@ if zsh --version &> /dev/null ; then
     install -m644 ./.zshrc "$HOME/.zshrc"
 
     printf "Setup agnoster theme\n"
-    install -m644 .config/zsh-themes/agnoster-modifications.diff "$HOME/.oh-my-zsh/"
+    install -m644 .config/utils/agnoster-modifications.diff "$HOME/.oh-my-zsh/"
     pushd "$HOME/.oh-my-zsh/"; git apply agnoster-modifications.diff; popd
 
     printf "install zsh syntax completion\n"
@@ -64,16 +64,13 @@ if [ $SKIP_BREW -eq 0 ]; then
     brew bundle
 fi
 
-# copy other configs and scripts
+# copy other configs and scripts (including tmux)
 printf "Installing .local/bin and .config\n"
 mkdir -p "$HOME/.local/bin" "$HOME/.config"
 cp -r .config/ "$HOME/.config"
 cp -r .local/bin/ "$HOME/.local/bin"
 install -m644 .gitconfig "$HOME/.gitconfig"
 
-# setup tmux
-printf "Copying tmux config\n"
-install -m644 .tmux.conf "$HOME/.tmux.conf"
 
 # Install yarn and coc
 if node --version &> /dev/null ; then

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+TMUX=$(which tmux)
+TMUX_SERVER="vscode"
+CONFIG_FILE="$HOME/.config/tmux/tmux.vscode.conf"
+
+if [ -z "$1" ]; then
+    SESSION_NAME="vscode"
+else
+    SESSION_NAME="vscode-$1"
+fi
+
+$TMUX -L $TMUX_SERVER attach -t "$SESSION_NAME" ||\
+$TMUX -L $TMUX_SERVER -f "$CONFIG_FILE" new-session -s "$SESSION_NAME"
