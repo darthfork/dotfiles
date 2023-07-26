@@ -62,24 +62,6 @@ let g:ale_linters = {
 \ 'python': ['pylint']
 \}
 
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr> <C-x><C-z> coc#pum#visible() ? coc#pum#stop() : "\<C-x>\<C-z>"
-" remap for complete to use tab and <cr>
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <silent><expr> <c-space> coc#refresh()
-
-highlight CocSearch ctermfg=12 guifg=#18A3FF
-highlight CocMenuSel ctermbg=109 guibg=#13354A
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
 cnoreabbrev Ack Ack!
 
 " NetRW Settings
@@ -104,8 +86,8 @@ augroup filetypesettings
   autocmd FileType ruby       set ai ts=2 sw=2 si sta et
   autocmd FileType yaml       set ai ts=2 sw=2 si sta et
   autocmd FileType make       set ai ts=8 sw=8 si sta noet list
-  autocmd FileType go         packadd vim-go | set ai ts=8 sw=8 si sta noet list
-  autocmd FileType rust       packadd rust.vim | set ai ts=4 sw=4 si sta et
+  autocmd FileType go         set ai ts=8 sw=8 si sta noet list
+  autocmd FileType rust       set ai ts=4 sw=4 si sta et
   autocmd FileType terraform  packadd vim-terraform | set ai ts=2 sw=2 si sta et
   autocmd BufRead,BufNewFile Earthfile set filetype=Earthfile
   autocmd BufRead,BufNewFile build.earth set filetype=Earthfile

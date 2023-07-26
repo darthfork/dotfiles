@@ -16,15 +16,6 @@
 [submodule ".vim/pack/plugins/start/syntastic"]
 	path = .vim/pack/plugins/start/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
-[submodule ".vim/pack/plugins/start/coc.nvim"]
-	path = .vim/pack/plugins/start/coc.nvim
-	url = git@github.com:neoclide/coc.nvim.git
-[submodule ".vim/pack/plugins/opt/vim-go"]
-	path = .vim/pack/plugins/opt/vim-go
-	url = https://github.com/fatih/vim-go.git
-[submodule ".vim/pack/plugins/opt/rust.vim"]
-	path = .vim/pack/plugins/opt/rust.vim
-	url = https://github.com/rust-lang/rust.vim.git
 [submodule ".vim/pack/plugins/start/vim-devicons"]
 	path = .vim/pack/plugins/start/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons.git
