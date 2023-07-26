@@ -1,9 +1,6 @@
 [submodule ".vim/pack/plugins/start/vim-signify"]
 	path = .vim/pack/plugins/start/vim-signify
 	url = https://github.com/mhinz/vim-signify.git
-[submodule ".vim/pack/plugins/start/vim-tmux-navigator"]
-	path = .vim/pack/plugins/start/vim-tmux-navigator
-	url = https://github.com/christoomey/vim-tmux-navigator.git
 [submodule ".vim/pack/plugins/start/fzf"]
 	path = .vim/pack/plugins/start/fzf
 	url = https://github.com/junegunn/fzf.git
