@@ -2,7 +2,7 @@
 
 TMUX=$(which tmux)
 TMUX_SERVER="vscode"
-CONFIG_FILE="$HOME/.config/tmux/tmux.vscode.conf"
+CONFIG_FILE="$HOME/.config/tmux/vscode.conf"
 
 if [ -z "$1" ]; then
     SESSION_NAME="vscode"
