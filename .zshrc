@@ -21,6 +21,7 @@ export MANPAGER="vim -M +MANPAGER - "
 export SHELLCHECK_OPTS="-e SC2155"
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # This allows agnoster to handle the venv prompt
 export LPASS_AGENT_TIMEOUT=28800
+export PYENV_ROOT="$HOME/.pyenv"
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 source start_ssh_agent.sh
@@ -29,6 +30,7 @@ source start_ssh_agent.sh
 autoload -U +X compinit && compinit
 source <(kubectl completion zsh)
 complete -C '$(command -v aws_completer)' aws
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 # quick namespace switcher
 function set-ns {
