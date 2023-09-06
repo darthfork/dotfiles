@@ -37,6 +37,12 @@ function set-ns {
   kubectl config set-context --current --namespace="$@"
 }
 
+# Delete and re-create kind cluster
+function reset_kind() {
+  kind delete cluster
+  ctlptl apply -f $HOME/.config/utils/kind_config.yaml
+}
+
 function aws_creds {
     export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
     export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
