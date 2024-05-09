@@ -1,3 +1,4 @@
+tap "hashicorp/tap"
 brew "awscli"
 brew "bazelisk"
 brew "blackbox"
