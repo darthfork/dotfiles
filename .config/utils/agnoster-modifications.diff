@@ -1,8 +1,8 @@
 diff --git a/themes/agnoster.zsh-theme b/themes/agnoster.zsh-theme
-index aa274a5b..80581f9b 100644
+index c2a5421..4f9c798 100644
 --- a/themes/agnoster.zsh-theme
 +++ b/themes/agnoster.zsh-theme
-@@ -29,11 +29,14 @@
+@@ -29,6 +29,11 @@
  # jobs are running in this shell will all be displayed automatically when
  # appropriate.
  
@@ -14,12 +14,7 @@ index aa274a5b..80581f9b 100644
  ### Segment drawing
  # A few utility functions to make it easy and re-usable to draw segmented prompts
  
--CURRENT_BG='NONE'
--
- case ${SOLARIZED_THEME:-dark} in
-     light) CURRENT_FG='white';;
-     *)     CURRENT_FG='black';;
-@@ -72,14 +75,29 @@ prompt_segment() {
+@@ -72,14 +77,30 @@ prompt_segment() {
    [[ -n $3 ]] && echo -n $3
  }
  
@@ -32,6 +27,7 @@ index aa274a5b..80581f9b 100644
 +  fi
 +  echo -n $START_PROMPT
 +}
++
 +
  # End the prompt, closing any open segments
  prompt_end() {
@@ -51,16 +47,7 @@ index aa274a5b..80581f9b 100644
    CURRENT_BG=''
  }
  
-@@ -111,7 +129,7 @@ prompt_git() {
-     dirty=$(parse_git_dirty)
-     ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-     ref="◈ $(git describe --exact-match --tags HEAD 2> /dev/null)" || \
--    ref="➦ $(git rev-parse --short HEAD 2> /dev/null)" 
-+    ref="➦ $(git rev-parse --short HEAD 2> /dev/null)"
-     if [[ -n $dirty ]]; then
-       prompt_segment yellow black
-     else
-@@ -144,7 +162,7 @@ prompt_git() {
+@@ -144,7 +165,7 @@ prompt_git() {
      zstyle ':vcs_info:*' get-revision true
      zstyle ':vcs_info:*' check-for-changes true
      zstyle ':vcs_info:*' stagedstr '✚'
@@ -69,7 +56,7 @@ index aa274a5b..80581f9b 100644
      zstyle ':vcs_info:*' formats ' %u%c'
      zstyle ':vcs_info:*' actionformats ' %u%c'
      vcs_info
-@@ -223,7 +241,7 @@ prompt_dir() {
+@@ -223,7 +244,7 @@ prompt_dir() {
  # Virtualenv: current working virtualenv
  prompt_virtualenv() {
    if [[ -n "$VIRTUAL_ENV" && -n "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
@@ -78,7 +65,7 @@ index aa274a5b..80581f9b 100644
    fi
  }
  
-@@ -249,17 +267,46 @@ prompt_status() {
+@@ -249,17 +270,46 @@ prompt_status() {
  prompt_aws() {
    [[ -z "$AWS_PROFILE" || "$SHOW_AWS_PROMPT" = false ]] && return
    case "$AWS_PROFILE" in
