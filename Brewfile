@@ -1,5 +1,6 @@
 tap "hashicorp/tap"
 brew "awscli"
+brew "bash"
 brew "bazelisk"
 brew "blackbox"
 brew "ctlptl"
