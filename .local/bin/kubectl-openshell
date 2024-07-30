@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: kubectl openshell <pod-name> [-n <namespace>]"
+  exit 1
+fi
+
+POD_NAME=$1
+NAMESPACE=${2:-default}
+
+kubectl exec -it "$POD_NAME" -n "$NAMESPACE" -- /usr/bin/env bash

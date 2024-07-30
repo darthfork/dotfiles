@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+NAMESPACE=${1:-default}
+
+kubectl config set-context --current --namespace="$NAMESPACE"
