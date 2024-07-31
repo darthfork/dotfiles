@@ -27,7 +27,7 @@
 	url = https://github.com/vim-airline/vim-airline.git
 [submodule ".vim/pack/plugins/start/ack.vim"]
 	path = .vim/pack/plugins/start/ack.vim
-	url = git@github.com:mileszs/ack.vim.git
+	url = https://github.com/mileszs/ack.vim.git
 [submodule ".vim/pack/plugins/start/ale"]
 	path = .vim/pack/plugins/start/ale
-	url = git@github.com:dense-analysis/ale.git
+	url = https://github.com/dense-analysis/ale.git
