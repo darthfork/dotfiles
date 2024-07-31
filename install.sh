@@ -39,6 +39,7 @@ cp -r .vim/ "$HOME/.vim"
 printf "Setup shell\n"
 if zsh --version &> /dev/null ; then
     printf "install oh-my-zsh\n"
+    rm -rf "$HOME/.oh-my-zsh" # remove existing installation
     bash -c "$(curl -fssl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
     printf "copy my zshrc to \$HOME\n"
@@ -50,6 +51,9 @@ if zsh --version &> /dev/null ; then
 
     printf "install zsh syntax completion\n"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+
+    sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
+
 else
     printf "\n==================================\nzsh is not available\n==================================\n"
 fi
@@ -70,15 +74,6 @@ mkdir -p "$HOME/.local/bin" "$HOME/.config"
 cp -r .config/ "$HOME/.config"
 cp -r .local/bin/ "$HOME/.local/bin"
 install -m644 .gitconfig "$HOME/.gitconfig"
-
-
-# Install yarn and coc
-if node --version &> /dev/null ; then
-    printf "Installing yarn and coc.nvim\n"
-    npm install yarn
-    printf "Installing COC plugin\n"
-    pushd "$HOME/.vim/pack/plugins/start/coc.nvim/"; yarn install; popd
-fi
 
 # Install fzf binding
 printf "run \"\$(brew --prefix)/opt/fzf/install\" to install fzf keybindings\n"
