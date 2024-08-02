@@ -2,7 +2,7 @@
 
 # Initialize variables
 pod_name=""
-namespace="default"
+namespace="$(kubectl config view --minify -o jsonpath='{..namespace}')"
 shell="bash"
 
 # Function to display usage
