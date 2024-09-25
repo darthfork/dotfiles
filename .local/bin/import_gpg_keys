@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-lpass show --notes "GPG Public Key" | gpg --import
-lpass show --notes "GPG Secret Key"  | gpg --allow-secret-key-import --import
