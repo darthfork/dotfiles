@@ -89,6 +89,6 @@ augroup filetypesettings
   autocmd FileType go         set ai ts=8 sw=8 si sta noet list
   autocmd FileType rust       set ai ts=4 sw=4 si sta et
   autocmd FileType terraform  packadd vim-terraform | set ai ts=2 sw=2 si sta et
-  autocmd BufRead,BufNewFile Earthfile set filetype=Earthfile
-  autocmd BufRead,BufNewFile build.earth set filetype=Earthfile
+  autocmd BufRead,BufNewFile Tiltfile set filetype=bzl
+  autocmd BufRead,BufNewFile *.tilt set filetype=bzl
 augroup END
