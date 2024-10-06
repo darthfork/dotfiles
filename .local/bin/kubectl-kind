@@ -1,3 +1,12 @@
+#!/usr/bin/env bash
+
+printf "\nDeleting existing kind clsuter\n\n"
+
+kind delete cluster
+
+printf "\nCreating new kind clsuter\n\n"
+
+cat <<HEREDOC | ctlptl apply -f -
 apiVersion: ctlptl.dev/v1alpha1
 kind: Registry
 name: ctlptl-registry
@@ -8,5 +17,9 @@ kind: Cluster
 product: kind
 registry: ctlptl-registry
 kindV1Alpha4Cluster:
+  name: local
   networking:
     apiServerPort: 20022
+  nodes:
+    - role: control-plane
+HEREDOC

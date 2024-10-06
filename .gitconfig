@@ -27,8 +27,6 @@
 	prompt = false
 [commit]
 	gpgSign = true
-[protocol "keybase"]
-	allow = always
 [pull]
 	rebase = false
 [url "ssh://git@github.com/"]
