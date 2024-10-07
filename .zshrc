@@ -25,13 +25,6 @@ source start_ssh_agent.sh
 source <(kubectl completion zsh)
 complete -C '$(command -v aws_completer)' aws
 
-function aws_creds {
-    export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
-    export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
-    export AWS_ACCOUNT_NUMBER=$(aws sts get-caller-identity --query Account --output text)
-    export AWS_PROFILE="default"
-}
-
 alias virsh="virsh --connect qemu:///system"
 alias tmux="tmux attach -t Base || tmux new -s Base"
 alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
