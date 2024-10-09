@@ -5,14 +5,14 @@ function usage() {
     echo "Usage: $0 <pod-name> [-n namespace] [-s shell]"
     echo "  pod-name: (required) Name of the pod"
     echo "  Optional Arguments: "
-    echo "      -n: (optional) Namespace of the pod (default: default)"
+    echo "      -n: (optional) Namespace of the pod (defaults to current namepsace)"
     echo "      -s: (optional) Shell to use (sh/bash/zsh) (default: bash)"
     exit 1
 }
 
 # Initialize variables
 pod_name=""
-namespace="default"
+namespace=$(kubectl config view --minify -o jsonpath='{..namespace}')
 shell="bash"
 
 
