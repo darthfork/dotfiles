@@ -1,3 +1,6 @@
 Brewfile.lock.json
-.vim/plugged
-.vim/autoload
+.netrwhist
+spell/
+plugged/
+autoload/
+undo/

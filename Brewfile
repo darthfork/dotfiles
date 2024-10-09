@@ -1,11 +1,14 @@
 tap "hashicorp/tap"
+
+# Homebrew packages
 brew "awscli"
 brew "bash"
 brew "bazelisk"
 brew "blackbox"
 brew "ctlptl"
 brew "curl"
-brew "earthly"
+brew "doctl"
+brew "docker-compose"
 brew "fzf"
 brew "gh"
 brew "gnupg"
@@ -19,7 +22,7 @@ brew "imagemagick"
 brew "jq"
 brew "kind"
 brew "kubernetes-cli"
-brew "lastpass-cli"
+brew "mas"
 brew "neovim"
 brew "pcre"
 brew "pinentry-mac"
@@ -35,5 +38,11 @@ brew "tree"
 brew "universal-ctags"
 brew "watch"
 brew "wget"
+brew "vim"
 brew "ykman"
 brew "yq"
+
+# Mac App Store Apps
+mas "Amphetamine", id: 937984704
+mas "Slack for Desktop", id: 803453959
+mas "Yubico Authenticator", id: 1497506650

@@ -67,6 +67,7 @@ call plug#end()
 
 " Plugin configurations
 let g:airline_theme='hybridline'
+let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#tab_nr_type = 1
@@ -78,6 +79,7 @@ let g:ack_autoclose = 1
 let g:ack_use_cword_for_empty_search = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
+
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
 \ 'sh': ['shellcheck'],
@@ -114,7 +116,7 @@ augroup filetypesettings
   autocmd FileType make       set ai ts=8 sw=8 si sta noet list
   autocmd FileType go         set ai ts=8 sw=8 si sta noet list
   autocmd FileType rust       set ai ts=4 sw=4 si sta et
-  autocmd FileType terraform  packadd vim-terraform | set ai ts=2 sw=2 si sta et
+  autocmd FileType terraform  set ai ts=2 sw=2 si sta et
   autocmd BufRead,BufNewFile Tiltfile set filetype=bzl
   autocmd BufRead,BufNewFile *.tilt set filetype=bzl
 augroup END
