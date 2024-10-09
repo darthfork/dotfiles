@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
 
-# Initialize variables
-pod_name=""
-namespace="$(kubectl config view --minify -o jsonpath='{..namespace}')"
-shell="bash"
-
 # Function to display usage
-usage() {
+function usage() {
     echo "Usage: $0 <pod-name> [-n namespace] [-s shell]"
     echo "  pod-name: (required) Name of the pod"
-    echo "  -n: (optional) Namespace of the pod (default: default)"
-    echo "  -s: (optional) Shell to use (default: /bin/sh)"
+    echo "  Optional Arguments: "
+    echo "      -n: (optional) Namespace of the pod (default: default)"
+    echo "      -s: (optional) Shell to use (sh/bash/zsh) (default: bash)"
     exit 1
 }
+
+# Initialize variables
+pod_name=""
+namespace="default"
+shell="bash"
+
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -47,4 +49,4 @@ if [ -z "$pod_name" ]; then
     usage
 fi
 
-kubectl exec -it "$pod_name" -n "$namespace" -- "/usr/bin/$shell"
+kubectl exec -it "$pod_name" -n "$namespace" -- "$shell"
