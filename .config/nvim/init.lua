@@ -4,12 +4,11 @@ vim.filetype.plugin = true
 vim.filetype.indent = true
 
 vim.cmd.runtime('ftplugin/man.vim')
-
-vim.opt.guicursor = ''
-
+vim.cmd('colorscheme retrobox')
 vim.cmd('syntax enable')
 
--- Converted configurations
+-- Configuration Options
+vim.opt.guicursor = ''
 vim.opt.regexpengine = 2
 vim.opt.background = 'dark'
 vim.opt.backspace = { 'indent', 'eol', 'start' }
@@ -33,30 +32,27 @@ vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.smartindent = true
 
+-- Persistent undo
 if vim.fn.has('persistent_undo') == 1 then
     vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
     vim.opt.undolevels = 10000
     vim.opt.undofile = true
 end
 
--- Set colorscheme
-vim.cmd('colorscheme retrobox')
-
 -- Key mappings
 local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
 
-map('n', 'n', 'nzz', opts)
-map('n', 'N', 'Nzz', opts)
-map('n', '<C-j>', '<C-w>j', opts)
-map('n', '<C-k>', '<C-w>k', opts)
-map('n', '<C-h>', '<C-w>h', opts)
-map('n', '<C-l>', '<C-w>l', opts)
-map('n', '<C-n>', ':Lexplore<CR>', opts)
-map('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', opts)
-map('n', '<C-b>', ':Buffers<CR>', opts)
-map('n', '<C-t>', ':Tags <CR>', opts)
-map('n', '<leader>rw', ':%s/\\s\\+$//e<CR>', opts)
+map('n', 'n', 'nzz', { noremap = true, silent = true })
+map('n', 'N', 'Nzz', { noremap = true, silent = true })
+map('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
+map('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
+map('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
+map('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+map('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true })
+map('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true })
+map('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true })
+map('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true })
+map('n', '<leader>rw', ':%s/\\s\\+$//e<CR>', { noremap = true, silent = false })
 
 -- Command abbreviation
 vim.cmd.cnoreabbrev('Ack', 'Ack!')
@@ -118,37 +114,36 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_altv = 1
 vim.g.netrw_winsize = -28
 
--- Highlight BadWhitespace
-vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
-
 -- Filetype-specific settings
+local autocmd = vim.api.nvim_create_autocmd
+vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
     pattern = { 'c', 'cpp', 'python', 'bash', 'rust' },
     command = 'setlocal ai ts=4 sw=4 si sta et',
     group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
     pattern = { 'html', 'javascript', 'typescript', 'markdown', 'ruby', 'yaml' },
     command = 'setlocal ai ts=2 sw=2 si sta et',
     group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
     pattern = { 'markdown', 'rst' },
     command = 'setlocal spell spelllang=en_us',
     group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
     pattern = { 'make', 'go' },
     command = 'setlocal ai ts=8 sw=8 si sta noet list',
     group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
     pattern = { 'terraform' },
     command = 'packadd vim-terraform | setlocal ai ts=2 sw=2 si sta et',
     group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+autocmd({ 'BufRead', 'BufNewFile' }, {
     pattern = { 'Tiltfile', '*.tilt' },
     command = 'set filetype=bzl',
     group = 'filetypesettings',

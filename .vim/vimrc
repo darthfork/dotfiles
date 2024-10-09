@@ -1,8 +1,10 @@
 let mapleader=','
-filetype plugin indent on
+filetype plugin on
+filetype indent on
 runtime ftplugin/man.vim
 syntax enable
 
+" Configuration Options
 set guicursor=
 set regexpengine=2
 set background=dark
@@ -13,10 +15,12 @@ set keywordprg=:Man
 set laststatus=2
 set number
 set splitright
-set nocompatible noswapfile
+set nocompatible
+set noswapfile
 set wildmenu incsearch hlsearch showmatch smartcase
 set expandtab shiftwidth=4 smarttab softtabstop=4 tabstop=4 smartindent
 
+" Persistent undo
 if has('persistent_undo')
   set undodir=$HOME/.vim/undo
   set undolevels=10000
@@ -25,6 +29,7 @@ endif
 
 colorscheme retrobox
 
+" Key mappings
 nmap n nzz
 nmap N Nzz
 nmap <C-j> <C-w>j
@@ -37,11 +42,30 @@ nmap <C-b> :Buffers<cr>
 nmap <C-t> :Tags <cr>
 nmap <leader>rw :%s/\s\+$//e<CR>
 nmap <leader>jq :%!jq '.'<CR>
-nmap <leader>ss :mksession! ~/.vim/sessions/default <cr>
-nmap <leader>ls :source ~/.vim/sessions/default <cr>
 nmap <silent><Leader>g :GitBlame<CR>
 nmap <Leader>/ :Ack!<Space>
 
+" Plugin manager setup
+let data_dir = '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin()
+    Plug 'mileszs/ack.vim'
+    Plug 'mhinz/vim-signify'
+    Plug 'dense-analysis/ale'
+    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'hashivim/vim-terraform'
+call plug#end()
+
+" Plugin configurations
 let g:airline_theme='hybridline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -53,7 +77,6 @@ let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
 let g:ack_autoclose = 1
 let g:ack_use_cword_for_empty_search = 1
 let g:ale_fix_on_save = 1
-
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
@@ -63,6 +86,7 @@ let g:ale_linters = {
 \ 'python': ['pylint']
 \}
 
+" Command abbreviation
 cnoreabbrev Ack Ack!
 
 " NetRW Settings
@@ -73,6 +97,7 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_winsize = -28
 
+" Filetype-specific settings
 highlight BadWhitespace ctermbg=red guibg=red
 augroup filetypesettings
   autocmd FileType c          set ai ts=4 sw=4 si sta et
