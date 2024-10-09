@@ -3,6 +3,7 @@ filetype plugin indent on
 runtime ftplugin/man.vim
 syntax enable
 
+set guicursor=
 set regexpengine=2
 set background=dark
 set backspace=indent,eol,start

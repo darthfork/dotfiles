@@ -5,7 +5,7 @@ vim.filetype.indent = true
 
 vim.cmd.runtime('ftplugin/man.vim')
 
-vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
+vim.opt.guicursor = ''
 
 vim.cmd('syntax enable')
 
@@ -34,7 +34,7 @@ vim.opt.tabstop = 4
 vim.opt.smartindent = true
 
 if vim.fn.has('persistent_undo') == 1 then
-    vim.opt.undodir = vim.fn.expand('$HOME/.vim/undo')
+    vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
     vim.opt.undolevels = 10000
     vim.opt.undofile = true
 end
@@ -57,7 +57,6 @@ map('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', opts)
 map('n', '<C-b>', ':Buffers<CR>', opts)
 map('n', '<C-t>', ':Tags <CR>', opts)
 map('n', '<leader>rw', ':%s/\\s\\+$//e<CR>', opts)
-map('n', '<leader>g', ':GitBlame<CR>', opts)
 
 -- Command abbreviation
 vim.cmd.cnoreabbrev('Ack', 'Ack!')
@@ -84,10 +83,11 @@ require('packer').startup(function(use)
     use 'mhinz/vim-signify'
     use 'dense-analysis/ale'
     use 'junegunn/fzf'
+    use 'junegunn/fzf.vim'
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'
     use 'ryanoasis/vim-devicons'
-    use 'nvim-treesitter/nvim-treesitter'
+    use 'sheerun/vim-polyglot'
     use 'hashivim/vim-terraform'
 
     -- Automatically set up configuration after cloning packer.nvim

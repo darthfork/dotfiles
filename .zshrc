@@ -32,3 +32,5 @@ alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
 eval "$(pyenv init -)"
 eval "$(goenv init -)"
 source <(fzf --zsh)
+
+# Use ~/.zshenv for secrets and system specific aliases
