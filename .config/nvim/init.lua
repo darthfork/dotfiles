@@ -61,40 +61,32 @@ map('n', '<leader>rw', ':%s/\\s\\+$//e<CR>', opts)
 -- Command abbreviation
 vim.cmd.cnoreabbrev('Ack', 'Ack!')
 
--- Plugin manager setup (packer.nvim)
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
+-- Plugin manager setup
+local function bootstrap_pckr()
+  local pckr_path = vim.fn.stdpath("data") .. "/pckr/pckr.nvim"
+  if not (vim.uv or vim.loop).fs_stat(pckr_path) then
+    vim.fn.system({
+      'git', 'clone', "--filter=blob:none", 'https://github.com/lewis6991/pckr.nvim',
+      pckr_path
+    })
+  end
+  vim.opt.rtp:prepend(pckr_path)
 end
 
-local packer_bootstrap = ensure_packer()
+bootstrap_pckr()
 
-require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
-
-    -- Plugins
-    use 'mileszs/ack.vim'
-    use 'mhinz/vim-signify'
-    use 'dense-analysis/ale'
-    use 'junegunn/fzf'
-    use 'junegunn/fzf.vim'
-    use 'vim-airline/vim-airline'
-    use 'vim-airline/vim-airline-themes'
-    use 'ryanoasis/vim-devicons'
-    use 'sheerun/vim-polyglot'
-    use 'hashivim/vim-terraform'
-
-    -- Automatically set up configuration after cloning packer.nvim
-    if packer_bootstrap then
-        require('packer').sync()
-    end
-end)
+require('pckr').add{
+    'mileszs/ack.vim';
+    'mhinz/vim-signify';
+    'dense-analysis/ale';
+    'junegunn/fzf';
+    'junegunn/fzf.vim';
+    'vim-airline/vim-airline';
+    'vim-airline/vim-airline-themes';
+    'ryanoasis/vim-devicons';
+    'sheerun/vim-polyglot';
+    'hashivim/vim-terraform';
+}
 
 -- Plugin configurations
 vim.g.airline_theme = 'hybridline'
