@@ -4,6 +4,7 @@ vim.filetype.indent = true
 vim.cmd.runtime('ftplugin/man.vim')
 vim.cmd('colorscheme retrobox')
 vim.cmd('syntax enable')
+vim.opt.rtp:append('/opt/homebrew/opt/fzf')
 
 -- Configuration Options
 vim.opt.guicursor = ''
@@ -68,16 +69,15 @@ end
 bootstrap_pckr()
 
 require('pckr').add{
-    'mileszs/ack.vim';
-    'mhinz/vim-signify';
     'dense-analysis/ale';
-    'junegunn/fzf';
+    'hashivim/vim-terraform';
     'junegunn/fzf.vim';
-    'vim-airline/vim-airline';
-    'vim-airline/vim-airline-themes';
+    'mhinz/vim-signify';
+    'mileszs/ack.vim';
     'ryanoasis/vim-devicons';
     'sheerun/vim-polyglot';
-    'hashivim/vim-terraform';
+    'vim-airline/vim-airline';
+    'vim-airline/vim-airline-themes';
 }
 
 -- Plugin configurations
