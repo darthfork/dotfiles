@@ -5,26 +5,26 @@ function usage() {
     echo "Usage: $0 <pod-name> [-n namespace] [-s shell]"
     echo "  pod-name: (required) Name of the pod"
     echo "  Optional Arguments: "
-    echo "      -n: (optional) Namespace of the pod (defaults to current namepsace)"
+    echo "      -c: (optional) Container to exec into within the pod"
     echo "      -s: (optional) Shell to use (sh/bash/zsh) (default: bash)"
     exit 1
 }
 
 # Initialize variables
 pod_name=""
-namespace=$(kubectl config view --minify -o jsonpath='{..namespace}')
+container=""
 shell="bash"
 
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -n)
-            namespace="$2"
-            shift 2
-            ;;
         -s)
             shell="$2"
+            shift 2
+            ;;
+        -c)
+            container="$2"
             shift 2
             ;;
         -*)
@@ -43,10 +43,12 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+namespace="$(kubectl get pods --all-namespaces --field-selector metadata.name="$pod_name" -o jsonpath='{.items[0].metadata.namespace}')"
+
 # Check if pod name is provided
 if [ -z "$pod_name" ]; then
     echo "Error: Pod name is required"
     usage
 fi
 
-kubectl exec -it "$pod_name" -n "$namespace" -- "$shell"
+kubectl exec -it "$pod_name" -n "$namespace" -c "$container" -- "$shell"
