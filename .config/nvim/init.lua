@@ -6,6 +6,9 @@ vim.cmd('colorscheme retrobox')
 vim.cmd('syntax enable')
 vim.opt.rtp:append('/opt/homebrew/opt/fzf')
 
+-- Load custom functions
+require("GitBlame")
+
 -- Configuration Options
 vim.opt.guicursor = ''
 vim.opt.regexpengine = 2
@@ -50,6 +53,7 @@ vim.api.nvim_set_keymap('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap 
 vim.api.nvim_set_keymap('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rw', ':%s/\\s\\+$//e<CR>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('n', '<Leader>g', ':GitBlame<CR>', { silent = true })
 
 -- Command abbreviation
 vim.cmd.cnoreabbrev('Ack', 'Ack!')
