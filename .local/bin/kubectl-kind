@@ -2,11 +2,11 @@
 
 CLUSTER_NAME=local
 
-printf "\n==Deleting existing kind clsuter==\n\n"
+printf "\n== Deleting existing kind cluster ==\n\n"
 
 kind delete cluster -n $CLUSTER_NAME
 
-printf "\n==Creating new kind cluster==\n\n"
+printf "\n== Creating new kind cluster ==\n\n"
 
 cat <<HEREDOC | ctlptl apply -f -
 apiVersion: ctlptl.dev/v1alpha1

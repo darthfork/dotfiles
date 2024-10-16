@@ -43,8 +43,15 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-namespace="$(kubectl get pods --all-namespaces --field-selector metadata.name="$pod_name" -o jsonpath='{.items[0].metadata.namespace}')"
+namespace_query=$(kubectl get pods --all-namespaces --field-selector metadata.name="$pod_name" -o jsonpath='{.items[0].metadata.namespace}' 2>&1)
+exit_status=$?
 
+if [ $exit_status -ne 0 ]; then
+    printf "Error occurred while fetching the namespace for pod %s. Check to make sure the pod exists" "$pod_name"
+    exit 1
+fi
+
+namespace="$namespace_query"
 # Check if pod name is provided
 if [ -z "$pod_name" ]; then
     echo "Error: Pod name is required"
