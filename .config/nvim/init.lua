@@ -74,7 +74,6 @@ bootstrap_pckr()
 
 require('pckr').add{
     'dense-analysis/ale';
-    'hashivim/vim-terraform';
     'junegunn/fzf.vim';
     'mhinz/vim-signify';
     'mileszs/ack.vim';

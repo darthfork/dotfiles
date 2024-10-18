@@ -12,7 +12,9 @@ Vim/NeoVim, tmux, Alacritty and shell config files
 │   ├── alacritty
 │   │   └── alacritty.yml
 │   ├── nvim
-│   │   └── init.lua
+│   │   ├── init.lua
+│   │   └── lua
+│   │       └── GitBlame.lua
 │   ├── tmux
 │   │   ├── tmux.conf
 │   │   └── vscode.conf
@@ -27,8 +29,8 @@ Vim/NeoVim, tmux, Alacritty and shell config files
 │       ├── dorker
 │       ├── enable_completion_linux.sh
 │       ├── kubectl-kind
-│       ├── kubectl-shell
 │       ├── kubectl-setns
+│       ├── kubectl-shell
 │       ├── otp
 │       ├── start_ssh_agent.sh
 │       ├── tmux-battery-info

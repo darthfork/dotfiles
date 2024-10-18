@@ -9,9 +9,7 @@ export EDITOR="nvim"
 export AWS_PAGER=""
 export GPG_TTY=$(tty)
 export skip_global_compinit=1
-export GOPATH=$HOME/.config/golang
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PATH:$HOME/.local/bin:$GOPATH/bin:$PYENV_ROOT/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export FZF_DEFAULT_COMMAND='rg --files --ignore-vcs --hidden -g "!{node_modules,.venv,.git}"'
 export FZF_DEFAULT_OPTS="--tmux --layout=reverse --border"
 export MANPAGER="vim -M +MANPAGER - "
