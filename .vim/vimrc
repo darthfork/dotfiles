@@ -1,8 +1,8 @@
 let mapleader=','
 filetype plugin on
 filetype indent on
-runtime ftplugin/man.vim
 syntax enable
+runtime ftplugin/man.vim
 set rtp+=/opt/homebrew/opt/fzf
 
 " Configuration Options
@@ -16,10 +16,20 @@ set keywordprg=:Man
 set laststatus=2
 set number
 set splitright
+set splitbelow
 set nocompatible
 set noswapfile
-set wildmenu incsearch hlsearch showmatch smartcase
-set expandtab shiftwidth=4 smarttab softtabstop=4 tabstop=4 smartindent
+set wildmenu
+set incsearch
+set hlsearch
+set showmatch
+set smartcase
+set expandtab
+set shiftwidth=4
+set smarttab
+set softtabstop=4
+set tabstop=4
+set smartindent
 
 " Persistent undo
 if has('persistent_undo')
@@ -28,6 +38,7 @@ if has('persistent_undo')
   set undofile
 endif
 
+" Set colorscheme
 colorscheme retrobox
 
 " Key mappings
@@ -53,7 +64,9 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Install plugins
 call plug#begin()
+    Plug 'darthfork/git-blame.vim'
     Plug 'dense-analysis/ale'
     Plug 'junegunn/fzf.vim'
     Plug 'mhinz/vim-signify'

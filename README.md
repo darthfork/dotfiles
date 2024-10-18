@@ -12,9 +12,7 @@ Vim/NeoVim, tmux, Alacritty and shell config files
 │   ├── alacritty
 │   │   └── alacritty.yml
 │   ├── nvim
-│   │   ├── init.lua
-│   │   └── lua
-│   │       └── GitBlame.lua
+│   │   └── init.lua
 │   ├── tmux
 │   │   ├── tmux.conf
 │   │   └── vscode.conf
@@ -38,8 +36,6 @@ Vim/NeoVim, tmux, Alacritty and shell config files
 │       └── tmux-system-info
 ├── .vim
 │   ├── README.md
-│   ├── plugin
-│   │   └── git_blame.vim
 │   └── vimrc
 ├── .zshrc
 ├── Brewfile

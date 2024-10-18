@@ -1,13 +1,9 @@
-vim.g.mapleader = ","
+vim.g.mapleader = ','
 vim.filetype.plugin = true
 vim.filetype.indent = true
 vim.cmd.runtime('ftplugin/man.vim')
-vim.cmd('colorscheme retrobox')
 vim.cmd('syntax enable')
 vim.opt.rtp:append('/opt/homebrew/opt/fzf')
-
--- Load custom functions
-require("GitBlame")
 
 -- Configuration Options
 vim.opt.guicursor = ''
@@ -17,9 +13,10 @@ vim.opt.backspace = { 'indent', 'eol', 'start' }
 vim.opt.colorcolumn = '120'
 vim.opt.encoding = 'utf-8'
 vim.opt.keywordprg = ':Man'
-vim.opt.laststatus = 2
+vim.opt.laststatus = 3
 vim.opt.number = true
 vim.opt.splitright = true
+vim.opt.splitbelow = true
 vim.opt.compatible = false
 vim.opt.swapfile = false
 vim.opt.wildmenu = true
@@ -41,6 +38,9 @@ if vim.fn.has('persistent_undo') == 1 then
     vim.opt.undofile = true
 end
 
+-- Set colorscheme
+vim.cmd('colorscheme retrobox')
+
 -- Key mappings
 vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap = true, silent = true })
@@ -60,10 +60,10 @@ vim.cmd.cnoreabbrev('Ack', 'Ack!')
 
 -- Plugin manager setup
 local function bootstrap_pckr()
-  local pckr_path = vim.fn.stdpath("data") .. "/pckr/pckr.nvim"
+  local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
   if not (vim.uv or vim.loop).fs_stat(pckr_path) then
     vim.fn.system({
-      'git', 'clone', "--filter=blob:none", 'https://github.com/lewis6991/pckr.nvim',
+      'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim',
       pckr_path
     })
   end
@@ -73,6 +73,7 @@ end
 bootstrap_pckr()
 
 require('pckr').add{
+    'darthfork/git-blame.vim';
     'dense-analysis/ale';
     'junegunn/fzf.vim';
     'mhinz/vim-signify';
@@ -99,6 +100,7 @@ vim.g.ale_fix_on_save = 1
 vim.g.ale_fixers = {
     ['*'] = { 'remove_trailing_lines', 'trim_whitespace' }
 }
+
 vim.g.ale_linters = {
     javascript = { 'eslint' },
     sh = { 'shellcheck' },
@@ -117,7 +119,6 @@ vim.g.netrw_winsize = -28
 -- Filetype-specific settings
 vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })
-
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'c', 'cpp', 'python', 'bash', 'rust' },
     command = 'setlocal ai ts=4 sw=4 si sta et',
