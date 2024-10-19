@@ -35,7 +35,6 @@ Vim/NeoVim, tmux, Alacritty and shell config files
 │       ├── tmux-spotify-info
 │       └── tmux-system-info
 ├── .vim
-│   ├── README.md
 │   └── vimrc
 ├── .zshrc
 ├── Brewfile

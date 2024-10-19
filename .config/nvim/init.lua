@@ -33,9 +33,9 @@ vim.opt.smartindent = true
 
 -- Persistent undo
 if vim.fn.has('persistent_undo') == 1 then
-    vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
-    vim.opt.undolevels = 10000
-    vim.opt.undofile = true
+  vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
+  vim.opt.undolevels = 10000
+  vim.opt.undofile = true
 end
 
 -- Set colorscheme
@@ -63,25 +63,27 @@ local function bootstrap_pckr()
   local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
   if not (vim.uv or vim.loop).fs_stat(pckr_path) then
     vim.fn.system({
-      'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim',
-      pckr_path
-    })
+        'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim',
+        pckr_path
+      })
   end
   vim.opt.rtp:prepend(pckr_path)
 end
 
 bootstrap_pckr()
 
+-- Install plugins
 require('pckr').add{
-    'darthfork/git-blame.vim';
-    'dense-analysis/ale';
-    'junegunn/fzf.vim';
-    'mhinz/vim-signify';
-    'mileszs/ack.vim';
-    'ryanoasis/vim-devicons';
-    'sheerun/vim-polyglot';
-    'vim-airline/vim-airline';
-    'vim-airline/vim-airline-themes';
+  'darthfork/git-blame.vim';
+  'github/copilot.vim';
+  'dense-analysis/ale';
+  'junegunn/fzf.vim';
+  'mhinz/vim-signify';
+  'mileszs/ack.vim';
+  'ryanoasis/vim-devicons';
+  'sheerun/vim-polyglot';
+  'vim-airline/vim-airline';
+  'vim-airline/vim-airline-themes';
 }
 
 -- Plugin configurations
@@ -98,15 +100,15 @@ vim.g.ack_autoclose = 1
 vim.g.ack_use_cword_for_empty_search = 1
 vim.g.ale_fix_on_save = 1
 vim.g.ale_fixers = {
-    ['*'] = { 'remove_trailing_lines', 'trim_whitespace' }
+  ['*'] = { 'remove_trailing_lines', 'trim_whitespace' }
 }
 
 vim.g.ale_linters = {
-    javascript = { 'eslint' },
-    sh = { 'shellcheck' },
-    go = { 'golangci-lint' },
-    rust = { 'rustfmt' },
-    python = { 'pylint' }
+  javascript = { 'eslint' },
+  sh = { 'shellcheck' },
+  go = { 'golangci-lint' },
+  rust = { 'rustfmt' },
+  python = { 'pylint' }
 }
 
 -- NetRW Settings
@@ -123,24 +125,24 @@ vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'c', 'cpp', 'python', 'bash', 'rust' },
     command = 'setlocal ai ts=4 sw=4 si sta et',
     group = 'filetypesettings',
-})
+  })
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'html', 'terraform', 'javascript', 'typescript', 'markdown', 'ruby', 'yaml' },
+    pattern = { 'lua', 'html', 'terraform', 'javascript', 'typescript', 'markdown', 'ruby', 'yaml' },
     command = 'setlocal ai ts=2 sw=2 si sta et',
     group = 'filetypesettings',
-})
+  })
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'markdown', 'rst' },
     command = 'setlocal spell spelllang=en_us',
     group = 'filetypesettings',
-})
+  })
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'make', 'go' },
     command = 'setlocal ai ts=8 sw=8 si sta noet list',
     group = 'filetypesettings',
-})
+  })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     pattern = { 'Tiltfile', '*.tilt' },
     command = 'set filetype=bzl',
     group = 'filetypesettings',
-})
+  })
