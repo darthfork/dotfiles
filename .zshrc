@@ -28,7 +28,7 @@ alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
 
 eval "$(pyenv init -)"
 eval "$(goenv init -)"
-source "$(brew --prefix nvm)/nvm.sh"
+source "/opt/homebrew/opt/nvm/nvm.sh"
 source <(fzf --zsh)
 
 # Enable completions

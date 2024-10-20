@@ -6,16 +6,9 @@ services:
     tty: true
     environment:
       - AWS_PROFILE
+      - DO_TOKEN
     volumes:
       - $HOME/workspace:/darthfork/workspace
-      - $HOME/.ssh:/darthfork/.ssh
       - $HOME/.aws:/darthfork/.aws
       - $HOME/.kube:/darthfork/.kube
-      - $HOME/.helm:/darthfork/.helm
-      - $SSH_AUTH_SOCK:/tmp/ssh_auth_sock
-      - /var/run/docker.sock:/var/run/docker.sock
     entrypoint: /bin/bash
-    # To use docker cli uncomment below and
-    # set this value in environment variables or ~/.env
-    group_add:
-      - $DOCKER_GROUP_ID
