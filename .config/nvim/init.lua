@@ -145,6 +145,6 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     pattern = { 'vimrc', 'init.lua' },
-    command = 'set keywordprg=:help',
+    command = 'setlocal keywordprg=:help',
     group = 'filetypesettings',
   })
