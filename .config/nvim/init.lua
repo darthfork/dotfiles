@@ -1,8 +1,6 @@
 vim.g.mapleader = ','
 vim.filetype.plugin = true
 vim.filetype.indent = true
-vim.cmd.runtime('ftplugin/man.vim')
-vim.cmd('syntax enable')
 vim.opt.rtp:append('/opt/homebrew/opt/fzf')
 
 -- Configuration Options
@@ -17,19 +15,12 @@ vim.opt.laststatus = 3
 vim.opt.number = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.opt.compatible = false
 vim.opt.swapfile = false
 vim.opt.wildmenu = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.opt.showmatch = true
 vim.opt.smartcase = true
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
-vim.opt.smarttab = true
-vim.opt.softtabstop = 4
-vim.opt.tabstop = 4
-vim.opt.smartindent = true
 
 -- Persistent undo
 if vim.fn.has('persistent_undo') == 1 then
@@ -42,18 +33,17 @@ end
 vim.cmd('colorscheme retrobox')
 
 -- Key mappings
-vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>rw', ':%s/\\s\\+$//e<CR>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('n', '<Leader>g', ':GitBlame<CR>', { silent = true })
+vim.keymap.set('n', 'n', 'nzz', { noremap = true, silent = true })
+vim.keymap.set('n', 'N', 'Nzz', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>g', ':GitBlame<CR>', { silent = true })
 
 -- Command abbreviation
 vim.cmd.cnoreabbrev('Ack', 'Ack!')
@@ -63,8 +53,7 @@ local function bootstrap_pckr()
   local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
   if not (vim.uv or vim.loop).fs_stat(pckr_path) then
     vim.fn.system({
-        'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim',
-        pckr_path
+        'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim', pckr_path
       })
   end
   vim.opt.rtp:prepend(pckr_path)
@@ -99,8 +88,10 @@ vim.g.ackprg = 'rg --vimgrep --type-not sql --smart-case'
 vim.g.ack_autoclose = 1
 vim.g.ack_use_cword_for_empty_search = 1
 vim.g.ale_fix_on_save = 1
+
 vim.g.ale_fixers = {
-  ['*'] = { 'remove_trailing_lines', 'trim_whitespace' }
+  ['*'] = { 'remove_trailing_lines', 'trim_whitespace' },
+  go = { 'gofmt', 'goimports' },
 }
 
 vim.g.ale_linters = {
@@ -108,7 +99,8 @@ vim.g.ale_linters = {
   sh = { 'shellcheck' },
   go = { 'golangci-lint' },
   rust = { 'rustfmt' },
-  python = { 'pylint' }
+  python = { 'pylint' },
+  bzl = { 'buildifier' },
 }
 
 -- NetRW Settings
@@ -121,6 +113,11 @@ vim.g.netrw_winsize = -28
 -- Filetype-specific settings
 vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = '*', -- Default settings
+    command = 'setlocal ai ts=4 sw=4 si sta et',
+    group = 'filetypesettings',
+  })
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'c', 'cpp', 'python', 'bash', 'rust' },
     command = 'setlocal ai ts=4 sw=4 si sta et',
@@ -144,5 +141,10 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     pattern = { 'Tiltfile', '*.tilt' },
     command = 'set filetype=bzl',
+    group = 'filetypesettings',
+  })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    pattern = { 'vimrc', 'init.lua' },
+    command = 'set keywordprg=:help',
     group = 'filetypesettings',
   })
