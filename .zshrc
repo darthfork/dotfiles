@@ -22,6 +22,7 @@ source $HOME/.oh-my-zsh/oh-my-zsh.sh
 source start_ssh_agent.sh
 
 alias vim="nvim"
+alias vimdiff="nvim -d"
 alias virsh="virsh --connect qemu:///system"
 alias tmux="tmux attach -t Base || tmux new -s Base"
 alias tmuxb="tmux attach -t Alt || tmux new -s Alt"
