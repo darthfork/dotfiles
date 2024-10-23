@@ -24,12 +24,6 @@ set incsearch
 set hlsearch
 set showmatch
 set smartcase
-set expandtab
-set shiftwidth=4
-set smarttab
-set softtabstop=4
-set tabstop=4
-set smartindent
 
 " Persistent undo
 if has('persistent_undo')
@@ -114,22 +108,25 @@ let g:netrw_winsize = -28
 " Filetype-specific settings
 highlight BadWhitespace ctermbg=red guibg=red
 augroup filetypesettings
-  autocmd FileType bash       set ai ts=4 sw=4 si sta et
-  autocmd FileType c          set ai ts=4 sw=4 si sta et
-  autocmd FileType cpp        set ai ts=4 sw=4 si sta et
-  autocmd FileType go         set ai ts=8 sw=8 si sta noet list
-  autocmd FileType html       set ai ts=2 sw=2 si sta et
-  autocmd FileType javascript set ai ts=2 sw=2 si sta et
-  autocmd FileType lua        set ai ts=2 sw=2 si sta et
-  autocmd FileType make       set ai ts=8 sw=8 si sta noet list
-  autocmd FileType markdown   set ai ts=2 sw=2 si sta et spell spelllang=en_us
-  autocmd FileType python     set ai ts=4 sw=4 si sta et
-  autocmd FileType rst        set ai ts=4 sw=4 si sta et spell spelllang=en_us
-  autocmd FileType ruby       set ai ts=2 sw=2 si sta et
-  autocmd FileType rust       set ai ts=4 sw=4 si sta et
-  autocmd FileType terraform  set ai ts=2 sw=2 si sta et
-  autocmd FileType typescript set ai ts=2 sw=2 si sta et
-  autocmd FileType yaml       set ai ts=2 sw=2 si sta et
-  autocmd BufRead,BufNewFile Tiltfile set filetype=bzl
-  autocmd BufRead,BufNewFile *.tilt set filetype=bzl
+  autocmd FileType *                    set ai ts=4 sw=4 si sta et
+  autocmd FileType bash                 set ai ts=4 sw=4 si sta et
+  autocmd FileType c                    set ai ts=4 sw=4 si sta et
+  autocmd FileType cpp                  set ai ts=4 sw=4 si sta et
+  autocmd FileType go                   set ai ts=8 sw=8 si sta noet list
+  autocmd FileType html                 set ai ts=2 sw=2 si sta et
+  autocmd FileType javascript           set ai ts=2 sw=2 si sta et
+  autocmd FileType lua                  set ai ts=2 sw=2 si sta et
+  autocmd FileType make                 set ai ts=8 sw=8 si sta noet list
+  autocmd FileType markdown             set ai ts=2 sw=2 si sta et spell spelllang=en_us
+  autocmd FileType python               set ai ts=4 sw=4 si sta et
+  autocmd FileType rst                  set ai ts=4 sw=4 si sta et spell spelllang=en_us
+  autocmd FileType ruby                 set ai ts=2 sw=2 si sta et
+  autocmd FileType rust                 set ai ts=4 sw=4 si sta et
+  autocmd FileType terraform            set ai ts=2 sw=2 si sta et
+  autocmd FileType typescript           set ai ts=2 sw=2 si sta et
+  autocmd FileType yaml                 set ai ts=2 sw=2 si sta et
+  autocmd BufRead,BufNewFile Tiltfile   set filetype=bzl
+  autocmd BufRead,BufNewFile *.tilt     set filetype=bzl
+  autocmd BufRead,BufNewFile vimrc      setlocal keywordprg=:help
+  autocmd BufRead,BufNewFile init.lua   setlocal keywordprg=:help
 augroup END
