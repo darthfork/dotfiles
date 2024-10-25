@@ -1,10 +1,10 @@
 vim.g.mapleader = ','
 vim.filetype.plugin = true
 vim.filetype.indent = true
-vim.opt.rtp:append('/opt/homebrew/opt/fzf')
 
 -- Configuration Options
 vim.opt.guicursor = ''
+vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))
 vim.opt.regexpengine = 2
 vim.opt.background = 'dark'
 vim.opt.backspace = { 'indent', 'eol', 'start' }
