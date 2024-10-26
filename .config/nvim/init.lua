@@ -1,6 +1,4 @@
 vim.g.mapleader = ','
-vim.filetype.plugin = true
-vim.filetype.indent = true
 
 -- Configuration Options
 vim.opt.guicursor = ''

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC1090,SC2009
+
 export SSH_ENV="$HOME/.ssh/environment"
 function start_agent {
     echo "Initialising new SSH agent..."
@@ -12,7 +14,7 @@ function start_agent {
 
 if [ -f "${SSH_ENV}" ]; then
     . "${SSH_ENV}" > /dev/null
-    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+    ps -ef | grep "${SSH_AGENT_PID}" | grep ssh-agent$ > /dev/null || {
         start_agent;
     }
 else
