@@ -1,4 +1,16 @@
 #!/usr/bin/env bash
 
-# Set $DOCKER_GROUP_ID before running this
-docker-compose -f "$HOME"/.config/utils/dorker-compose.yml run dorker
+# Define the path to your Docker Compose file
+CONFIG_FILE="$HOME/.config/utils/dorker.yaml"
+
+# Function to bring down the services and remove orphans
+cleanup() {
+    echo "Cleaning up..."
+    docker-compose -f "$CONFIG_FILE" down --remove-orphans
+}
+
+# Trap EXIT signal to ensure cleanup is called when the script exits
+trap cleanup EXIT
+
+# Start the container
+docker-compose -f "$CONFIG_FILE" run --rm dorker

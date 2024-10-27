@@ -6,9 +6,11 @@ services:
     tty: true
     environment:
       - AWS_PROFILE
-      - DO_TOKEN
     volumes:
       - $HOME/workspace:/darthfork/workspace
       - $HOME/.aws:/darthfork/.aws
       - $HOME/.kube:/darthfork/.kube
-    entrypoint: /bin/bash
+      - $HOME/.helm:/darthfork/.helm
+    ports:
+      - 20022:20022
+    entrypoint: /usr/bin/env bash
