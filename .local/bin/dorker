@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Define the path to your Docker Compose file
-CONFIG_FILE="$HOME/.config/utils/dorker.yaml"
+CONFIG_FILE="$HOME/.config/utils/compose.yaml"
 
 # Function to bring down the services and remove orphans
 cleanup() {

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# Define the path to your YAML file
+YAML_FILE="$HOME/.config/utils/kubernetes.yaml"
+
+function usage() {
+    echo "Usage: kubectl dorker {up|down}"
+    exit 1
+}
+
+function up() {
+    echo "Applying dorker configuration..."
+    kubectl apply -f "$YAML_FILE"
+
+    # Wait for the pod to be ready
+    echo "Waiting for the dorker pod to be ready..."
+    kubectl wait --for=condition=ready pod/dorker --timeout=120s
+
+    # Open a shell inside the 'dorker' container
+    echo "Opening shell in dorker container..."
+    kubectl exec -it dorker --container dorker -- /bin/bash
+}
+
+function down() {
+    echo "Deleting all resources deployed by dorker..."
+    kubectl delete -f "$YAML_FILE"
+}
+
+if [ "$1" == "up" ]; then
+    up
+elif [ "$1" == "down" ]; then
+    down
+else
+    usage
+fi

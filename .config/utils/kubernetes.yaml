@@ -1,0 +1,46 @@
+# Pod configuration for debugging kubernetes cluster issues
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dorker
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: dorker
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: dorker-binding
+subjects:
+- kind: ServiceAccount
+  name: dorker
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: dorker
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dorker
+  namespace: default
+  labels:
+    app: dorker
+spec:
+  serviceAccountName: dorker
+  containers:
+  - name: dorker
+    image: darthfork/dorker:latest
+    command: ["sh", "-c", "while true; do sleep 3600; done"]
+    tty: true
+    stdin: true
+---
