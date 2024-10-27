@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# Function to display usage
+# kubectl-shell - Kubernetes wrapper for exec-ing into a pod
+
 function usage() {
     echo "Usage: $0 <pod-name> [-n namespace] [-s shell]"
     echo "  pod-name: (required) Name of the pod"

@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+# codemux - tmux session manager for Visual Studio Code
+
+# Usage: Add the following block to your settings.json file:
+# "terminal.integrated.profiles.osx": {
+#     "tmux": {
+#         "path": "codemux",
+#         "args": [
+#             "${workspaceFolderBasename}"
+#         ],
+#         "icon": "terminal-tmux"
+#     },
+# }
+
 TMUX=$(which tmux)
 TMUX_SERVER="vscode"
 CONFIG_FILE="$HOME/.config/tmux/vscode.conf"

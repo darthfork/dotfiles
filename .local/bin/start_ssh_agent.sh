@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This script starts an ssh-agent and adds the ssh key to it.
+
 # shellcheck disable=SC1090,SC2009
 
 export SSH_ENV="$HOME/.ssh/environment"

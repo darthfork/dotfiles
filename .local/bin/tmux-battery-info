@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# tmux-battery-info - Display battery information in tmux status bar
+
 mac_battery_info(){
     batt_info=$(pmset -g batt | tail -n -1 | sed 's/;//g')
     percentage=$(awk '{print $3}' <<< "$batt_info")

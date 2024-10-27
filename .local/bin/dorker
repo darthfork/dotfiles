@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 
-# Define the path to your Docker Compose file
+# dorker - Docker Compose wrapper for creating a container with debugging tools
+
 CONFIG_FILE="$HOME/.config/utils/compose.yaml"
 
-# Function to bring down the services and remove orphans
-cleanup() {
+function cleanup() {
     echo "Cleaning up..."
     docker-compose -f "$CONFIG_FILE" down --remove-orphans
 }
 
-# Trap EXIT signal to ensure cleanup is called when the script exits
+# Call cleanup on exit
 trap cleanup EXIT
 
-# Start the container
 docker-compose -f "$CONFIG_FILE" run --rm dorker

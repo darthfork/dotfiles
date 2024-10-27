@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# kubectl-setns - Kubernetes wrapper for setting the current namespace
+
 NAMESPACE=${1:-default}
 
 kubectl config set-context --current --namespace="$NAMESPACE"

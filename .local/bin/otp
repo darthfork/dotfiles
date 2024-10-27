@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# otp - Yubikey OTP code generator
+
 set -e
 
 yubikey_connected=$(ykman list)

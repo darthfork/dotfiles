@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# Define the path to your YAML file
+# kubectl-dorker - Kubernetes wrapper for creating a pod with debugging tools
+
 YAML_FILE="$HOME/.config/utils/kubernetes.yaml"
 
 function usage() {

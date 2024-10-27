@@ -1,5 +1,6 @@
 #!/usr/bin/env osascript
-# Returns the current playing song in Spotify for OSX
+
+# tmux-spotify-info - Display the current Spotify track in tmux status bar
 
 tell application "Spotify"
   if it is running then

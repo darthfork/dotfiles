@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# tmux-system-info - Display cpu and memory information in tmux status bar
+
 cpu=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}')
 mem=$(free | grep Mem | awk '{print $3/$2 * 100"%"}')
 

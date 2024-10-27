@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# kubectl-kind - Kubernetes wrapper for creating a kind cluster
+
 CLUSTER_NAME=local
 
 printf "\n== Deleting existing kind cluster ==\n\n"
