@@ -1,79 +1,58 @@
 #!/usr/bin/env bash
-# Installation script for Github codespaces and alike
-set -eo pipefail
 
-function usage(){
-cat <<EOF
-Usage: $0 [options]
+# install.sh: A script to install and configure dotfiles, tools and utilities
 
---skip-brew | skip brew packages
---help      | show this help message
-EOF
-}
+set -euo pipefail
 
-SKIP_BREW=0
+# Create directories
+printf "Creating configuration directories...\n"
+mkdir -p "$HOME/.vim"
+mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/.config/nvim"
+mkdir -p "$HOME/.config/tmux"
+mkdir -p "$HOME/.config/utils"
+mkdir -p "$HOME/.config/alacritty"
 
-while [[ $# -gt 0 ]]
-do
-    key="$1"
-    case $key in
-        --skip-brew)
-            SKIP_BREW=1
-            shift
-            ;;
-        --help)
-            usage
-            exit 0
-            ;;
-    esac
-done
+# Symlink configuration files for vim, neovim, shell, tmux, alacritty and other tools
+printf "Symlinking vim, neovim, shell, tmux, alacritty and other configuration files...\n"
+ln -s ".zshrc" "$HOME/.zshrc"
+ln -s ".gitconfig" "$HOME/.gitconfig"
+ln -s ".vim/vimrc" "$HOME/.vim/vimrc"
+ln -s ".config/nvim/init.lua" "$HOME/.config/nvim/init.lua"
+ln -s ".config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+ln -s ".config/tmux/vscode.conf" "$HOME/.config/tmux/vscode.conf"
+ln -s ".config/utils/compose.yaml" "$HOME/.config/utils/compose.yaml"
+ln -s ".config/utils/kubernetes.yaml" "$HOME/.config/utils/kubernetes.yaml"
+ln -s ".config/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+ln -s ".config/utils/agnoster-modifications.diff" "$HOME/.config/utils/agnoster-modifications.diff"
 
-# Pull in submoduled vim plugins
-git submodule update --init --recursive
+# Install utility scripts and kubernetes plugins
+printf "Install Utility scripts and kubernetes plugins...\n"
+install -m755 ".local/bin/*" "$HOME/.local/bin"
 
-# setup vim
-printf "Copying vim config\n"
-cp -r .vim/ "$HOME/.vim"
+# Setup homebrew
+printf "Installing homebrew...\n"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# setup zsh
-printf "Setup shell\n"
-if zsh --version &> /dev/null ; then
-    printf "install oh-my-zsh\n"
-    rm -rf "$HOME/.oh-my-zsh" # remove existing installation
-    bash -c "$(curl -fssl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Install homebrew packages
+printf "Installing homebrew packages...\n"
+brew bundle
 
-    printf "copy my zshrc to \$HOME\n"
-    install -m644 ./.zshrc "$HOME/.zshrc"
+# Install oh-my-zsh
+printf "Removing existing oh-my-zsh installation if any...\n"
+rm -rf "$HOME/.oh-my-zsh"
+printf "Installing oh-my-zsh...\n"
+bash -c "$(curl -fssl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-    printf "Setup agnoster theme\n"
-    install -m644 .config/utils/agnoster-modifications.diff "$HOME/.oh-my-zsh/"
-    pushd "$HOME/.oh-my-zsh/"; git apply agnoster-modifications.diff; popd
+# Apply agnoster theme changes
+printf "Applying agnoster theme changes...\n"
+cp ".config/utils/agnoster-modifications.diff" "$HOME/.oh-my-zsh/"
+pushd "$HOME/.oh-my-zsh/" || exit
+git apply agnoster-modifications.diff
+rm agnoster-modifications.diff
+popd || exit
 
-    printf "install zsh syntax completion\n"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-
-    sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
-
-else
-    printf "\n==================================\nzsh is not available\n==================================\n"
-fi
-
-# setup homebrew
-if [ $SKIP_BREW -eq 0 ]; then
-    if ! brew --version &> /dev/null ; then
-        printf "Installing homebrew\n"
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
-    printf "Installing homebrew packages\n"
-    brew bundle
-fi
-
-# copy other configs and scripts (including tmux)
-printf "Installing .local/bin and .config\n"
-mkdir -p "$HOME/.local/bin" "$HOME/.config"
-cp -r .config/ "$HOME/.config"
-cp -r .local/bin/ "$HOME/.local/bin"
-install -m644 .gitconfig "$HOME/.gitconfig"
-
-# Install fzf binding
-printf "run \"\$(brew --prefix)/opt/fzf/install\" to install fzf keybindings\n"
+# Install zsh syntax completion
+printf "Installing zsh syntax completion...\n"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git\
+    "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"

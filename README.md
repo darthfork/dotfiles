@@ -2,7 +2,17 @@
   <img src="https://dotfiles.github.io/images/dotfiles-logo.png" alt="dotfiles" width="474" height="148" />
 </p>
 
-Vim/NeoVim, tmux, Alacritty and shell config files
+# Dotfiles
+
+Vim/NeoVim, tmux, Alacritty, shell config files and utility scripts for macOS and Linux.
+
+## Installation
+
+To install the dotfiles, utility scripts and packages run the following commands:
+
+```bash
+./install.sh
+```
 
 ## Utility Scripts and Kubernetes Plugins
 
@@ -67,7 +77,7 @@ source <(helm completion zsh)
 
 ## Repo Structure
 
-```bash
+```
 .
 ├── .config
 │   ├── alacritty

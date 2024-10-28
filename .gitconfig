@@ -8,21 +8,20 @@
 	# run `git config --global --unset gpg.format` before using gpg key
 	# signingKey = 72471FC55B6D8AC3008B71EB22E13F39CDE58A8C
 [core]
-	editor = vim
+	editor = nvim
 	excludesFile = ~/.gitignore
 [alias]
 	pull-submodules = "submodule update --init --recursive"
 	pr = "!f() { git checkout main; git branch -D pr/$1 || true; git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-	lg = "log --graph --abbrev-commit --pretty=format:'%C(bold green)%h%C(reset) - %C(bold red)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 	branches = "branch -a"
 	newbranch = "!f() { git checkout main; git pull origin main; git checkout -b darthfork/$1; }; f"
-	showcommit = "!f() { git diff-tree -p $1; }; f"
+	showcommit = "diff-tree -p"
 [pager]
 	diff = less
 	branch =
 	log = less
 [diff]
-	tool = vimdiff
+	tool = nvimdiff
 [difftool]
 	prompt = false
 [commit]
