@@ -4,6 +4,13 @@
 
 YAML_FILE="$HOME/.config/utils/kubernetes.yaml"
 
+# Check if the YAML file exists
+if [ ! -f "$YAML_FILE" ]; then
+    echo "Error: Kubernetes configuration file $YAML_FILE does not exist."
+    exit 1
+fi
+
+
 function usage() {
     echo "Usage: kubectl dorker {up|down}"
     exit 1
