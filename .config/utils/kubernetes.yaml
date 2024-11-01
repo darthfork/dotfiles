@@ -39,7 +39,7 @@ spec:
   serviceAccountName: dorker
   containers:
   - name: dorker
-    image: darthfork/dorker:latest
+    image: darthfork/dorker:fedora40
     command: ["sh", "-c", "while true; do sleep 3600; done"]
     tty: true
     stdin: true

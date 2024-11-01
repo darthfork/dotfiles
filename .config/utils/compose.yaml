@@ -1,6 +1,6 @@
 services:
   dorker:
-    image: darthfork/dorker:latest
+    image: darthfork/dorker:fedora40
     hostname: dorker
     stdin_open: true
     tty: true
