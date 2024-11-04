@@ -1,5 +1,5 @@
 ZSH_THEME="agnoster"
-DEFAULT_USER=`whoami`
+DEFAULT_USER=$(whoami)
 plugins=(
   zsh-syntax-highlighting
 )
@@ -13,7 +13,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export FZF_DEFAULT_COMMAND='rg --files --ignore-vcs --hidden -g "!{node_modules,.venv,.git}"'
 export FZF_DEFAULT_OPTS="--tmux --layout=reverse --border"
 export MANPAGER="vim -M +MANPAGER - "
-export SHELLCHECK_OPTS="-e SC2155"
+export SHELLCHECK_OPTS="-e SC2155 -e SC1008"
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # This allows agnoster to handle the venv prompt
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
@@ -25,6 +25,7 @@ alias tmux="tmux attach -t Base || tmux new -s Base"
 
 eval "$(pyenv init -)"
 eval "$(goenv init -)"
+eval "$(rbenv init -)"
 source "$HOME/.nvm/nvm.sh"
 source <(fzf --zsh)
 
