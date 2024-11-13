@@ -10,6 +10,7 @@ vim.opt.colorcolumn = '120'
 vim.opt.encoding = 'utf-8'
 vim.opt.keywordprg = ':Man'
 vim.opt.laststatus = 3
+vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -67,18 +68,32 @@ require('pckr').add{
   'junegunn/fzf.vim';
   'mhinz/vim-signify';
   'mileszs/ack.vim';
-  'ryanoasis/vim-devicons';
   'sheerun/vim-polyglot';
-  'vim-airline/vim-airline';
-  'vim-airline/vim-airline-themes';
+  'akinsho/bufferline.nvim';
+  'nvim-lualine/lualine.nvim';
+  'nvim-tree/nvim-web-devicons';
+}
+
+-- Lualine configurations
+require("lualine").setup{
+ options = {
+    icons_enabled = true,
+    theme = 'codedark',
+  },
+}
+
+-- Bufferline configurations
+require("bufferline").setup{
+  options = {
+    numbers = 'ordinal',
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    show_tab_indicators = true,
+    separator_style = 'slant',
+  },
 }
 
 -- Plugin configurations
-vim.g.airline_theme = 'hybridline'
-vim.g.airline_powerline_fonts = 1
-vim.g['airline#extensions#tabline#enabled'] = 1
-vim.g['airline#extensions#tabline#fnamemod'] = ':t'
-vim.g['airline#extensions#tabline#tab_nr_type'] = 1
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=docs --exclude=.venv --exclude=.terraform'
 vim.g.go_def_mapping_enabled = 0
 vim.g.fzf_layout = { down = '40%' }
