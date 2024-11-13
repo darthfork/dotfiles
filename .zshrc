@@ -1,3 +1,7 @@
+#!/usr/bin/env zsh
+
+# .zshrc - Zsh configuration file
+
 ZSH_THEME="agnoster"
 DEFAULT_USER=$(whoami)
 plugins=(

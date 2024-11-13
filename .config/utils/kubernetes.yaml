@@ -1,4 +1,7 @@
-# Pod configuration for debugging kubernetes cluster issues
+# vi: set syntax=yaml:
+
+# kubernetes.yaml - Pod configuration for debugging kubernetes cluster issues
+
 ---
 apiVersion: v1
 kind: ServiceAccount

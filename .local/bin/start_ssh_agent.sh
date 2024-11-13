@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-# This script starts an ssh-agent and adds the ssh key to it.
+# start_ssh_agent.sh -- starts an ssh-agent and adds the ssh key to it.
+
+# Usage: add the following line to your .zshrc or .bashrc
+# source start_ssh_agent.sh
 
 # shellcheck disable=SC1090,SC2009
 

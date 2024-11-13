@@ -1,3 +1,5 @@
+-- init.lua - Main configuration file for Neovim
+
 vim.g.mapleader = ','
 
 -- Configuration Options
@@ -58,6 +60,7 @@ local function bootstrap_pckr()
   vim.opt.rtp:prepend(pckr_path)
 end
 
+-- Bootstrap plugin manager
 bootstrap_pckr()
 
 -- Install plugins
@@ -79,6 +82,8 @@ require("lualine").setup{
  options = {
     icons_enabled = true,
     theme = 'codedark',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = '' },
   },
 }
 
@@ -89,6 +94,7 @@ require("bufferline").setup{
     show_buffer_close_icons = false,
     show_close_icon = false,
     show_tab_indicators = true,
+    tab_size = 20,
     separator_style = 'slant',
   },
 }

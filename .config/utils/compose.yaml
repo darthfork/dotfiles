@@ -1,3 +1,7 @@
+# vi: set syntax=yaml:
+
+# compose.yaml - docker-compose file to run the dorker container.
+
 services:
   dorker:
     image: darthfork/dorker:fedora40

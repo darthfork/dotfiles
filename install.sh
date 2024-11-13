@@ -11,7 +11,6 @@ mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/.config/nvim"
 mkdir -p "$HOME/.config/tmux"
 mkdir -p "$HOME/.config/utils"
-mkdir -p "$HOME/.config/alacritty"
 
 # Symlink configuration files for vim, neovim, shell, tmux, alacritty and other tools
 printf "Symlinking vim, neovim, shell, tmux, alacritty and other configuration files...\n"
@@ -23,7 +22,6 @@ ln -s ".config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
 ln -s ".config/tmux/vscode.conf" "$HOME/.config/tmux/vscode.conf"
 ln -s ".config/utils/compose.yaml" "$HOME/.config/utils/compose.yaml"
 ln -s ".config/utils/kubernetes.yaml" "$HOME/.config/utils/kubernetes.yaml"
-ln -s ".config/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
 ln -s ".config/utils/agnoster-modifications.diff" "$HOME/.config/utils/agnoster-modifications.diff"
 
 # Install utility scripts and kubernetes plugins
