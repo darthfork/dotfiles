@@ -4,7 +4,7 @@
 
 # Dotfiles
 
-Vim/NeoVim, tmux, Alacritty, shell config files and utility scripts for macOS and Linux.
+Vim/NeoVim, tmux, shell config files and utility scripts for macOS and Linux.
 
 ## Installation
 
@@ -80,8 +80,6 @@ source <(helm completion zsh)
 ```
 .
 ├── .config
-│   ├── alacritty
-│   │   └── alacritty.yml
 │   ├── nvim
 │   │   └── init.lua
 │   ├── tmux
@@ -97,7 +95,6 @@ source <(helm completion zsh)
 │   └── bin
 │       ├── codemux
 │       ├── dorker
-│       ├── enable_completion_linux.sh
 │       ├── kubectl-dorker
 │       ├── kubectl-kind
 │       ├── kubectl-setns

@@ -95,7 +95,7 @@ require("bufferline").setup{
     show_close_icon = false,
     show_tab_indicators = true,
     tab_size = 20,
-    separator_style = 'slant',
+    separator_style = 'slope',
   },
 }
 
