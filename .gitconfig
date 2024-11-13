@@ -3,7 +3,7 @@
 	pager = true
 [user]
 	name = Abhishek Rai
-	email = rai.abhishek90@gmail.com
+	email = mail@raiabhishek.com
 	signingkey = ~/.ssh/id_rsa.pub
 	# run `git config --global --unset gpg.format` before using gpg key
 	# signingKey = 72471FC55B6D8AC3008B71EB22E13F39CDE58A8C
