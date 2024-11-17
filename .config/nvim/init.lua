@@ -1,5 +1,6 @@
--- init.lua - Main configuration file for Neovim
+-- init.lua - configuration file for Neovim
 
+-- Set leader key
 vim.g.mapleader = ','
 
 -- Configuration Options
@@ -22,6 +23,8 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.opt.showmatch = true
 vim.opt.smartcase = true
+vim.opt.cursorline = true
+vim.opt.fillchars = { eob = " " }
 
 -- Persistent undo
 if vim.fn.has('persistent_undo') == 1 then
@@ -71,32 +74,10 @@ require('pckr').add{
   'junegunn/fzf.vim';
   'mhinz/vim-signify';
   'mileszs/ack.vim';
-  'sheerun/vim-polyglot';
+  {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'};
   'akinsho/bufferline.nvim';
   'nvim-lualine/lualine.nvim';
   'nvim-tree/nvim-web-devicons';
-}
-
--- Lualine configurations
-require("lualine").setup{
- options = {
-    icons_enabled = true,
-    theme = 'codedark',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = '' },
-  },
-}
-
--- Bufferline configurations
-require("bufferline").setup{
-  options = {
-    numbers = 'ordinal',
-    show_buffer_close_icons = false,
-    show_close_icon = false,
-    show_tab_indicators = true,
-    tab_size = 20,
-    separator_style = 'slope',
-  },
 }
 
 -- Plugin configurations
@@ -123,6 +104,34 @@ vim.g.ale_linters = {
   bzl = { 'buildifier' },
 }
 
+-- Lualine configurations
+require("lualine").setup{
+  options = {
+    icons_enabled = true,
+    theme = 'codedark',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = '' },
+  },
+}
+
+-- Bufferline configurations
+require("bufferline").setup{
+  options = {
+    numbers = 'ordinal',
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    show_tab_indicators = true,
+    tab_size = 20,
+    separator_style = 'slope',
+  },
+}
+
+-- Treesitter configurations
+require('nvim-treesitter.configs').setup{
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "markdown", "json", "starlark", "yaml", "python", "bash", "rust", "go"},
+  highlight = { enable = true },
+}
+
 -- NetRW Settings
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
@@ -130,16 +139,13 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_altv = 1
 vim.g.netrw_winsize = -28
 
--- Filetype-specific settings
+-- Highlight Bad Whitespace
 vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
+
+-- Filetype specific settings
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = '*', -- Default settings
-    command = 'setlocal ai ts=4 sw=4 si sta et',
-    group = 'filetypesettings',
-  })
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'c', 'cpp', 'python', 'bash', 'rust' },
+    pattern = { '*', 'c', 'cpp', 'python', 'bash', 'rust' },
     command = 'setlocal ai ts=4 sw=4 si sta et',
     group = 'filetypesettings',
   })
@@ -159,8 +165,8 @@ vim.api.nvim_create_autocmd('FileType', {
     group = 'filetypesettings',
   })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-    pattern = { 'Tiltfile', '*.tilt' },
-    command = 'set filetype=bzl',
+    pattern = { 'Tiltfile', '*.tilt', 'BUILD', '*.bazel', 'WORKSPACE', '*.bzl' },
+    command = 'set filetype=starlark',
     group = 'filetypesettings',
   })
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
