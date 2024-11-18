@@ -77,7 +77,7 @@ source <(helm completion zsh)
 
 ## Repo Structure
 
-```
+```bash
 .
 ├── .config
 │   ├── nvim

@@ -75,6 +75,7 @@ require('pckr').add{
   'mhinz/vim-signify';
   'mileszs/ack.vim';
   {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'};
+  'MeanderingProgrammer/render-markdown.nvim';
   'akinsho/bufferline.nvim';
   'nvim-lualine/lualine.nvim';
   'nvim-tree/nvim-web-devicons';
@@ -131,6 +132,9 @@ require('nvim-treesitter.configs').setup{
   ensure_installed = { "c", "lua", "vim", "vimdoc", "markdown", "json", "starlark", "yaml", "python", "bash", "rust", "go"},
   highlight = { enable = true },
 }
+
+-- Render Markdown configurations
+require('render-markdown').setup({})
 
 -- NetRW Settings
 vim.g.netrw_banner = 0
