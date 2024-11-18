@@ -31,9 +31,9 @@ To install the dotfiles, utility scripts and packages run the following commands
 - [**dorker**](.local/bin/dorker)
   - Description: Utility script to create a container with aws/helm/kubectl and other utilities for debugging
   - Usage: `dorker`
-- [**otp**](.local/bin/otp)
-  - Description: Utility script to generate OTP tokens from yubikey
-  - Usage: `otp <service-name>`
+- [**mfa**](.local/bin/mfa)
+  - Description: Utility script to generate 2FA tokens from yubikey
+  - Usage: `mfa <service-name>`
 - [**codemux**](.local/bin/codemux)
   - Description: Utility script to open a tmux session with vscode specific layout and configurations
   - Usage: `codemux <workspace-name>`. This launches a vscode session named `vscode-<workspace-name>`. To use with vscode add the following to your vscode settings.json
@@ -51,7 +51,7 @@ To install the dotfiles, utility scripts and packages run the following commands
 
 ## Enable completion for zsh
 
-**autoload setting**
+**autoload setting** (Pre-requisite for enabling completion)
 
 ```zsh
 autoload -U +X compinit && compinit
@@ -99,7 +99,7 @@ source <(helm completion zsh)
 │       ├── kubectl-kind
 │       ├── kubectl-setns
 │       ├── kubectl-shell
-│       ├── otp
+│       ├── mfa
 │       ├── start_ssh_agent.sh
 │       ├── tmux-battery-info
 │       ├── tmux-spotify-info

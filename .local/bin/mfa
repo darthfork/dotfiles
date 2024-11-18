@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# otp - Yubikey OTP code generator
+# mfa - Yubikey 2FA code generator
 
 set -e
 
