@@ -30,7 +30,7 @@ alias tmux="tmux attach -t Base || tmux new -s Base"
 eval "$(pyenv init -)"
 eval "$(goenv init -)"
 eval "$(rbenv init -)"
-source "$HOME/.nvm/nvm.sh"
+eval "$(nodenv init -)"
 source <(fzf --zsh)
 
 # Enable completions
