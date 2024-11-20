@@ -1,5 +1,7 @@
 -- init.lua - configuration file for Neovim
 
+-- luacheck: globals vim
+
 -- Set leader key
 vim.g.mapleader = ','
 
@@ -82,7 +84,7 @@ require('pckr').add{
 }
 
 -- Plugin configurations
-vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=docs --exclude=.venv --exclude=.terraform'
+vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
 vim.g.go_def_mapping_enabled = 0
 vim.g.fzf_layout = { down = '40%' }
 vim.g.ackprg = 'rg --vimgrep --type-not sql --smart-case'
@@ -129,7 +131,10 @@ require("bufferline").setup{
 
 -- Treesitter configurations
 require('nvim-treesitter.configs').setup{
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "markdown", "json", "starlark", "yaml", "python", "bash", "rust", "go"},
+  ensure_installed = {
+    "c", "lua", "vim", "vimdoc", "markdown", "json",
+    "starlark", "yaml", "python", "bash", "rust", "go"
+  },
   highlight = { enable = true },
 }
 
