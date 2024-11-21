@@ -1,0 +1,10 @@
+# vi: set filetype=yaml:
+
+extends: default
+
+rules:
+  line-length:
+    max: 120
+    level: warning
+  truthy: disable
+  document-start: disable

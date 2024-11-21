@@ -85,10 +85,12 @@ source <(helm completion zsh)
 │   ├── tmux
 │   │   ├── tmux.conf
 │   │   └── vscode.conf
-│   └── utils
-│       ├── agnoster-modifications.diff
-│       ├── compose.yaml
-│       └── kubernetes.yaml
+│   ├── utils
+│   │   ├── agnoster-modifications.diff
+│   │   ├── compose.yaml
+│   │   └── kubernetes.yaml
+│   └── yamllint
+│       └── config
 ├── .gitconfig
 ├── .gitignore
 ├── .local
