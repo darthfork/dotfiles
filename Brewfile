@@ -41,6 +41,7 @@ brew "tree-sitter"
 brew "universal-ctags"
 brew "watch"
 brew "wget"
+brew "yamllint"
 brew "ykman"
 brew "yq"
 

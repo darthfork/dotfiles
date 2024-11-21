@@ -2,6 +2,8 @@
 
 # compose.yaml - docker-compose file to run the dorker container.
 
+# yamllint disable rule:document-start
+
 services:
   dorker:
     image: darthfork/dorker:fedora40

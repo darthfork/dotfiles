@@ -14,18 +14,18 @@ kind: ClusterRole
 metadata:
   name: dorker
 rules:
-- apiGroups: ["*"]
-  resources: ["*"]
-  verbs: ["*"]
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: dorker-binding
 subjects:
-- kind: ServiceAccount
-  name: dorker
-  namespace: default
+  - kind: ServiceAccount
+    name: dorker
+    namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -41,9 +41,9 @@ metadata:
 spec:
   serviceAccountName: dorker
   containers:
-  - name: dorker
-    image: darthfork/dorker:fedora40
-    command: ["sh", "-c", "while true; do sleep 3600; done"]
-    tty: true
-    stdin: true
+    - name: dorker
+      image: darthfork/dorker:fedora40
+      command: ["sh", "-c", "while true; do sleep 3600; done"]
+      tty: true
+      stdin: true
 ---
