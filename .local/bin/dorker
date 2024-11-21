@@ -4,12 +4,25 @@
 
 CONFIG_FILE="$HOME/.config/utils/compose.yaml"
 
+# clean up the Docker Compose environment
 function cleanup() {
     echo "Cleaning up..."
-    docker-compose -f "$CONFIG_FILE" down --remove-orphans
+    docker-compose -f "$CONFIG_FILE" down --remove-orphans || {
+        echo "Failed to clean up Docker Compose resources." >&2
+    }
 }
 
-# Call cleanup on exit
+# Set trap to ensure cleanup on script exit
 trap cleanup EXIT
 
-docker-compose -f "$CONFIG_FILE" run --rm dorker
+# Ensure the configuration file exists
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo "Error: Configuration file not found at $CONFIG_FILE" >&2
+    exit 1
+fi
+
+# Run the Docker Compose service
+docker-compose -f "$CONFIG_FILE" run --rm dorker || {
+    echo "Error: Failed to run the Docker Compose service." >&2
+    exit 1
+}

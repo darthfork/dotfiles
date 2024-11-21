@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # codemux - tmux session manager for Visual Studio Code
-
+#
 # Usage: Add the following block to your settings.json file:
 # "terminal.integrated.profiles.osx": {
 #     "tmux": {
@@ -13,15 +13,19 @@
 #     },
 # }
 
-TMUX=$(which tmux)
+set -euo pipefail
+
+# Locate tmux binary
+TMUX=$(command -v tmux || { echo "tmux not found. Please install it."; exit 1; })
 TMUX_SERVER="vscode"
 CONFIG_FILE="$HOME/.config/tmux/vscode.conf"
 
-if [ -z "$1" ]; then
-    SESSION_NAME="vscode"
-else
-    SESSION_NAME="vscode-$1"
-fi
+# Determine session name
+SESSION_NAME=${1:-"vscode"}
 
-$TMUX -L $TMUX_SERVER attach -t "$SESSION_NAME" ||\
-$TMUX -L $TMUX_SERVER -f "$CONFIG_FILE" new-session -s "$SESSION_NAME"
+# Attach to an existing session or create a new one
+if $TMUX -L "$TMUX_SERVER" has-session -t "$SESSION_NAME" 2>/dev/null; then
+    $TMUX -L "$TMUX_SERVER" attach-session -t "$SESSION_NAME"
+else
+    $TMUX -L "$TMUX_SERVER" -f "$CONFIG_FILE" new-session -s "$SESSION_NAME"
+fi

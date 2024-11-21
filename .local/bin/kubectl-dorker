@@ -4,40 +4,66 @@
 
 YAML_FILE="$HOME/.config/utils/kubernetes.yaml"
 
-# Check if the YAML file exists
-if [ ! -f "$YAML_FILE" ]; then
-    echo "Error: Kubernetes configuration file $YAML_FILE does not exist."
-    exit 1
-fi
-
-
+# display usage information
 function usage() {
     echo "Usage: kubectl dorker {up|down}"
     exit 1
 }
 
+# bring up the dorker pod
 function up() {
     echo "Applying dorker configuration..."
-    kubectl apply -f "$YAML_FILE"
+    if ! kubectl apply -f "$YAML_FILE"; then
+        echo "Error: Failed to apply the Kubernetes configuration." >&2
+        exit 1
+    fi
 
     # Wait for the pod to be ready
     echo "Waiting for the dorker pod to be ready..."
-    kubectl wait --for=condition=ready pod/dorker --timeout=120s
+    if ! kubectl wait --for=condition=ready pod/dorker --timeout=120s; then
+        echo "Error: Timeout while waiting for the dorker pod to be ready." >&2
+        down
+        exit 1
+    fi
 
     # Open a shell inside the 'dorker' container
-    echo "Opening shell in dorker container..."
-    kubectl exec -it dorker --container dorker -- /bin/bash
+    echo "Opening shell in the dorker container..."
+    if ! kubectl exec -it dorker --container dorker -- /bin/bash; then
+        echo "Error: Failed to open a shell in the dorker container." >&2
+        down
+        exit 1
+    fi
 }
 
+# bring down the dorker pod and resources
 function down() {
     echo "Deleting all resources deployed by dorker..."
-    kubectl delete -f "$YAML_FILE"
+    if ! kubectl delete -f "$YAML_FILE"; then
+        echo "Error: Failed to delete the Kubernetes resources." >&2
+        exit 1
+    fi
+    echo "Resources deleted successfully."
 }
 
-if [ "$1" == "up" ]; then
-    up
-elif [ "$1" == "down" ]; then
-    down
-else
+# Ensure the YAML file exists
+if [ ! -f "$YAML_FILE" ]; then
+    echo "Error: Kubernetes configuration file $YAML_FILE does not exist." >&2
+    exit 1
+fi
+
+# Check the user input and call the appropriate function
+if [ $# -ne 1 ]; then
     usage
 fi
+
+case "$1" in
+    up)
+        up
+        ;;
+    down)
+        down
+        ;;
+    *)
+        usage
+        ;;
+esac

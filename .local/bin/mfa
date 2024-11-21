@@ -2,23 +2,47 @@
 
 # mfa - Yubikey 2FA code generator
 
-set -e
+set -euo pipefail
 
-yubikey_connected=$(ykman list)
-if [ -z "$yubikey_connected" ]; then
-    echo "No yubikey found"
-    exit 0
-fi
+# check for Yubikey presence
+function check_yubikey() {
+    if ! ykman list | grep -q .; then
+        echo "No Yubikey found. Please connect your Yubikey and try again." >&2
+        exit 1
+    fi
+}
 
-machine="$(uname -s)"
-case "${machine}" in
-    Linux*)     COPY='xclip -selection clipboard';;
-    Darwin*)    COPY='pbcopy';;
-    *)          echo "Unrecognized kernel"; exit 1
-esac
+# detect the operating system and set the copy command
+function set_copy_command() {
+    case "$(uname -s)" in
+        Linux*) COPY='xclip -selection clipboard';;
+        Darwin*) COPY='pbcopy';;
+        *) echo "Error: Unrecognized operating system." >&2; exit 1;;
+    esac
+}
 
-if [ -z "$1" ]; then
-    ykman oath accounts code
-else
-    ykman oath accounts code "$1"  | tee /dev/tty | awk '{print $2}' | tr -d '\n' | eval "${COPY}"
-fi
+# generate and optionally copy the 2FA code
+function generate_code() {
+    local account="${1:-}"
+    if [ -z "$account" ]; then
+        echo "Listing available accounts and generating codes..."
+        ykman oath accounts code
+    else
+        echo -e "Generating 2FA code for account: $1\n"
+        ykman oath accounts code "$1" | tee /dev/tty | awk '{print $2}' | tr -d '\n' | ${COPY}
+        echo -e "\nCode copied to clipboard."
+    fi
+}
+
+function main() {
+    check_yubikey
+    set_copy_command
+
+    if [ $# -eq 0 ]; then
+        generate_code
+    else
+        generate_code "$1"
+    fi
+}
+
+main "$@"

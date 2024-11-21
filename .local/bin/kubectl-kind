@@ -2,15 +2,32 @@
 
 # kubectl-kind - Kubernetes wrapper for creating a kind cluster
 
-CLUSTER_NAME=local
+set -euo pipefail
+CLUSTER_NAME="local"
 
-printf "\n== Deleting existing kind cluster ==\n\n"
+# Function to print messages with formatting
+print_message() {
+    printf "\n== %s ==\n\n" "$1"
+}
 
-kind delete cluster -n $CLUSTER_NAME
+# Function to handle errors
+error_exit() {
+    echo "Error: $1" >&2
+    exit 1
+}
 
-printf "\n== Creating new kind cluster ==\n\n"
+print_message "Deleting existing kind cluster (if it exists)"
 
-cat <<HEREDOC | ctlptl apply -f -
+if kind delete cluster -n "$CLUSTER_NAME"; then
+    echo "Cluster deleted successfully."
+else
+    echo "No existing cluster to delete or deletion failed. Proceeding with cluster creation..."
+fi
+
+print_message "Creating new kind cluster"
+
+# Define the cluster configuration and apply it using ctlptl
+cat <<HEREDOC | ctlptl apply -f - || error_exit "Failed to create kind cluster"
 apiVersion: ctlptl.dev/v1alpha1
 kind: Registry
 name: ctlptl-registry
@@ -27,3 +44,5 @@ kindV1Alpha4Cluster:
   nodes:
     - role: control-plane
 HEREDOC
+
+echo "Kind cluster '$CLUSTER_NAME' created successfully."

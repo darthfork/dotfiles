@@ -1,8 +1,44 @@
 #!/usr/bin/env bash
 
-# tmux-system-info - Display cpu and memory information in tmux status bar
+# tmux-system-info - Display CPU and memory usage information in the tmux status bar
 
-cpu=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}')
-mem=$(free | grep Mem | awk '{print $3/$2 * 100"%"}')
+set -euo pipefail
 
-echo " CPU: $cpu | MEM: $mem"
+# fetch CPU usage
+function get_cpu_usage() {
+    if ! command -v top &>/dev/null; then
+        echo "Error: top command not found. Please install it." >&2
+        exit 1
+    fi
+
+    # Extract CPU usage as the percentage of usage (100 - idle)
+    local cpu
+    cpu=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{printf "%.1f%%", 100 - $1}')
+    echo "$cpu"
+}
+
+# fetch memory usage
+function get_mem_usage() {
+    if ! command -v free &>/dev/null; then
+        echo "Error: free command not found. Please install it." >&2
+        exit 1
+    fi
+
+    # Extract memory usage as the percentage of used memory
+    local mem
+    mem=$(free | grep Mem | awk '{printf "%.1f%%", $3/$2 * 100}')
+    echo "$mem"
+}
+
+function main() {
+    local cpu mem
+
+    # Fetch CPU and memory usage
+    cpu=$(get_cpu_usage)
+    mem=$(get_mem_usage)
+
+    # Display the information
+    echo " CPU: $cpu | MEM: $mem"
+}
+
+main

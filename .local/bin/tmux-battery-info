@@ -2,8 +2,19 @@
 
 # tmux-battery-info - Display battery information in tmux status bar
 
-mac_battery_info(){
-    batt_info=$(pmset -g batt | tail -n -1 | sed 's/;//g')
+set -euo pipefail
+
+# fetch battery information on macOS
+function mac_battery_info() {
+    if ! command -v pmset &>/dev/null; then
+        echo "Error: pmset command not found. Ensure you're running this on macOS." >&2
+        exit 1
+    fi
+
+    local batt_info
+    batt_info=$(pmset -g batt | tail -n 1 | sed 's/;//g')
+
+    local percentage charge_status time_remaining
     percentage=$(awk '{print $3}' <<< "$batt_info")
     charge_status=$(awk '{print $4}' <<< "$batt_info")
     time_remaining=$(awk '{print $5 " " $6}' <<< "$batt_info")
@@ -15,8 +26,17 @@ mac_battery_info(){
     fi
 }
 
-linux_battery_info(){
+# fetch battery information on Linux
+function linux_battery_info() {
+    if ! command -v acpitool &>/dev/null; then
+        echo "Error: acpitool command not found. Please install it to fetch battery information." >&2
+        exit 1
+    fi
+
+    local batt_info
     batt_info=$(acpitool -b | sed 's/,//g')
+
+    local percentage charge_status time_remaining
     percentage=$(awk '{printf "%d", $5}' <<< "$batt_info")
     charge_status=$(awk '{print $4}' <<< "$batt_info")
     time_remaining=$(awk '{print $6}' <<< "$batt_info")
@@ -28,8 +48,19 @@ linux_battery_info(){
     fi
 }
 
-if [ "$(uname)" == "Linux" ]; then
-    linux_battery_info
-elif [ "$(uname)" == "Darwin" ]; then
-    mac_battery_info
-fi;
+function main() {
+    case "$(uname)" in
+        Linux)
+            linux_battery_info
+            ;;
+        Darwin)
+            mac_battery_info
+            ;;
+        *)
+            echo "Error: Unsupported operating system." >&2
+            exit 1
+            ;;
+    esac
+}
+
+main

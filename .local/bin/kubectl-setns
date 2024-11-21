@@ -1,7 +1,39 @@
 #!/usr/bin/env bash
 
 # kubectl-setns - Kubernetes wrapper for setting the current namespace
+#
+# Usage: kubectl-setns <namespace>
+# If no namespace is provided, the default namespace will be used.
 
+set -euo pipefail
+
+# display usage information
+function usage() {
+    echo "Usage: kubectl setns <namespace>"
+    echo "If no namespace is provided, the 'default' namespace will be used."
+    exit 1
+}
+
+# Check if kubectl is installed
+if ! command -v kubectl &>/dev/null; then
+    echo "Error: kubectl is not installed or not in PATH." >&2
+    exit 1
+fi
+
+# Parse the namespace argument
 NAMESPACE=${1:-default}
 
-kubectl config set-context --current --namespace="$NAMESPACE"
+# Validate namespace input (optional step to check valid characters)
+if [[ ! "$NAMESPACE" =~ ^[a-zA-Z0-9-]+$ ]]; then
+    echo "Error: Invalid namespace name. Namespaces must only contain alphanumeric characters and hyphens." >&2
+    usage
+fi
+
+# Set the current namespace in the kubeconfig
+echo "Setting current namespace to '$NAMESPACE'..."
+if kubectl config set-context --current --namespace="$NAMESPACE"; then
+    echo "Namespace successfully set to '$NAMESPACE'."
+else
+    echo "Error: Failed to set namespace to '$NAMESPACE'." >&2
+    exit 1
+fi

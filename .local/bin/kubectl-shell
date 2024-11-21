@@ -1,13 +1,25 @@
 #!/usr/bin/env bash
 
 # kubectl-shell - Kubernetes wrapper for exec-ing into a pod
+#
+# Usage:
+#   kubectl-shell <pod-name> [-c container] [-s shell]
+#
+# Arguments:
+#   pod-name  (required) Name of the pod.
+# Options:
+#   -c        (optional) Container to exec into within the pod.
+#   -s        (optional) Shell to use (sh/bash/zsh). Default: bash.
 
+set -euo pipefail
+
+# display usage information
 function usage() {
-    echo "Usage: $0 <pod-name> [-n namespace] [-s shell]"
+    echo "Usage: kubectl shell <pod-name> [-c container] [-s shell]"
     echo "  pod-name: (required) Name of the pod"
-    echo "  Optional Arguments: "
+    echo "  Optional Arguments:"
     echo "      -c: (optional) Container to exec into within the pod"
-    echo "      -s: (optional) Shell to use (sh/bash/zsh) (default: bash)"
+    echo "      -s: (optional) Shell to use (sh/bash/zsh). Default: bash"
     exit 1
 }
 
@@ -16,27 +28,34 @@ pod_name=""
 container=""
 shell="bash"
 
-
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
         -s)
+            if [[ -z ${2:-} ]]; then
+                echo "Error: Missing argument for -s (shell)" >&2
+                usage
+            fi
             shell="$2"
             shift 2
             ;;
         -c)
+            if [[ -z ${2:-} ]]; then
+                echo "Error: Missing argument for -c (container)" >&2
+                usage
+            fi
             container="$2"
             shift 2
             ;;
         -*)
-            echo "Unknown option: $1"
+            echo "Error: Unknown option: $1" >&2
             usage
             ;;
         *)
-            if [ -z "$pod_name" ]; then
+            if [[ -z "$pod_name" ]]; then
                 pod_name="$1"
             else
-                echo "Too many arguments"
+                echo "Error: Too many arguments" >&2
                 usage
             fi
             shift
@@ -44,17 +63,27 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Check if pod name is provided
-if [ -z "$pod_name" ]; then
-    echo "Error: Pod name is required"
+# Check if the pod name is provided
+if [[ -z "$pod_name" ]]; then
+    echo "Error: Pod name is required" >&2
     usage
 fi
 
-namespace=$(kubectl get pods --all-namespaces --field-selector metadata.name="$pod_name" -o jsonpath='{.items[0].metadata.namespace}' 2>&1)
+# Fetch the namespace of the pod
+namespace=$(kubectl get pods --all-namespaces --field-selector metadata.name="$pod_name" -o jsonpath='{.items[0].metadata.namespace}' 2>/dev/null || true)
 
-if [ $? -ne 0 ]; then
-    printf "Error occurred while fetching the namespace for pod \"%s\". Check to make sure the pod exists\n" "$pod_name"
+if [[ -z "$namespace" ]]; then
+    printf "Error: Unable to find namespace for pod \"%s\". Ensure the pod exists.\n" "$pod_name" >&2
     exit 1
 fi
 
-kubectl exec -it "$pod_name" -n "$namespace" -c "$container" -- "$shell"
+# Build kubectl exec command
+exec_command=("kubectl" "exec" "-it" "$pod_name" "-n" "$namespace")
+if [[ -n "$container" ]]; then
+    exec_command+=("-c" "$container")
+fi
+exec_command+=("--" "$shell")
+
+# Execute the command
+echo "Executing: ${exec_command[*]}"
+"${exec_command[@]}"
