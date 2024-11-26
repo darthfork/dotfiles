@@ -3,7 +3,8 @@
 -- luacheck: globals vim
 
 -- Set leader key
-vim.g.mapleader = ','
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- Configuration Options
 vim.opt.guicursor = ''
@@ -27,13 +28,9 @@ vim.opt.showmatch = true
 vim.opt.smartcase = true
 vim.opt.cursorline = true
 vim.opt.fillchars = { eob = " " }
-
--- Persistent undo
-if vim.fn.has('persistent_undo') == 1 then
-  vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
-  vim.opt.undolevels = 10000
-  vim.opt.undofile = true
-end
+vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
+vim.opt.undolevels = 10000
+vim.opt.undofile = true
 
 -- Set colorscheme
 vim.cmd('colorscheme retrobox')
@@ -49,24 +46,20 @@ vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Leader>g', ':GitBlame<CR>', { silent = true })
 
 -- Command abbreviation
 vim.cmd.cnoreabbrev('Ack', 'Ack!')
 
 -- Plugin manager setup
-local function bootstrap_pckr()
-  local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
-  if not (vim.uv or vim.loop).fs_stat(pckr_path) then
-    vim.fn.system({
-        'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim', pckr_path
-      })
-  end
-  vim.opt.rtp:prepend(pckr_path)
+local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
+if not (vim.uv or vim.loop).fs_stat(pckr_path) then
+  vim.fn.system({
+      'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim', pckr_path
+    })
 end
-
--- Bootstrap plugin manager
-bootstrap_pckr()
+vim.opt.rtp:prepend(pckr_path)
 
 -- Install plugins
 require('pckr').add{
@@ -85,7 +78,6 @@ require('pckr').add{
 
 -- Plugin configurations
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
-vim.g.go_def_mapping_enabled = 0
 vim.g.fzf_layout = { down = '40%' }
 vim.g.ackprg = 'rg --vimgrep --type-not sql --smart-case'
 vim.g.ack_autoclose = 1
@@ -154,7 +146,7 @@ vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
 -- Filetype specific settings
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { '*', 'c', 'cpp', 'python', 'bash', 'rust' },
+    pattern = { '*', 'c', 'cpp', 'python', 'bash', 'rust' , 'starlark' },
     command = 'setlocal ai ts=4 sw=4 si sta et',
     group = 'filetypesettings',
   })
