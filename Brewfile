@@ -49,3 +49,4 @@ brew "yq"
 mas "Amphetamine", id: 937984704
 mas "Slack for Desktop", id: 803453959
 mas "Yubico Authenticator", id: 1497506650
+mas "WhatsApp", id: 310633997

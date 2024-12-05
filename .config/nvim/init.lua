@@ -3,8 +3,7 @@
 -- luacheck: globals vim
 
 -- Set leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+vim.g.mapleader = ","
 
 -- Configuration Options
 vim.opt.guicursor = ''
@@ -49,9 +48,6 @@ vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Leader>g', ':GitBlame<CR>', { silent = true })
 
--- Command abbreviation
-vim.cmd.cnoreabbrev('Ack', 'Ack!')
-
 -- Plugin manager setup
 local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
 if not (vim.uv or vim.loop).fs_stat(pckr_path) then
@@ -68,7 +64,6 @@ require('pckr').add{
   'dense-analysis/ale';
   'junegunn/fzf.vim';
   'mhinz/vim-signify';
-  'mileszs/ack.vim';
   {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'};
   'MeanderingProgrammer/render-markdown.nvim';
   'akinsho/bufferline.nvim';
@@ -104,7 +99,7 @@ require("lualine").setup{
   options = {
     icons_enabled = true,
     theme = 'codedark',
-    component_separators = { left = '', right = ''},
+    component_separators = { left = '\\', right = '/'},
     section_separators = { left = '', right = '' },
   },
 }
@@ -124,8 +119,8 @@ require("bufferline").setup{
 -- Treesitter configurations
 require('nvim-treesitter.configs').setup{
   ensure_installed = {
-    "c", "lua", "vim", "vimdoc", "markdown", "json",
-    "starlark", "yaml", "python", "bash", "rust", "go"
+    "bash", "c", "go", "helm", "json", "lua", "markdown", "python",
+    "rust", "starlark", "terraform", "vim", "vimdoc", "yaml",
   },
   highlight = { enable = true },
 }

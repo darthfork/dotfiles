@@ -26,13 +26,9 @@ set incsearch
 set hlsearch
 set showmatch
 set smartcase
-
-" Persistent undo
-if has('persistent_undo')
-  set undodir=$HOME/.vim/undo
-  set undolevels=10000
-  set undofile
-endif
+set undodir=$HOME/.vim/undo
+set undolevels=10000
+set undofile
 
 " Set colorscheme
 colorscheme retrobox
@@ -66,7 +62,6 @@ call plug#begin()
   Plug 'dense-analysis/ale'
   Plug 'junegunn/fzf.vim'
   Plug 'mhinz/vim-signify'
-  Plug 'mileszs/ack.vim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'sheerun/vim-polyglot'
   Plug 'vim-airline/vim-airline'
@@ -95,9 +90,6 @@ let g:ale_linters = {
       \ 'rust': ['rustfmt'],
       \ 'python': ['pylint']
       \}
-
-" Command abbreviation
-cnoreabbrev Ack Ack!
 
 " NetRW Settings
 let g:netrw_banner = 0
