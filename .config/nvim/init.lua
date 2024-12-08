@@ -3,7 +3,7 @@
 -- luacheck: globals vim
 
 -- Set leader key
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 
 -- Configuration Options
 vim.opt.guicursor = ''
@@ -35,18 +35,19 @@ vim.opt.undofile = true
 vim.cmd('colorscheme retrobox')
 
 -- Key mappings
-vim.keymap.set('n', 'n', 'nzz', { noremap = true, silent = true })
-vim.keymap.set('n', 'N', 'Nzz', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<Leader>g', ':GitBlame<CR>', { silent = true })
+vim.keymap.set('n', 'n', 'nzz', { noremap = true, silent = true , desc = 'Move to next search result' })
+vim.keymap.set('n', 'N', 'Nzz', { noremap = true, silent = true , desc = 'Move to previous search result' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true, desc = 'Move down' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true, desc = 'Move up' })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true, desc = 'Move left' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true, desc = 'Move right' })
+vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true , desc = 'Open netrw' })
+vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true , desc = 'Find files' })
+vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true , desc = 'Show all open buffers' })
+vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true , desc = 'Search through tags' })
+vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true , desc = 'Show all available commands' })
+vim.keymap.set('n', '<Leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
+vim.keymap.set('n', '<Leader>rg', ':RG<CR>', { silent = true , desc = 'Search through files with RipGrep' })
 
 -- Plugin manager setup
 local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
@@ -55,6 +56,7 @@ if not (vim.uv or vim.loop).fs_stat(pckr_path) then
       'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim', pckr_path
     })
 end
+
 vim.opt.rtp:prepend(pckr_path)
 
 -- Install plugins
