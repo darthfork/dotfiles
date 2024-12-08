@@ -16,6 +16,7 @@ export skip_global_compinit=1
 export PATH="$PATH:$HOME/.local/bin"
 export FZF_DEFAULT_COMMAND='rg --files --ignore-vcs --hidden -g "!{node_modules,.venv,.git}"'
 export FZF_DEFAULT_OPTS="--tmux --layout=reverse --border"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 export MANPAGER="vim -M +MANPAGER - "
 export SHELLCHECK_OPTS="-e SC2155 -e SC1008 -e SC2181"
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # This allows agnoster to handle the venv prompt

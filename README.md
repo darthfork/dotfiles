@@ -82,6 +82,8 @@ source <(helm completion zsh)
 ├── .config
 │   ├── nvim
 │   │   └── init.lua
+│   ├── ripgrep
+│   │   └── config
 │   ├── tmux
 │   │   ├── tmux.conf
 │   │   └── vscode.conf

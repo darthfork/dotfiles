@@ -12,6 +12,7 @@ mkdir -p "$HOME/.config/nvim"
 mkdir -p "$HOME/.config/tmux"
 mkdir -p "$HOME/.config/utils"
 mkdir -p "$HOME/.config/yamllint"
+mkdir -p "$HOME/.config/ripgrep"
 
 # Symlink configuration files for vim, neovim, shell, tmux, alacritty and other tools
 printf "Symlinking vim, neovim, shell, tmux, alacritty and other configuration files...\n"
@@ -25,6 +26,7 @@ ln -s ".config/utils/compose.yaml" "$HOME/.config/utils/compose.yaml"
 ln -s ".config/utils/kubernetes.yaml" "$HOME/.config/utils/kubernetes.yaml"
 ln -s ".config/utils/agnoster-modifications.diff" "$HOME/.config/utils/agnoster-modifications.diff"
 ln -s ".config/yamllint/config" "$HOME/.config/yamllint/config"
+ln -s ".config/ripgrep/config" "$HOME/.config/ripgrep/config"
 
 # Install utility scripts and kubernetes plugins
 printf "Install Utility scripts and kubernetes plugins...\n"
