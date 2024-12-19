@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://dotfiles.github.io/images/dotfiles-logo.png" alt="dotfiles" width="474" height="148" />
-</p>
+![Dotfiles](https://dotfiles.github.io/images/dotfiles-logo.png "Dotfiles")
 
 # Dotfiles
 
@@ -36,7 +34,8 @@ To install the dotfiles, utility scripts and packages run the following commands
   - Usage: `mfa <service-name>`
 - [**codemux**](.local/bin/codemux)
   - Description: Utility script to open a tmux session with vscode specific layout and configurations
-  - Usage: `codemux <workspace-name>`. This launches a vscode session named `vscode-<workspace-name>`. To use with vscode add the following to your vscode settings.json
+  - Usage: `codemux <workspace-name>`. This launches a vscode session named `<workspace-name>`. To use with vscode add the following to your vscode settings.json
+
     ```json
       "terminal.integrated.profiles.osx": {
           "tmux": {
@@ -51,7 +50,7 @@ To install the dotfiles, utility scripts and packages run the following commands
 
 ## Enable completion for zsh
 
-**autoload setting** (Pre-requisite for enabling completion)
+**autoload setting** (pre-requisite for enabling completion)
 
 ```zsh
 autoload -U +X compinit && compinit
