@@ -46,8 +46,8 @@ vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, s
 vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true , desc = 'Show all open buffers' })
 vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true , desc = 'Search through tags' })
 vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true , desc = 'Show all available commands' })
-vim.keymap.set('n', '<Leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
-vim.keymap.set('n', '<Leader>rg', ':RG<CR>', { silent = true , desc = 'Search through files with RipGrep' })
+vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
+vim.keymap.set('n', '<leader>rg', ':RG<CR>', { silent = true , desc = 'Search through files with RipGrep' })
 
 -- Plugin manager setup
 local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
@@ -76,17 +76,16 @@ require('pckr').add{
 -- Plugin configurations
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
 vim.g.fzf_layout = { down = '40%' }
-vim.g.ackprg = 'rg --vimgrep --type-not sql --smart-case'
-vim.g.ack_autoclose = 1
-vim.g.ack_use_cword_for_empty_search = 1
-vim.g.ale_fix_on_save = 1
 
+-- ALE Fixers configurations
+vim.g.ale_fix_on_save = 1
 vim.g.ale_fixers = {
   ['*'] = { 'remove_trailing_lines', 'trim_whitespace' },
   go = { 'gofmt', 'goimports' },
   json = { 'jq' },
 }
 
+-- ALE Linters configurations
 vim.g.ale_linters = {
   javascript = { 'eslint' },
   sh = { 'shellcheck' },
