@@ -7,7 +7,6 @@ vim.g.mapleader = " "
 
 -- Configuration Options
 vim.opt.guicursor = ''
-vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))
 vim.opt.regexpengine = 2
 vim.opt.background = 'dark'
 vim.opt.backspace = { 'indent', 'eol', 'start' }
@@ -31,24 +30,6 @@ vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
 vim.opt.undolevels = 10000
 vim.opt.undofile = true
 
--- Set colorscheme
-vim.cmd('colorscheme retrobox')
-
--- Key mappings
-vim.keymap.set('n', 'n', 'nzz', { noremap = true, silent = true , desc = 'Move to next search result' })
-vim.keymap.set('n', 'N', 'Nzz', { noremap = true, silent = true , desc = 'Move to previous search result' })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true, desc = 'Move down' })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true, desc = 'Move up' })
-vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true, desc = 'Move left' })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true, desc = 'Move right' })
-vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true , desc = 'Open netrw' })
-vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true , desc = 'Find files' })
-vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true , desc = 'Show all open buffers' })
-vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true , desc = 'Search through tags' })
-vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true , desc = 'Show all available commands' })
-vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
-vim.keymap.set('n', '<leader>rg', ':RG<CR>', { silent = true , desc = 'Search through files with RipGrep' })
-
 -- Plugin manager setup
 local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
 if not (vim.uv or vim.loop).fs_stat(pckr_path) then
@@ -57,7 +38,9 @@ if not (vim.uv or vim.loop).fs_stat(pckr_path) then
     })
 end
 
+-- Runtime path configuration
 vim.opt.rtp:prepend(pckr_path)
+vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))
 
 -- Install plugins
 require('pckr').add{
@@ -73,11 +56,29 @@ require('pckr').add{
   'nvim-tree/nvim-web-devicons';
 }
 
--- Plugin configurations
+-- Set colorscheme
+vim.cmd('colorscheme retrobox')
+
+-- Key mappings
+vim.keymap.set('n', 'n', 'nzz', { noremap = true, silent = true , desc = 'Move to next search result' })
+vim.keymap.set('n', 'N', 'Nzz', { noremap = true, silent = true , desc = 'Move to previous search result' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true, desc = 'Move down a buffer' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true, desc = 'Move up a buffer' })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true, desc = 'Move left a buffer' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true, desc = 'Move right a buffer' })
+vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true , desc = 'Open netrw' })
+vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true , desc = 'Find files' })
+vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true , desc = 'Show all open buffers' })
+vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true , desc = 'Search through tags' })
+vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true , desc = 'Show all available commands' })
+vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
+vim.keymap.set('n', '<leader>rg', ':RG<CR>', { silent = true , desc = 'Search through files with RipGrep' })
+
+-- FZF configuration
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
 vim.g.fzf_layout = { down = '40%' }
 
--- ALE Fixers configurations
+-- ALE configuration
 vim.g.ale_fix_on_save = 1
 vim.g.ale_fixers = {
   ['*'] = { 'remove_trailing_lines', 'trim_whitespace' },
@@ -85,7 +86,6 @@ vim.g.ale_fixers = {
   json = { 'jq' },
 }
 
--- ALE Linters configurations
 vim.g.ale_linters = {
   javascript = { 'eslint' },
   sh = { 'shellcheck' },
@@ -95,7 +95,7 @@ vim.g.ale_linters = {
   bzl = { 'buildifier' },
 }
 
--- Lualine configurations
+-- Lualine configuration
 require("lualine").setup{
   options = {
     icons_enabled = true,
@@ -105,7 +105,7 @@ require("lualine").setup{
   },
 }
 
--- Bufferline configurations
+-- Bufferline configuration
 require("bufferline").setup{
   options = {
     numbers = 'ordinal',
@@ -117,7 +117,7 @@ require("bufferline").setup{
   },
 }
 
--- Treesitter configurations
+-- Treesitter configuration
 require('nvim-treesitter.configs').setup{
   ensure_installed = {
     "bash", "c", "go", "helm", "json", "lua", "markdown", "python",
@@ -126,10 +126,10 @@ require('nvim-treesitter.configs').setup{
   highlight = { enable = true },
 }
 
--- Render Markdown configurations
+-- Render Markdown configuration
 require('render-markdown').setup({})
 
--- NetRW Settings
+-- NetRW configuration
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 0
