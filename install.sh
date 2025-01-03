@@ -16,21 +16,23 @@ mkdir -p "$HOME/.config/ripgrep"
 
 # Symlink configuration files for vim, neovim, shell, tmux, alacritty and other tools
 printf "Symlinking vim, neovim, shell, tmux, alacritty and other configuration files...\n"
-ln -s ".zshrc" "$HOME/.zshrc"
-ln -s ".gitconfig" "$HOME/.gitconfig"
-ln -s ".vim/vimrc" "$HOME/.vim/vimrc"
-ln -s ".config/nvim/init.lua" "$HOME/.config/nvim/init.lua"
-ln -s ".config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
-ln -s ".config/tmux/vscode.conf" "$HOME/.config/tmux/vscode.conf"
-ln -s ".config/utils/compose.yaml" "$HOME/.config/utils/compose.yaml"
-ln -s ".config/utils/kubernetes.yaml" "$HOME/.config/utils/kubernetes.yaml"
-ln -s ".config/utils/agnoster-modifications.diff" "$HOME/.config/utils/agnoster-modifications.diff"
-ln -s ".config/yamllint/config" "$HOME/.config/yamllint/config"
-ln -s ".config/ripgrep/config" "$HOME/.config/ripgrep/config"
+ln -s "$PWD/.zshrc" "$HOME/.zshrc"
+ln -s "$PWD/.gitconfig" "$HOME/.gitconfig"
+ln -s "$PWD/.vim/vimrc" "$HOME/.vim/vimrc"
+ln -s "$PWD/.config/nvim/init.lua" "$HOME/.config/nvim/init.lua"
+ln -s "$PWD/.config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+ln -s "$PWD/.config/tmux/vscode.conf" "$HOME/.config/tmux/vscode.conf"
+ln -s "$PWD/.config/utils/compose.yaml" "$HOME/.config/utils/compose.yaml"
+ln -s "$PWD/.config/utils/kubernetes.yaml" "$HOME/.config/utils/kubernetes.yaml"
+ln -s "$PWD/.config/utils/agnoster-modifications.diff" "$HOME/.config/utils/agnoster-modifications.diff"
+ln -s "$PWD/.config/yamllint/config" "$HOME/.config/yamllint/config"
+ln -s "$PWD/.config/ripgrep/config" "$HOME/.config/ripgrep/config"
 
 # Install utility scripts and kubernetes plugins
 printf "Install Utility scripts and kubernetes plugins...\n"
-install -m755 ".local/bin/*" "$HOME/.local/bin"
+for file in .local/bin/*; do
+    install -m755 "$file" "$HOME/.local/bin"
+done
 
 # Setup homebrew
 printf "Installing homebrew...\n"
