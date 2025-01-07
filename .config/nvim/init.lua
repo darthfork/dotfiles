@@ -76,7 +76,6 @@ vim.keymap.set('n', '<leader>rg', ':RG<CR>', { silent = true , desc = 'Search th
 
 -- FZF configuration
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
-vim.g.fzf_layout = { down = '40%' }
 
 -- ALE configuration
 vim.g.ale_fix_on_save = 1

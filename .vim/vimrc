@@ -51,9 +51,9 @@ nmap <silent><leader>g :GitBlame<CR>
 nmap <silent><leader>rg :RG<CR>
 
 " Plugin manager setup
-let data_dir = '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+let config_dir = '~/.vim'
+if empty(glob(config_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.config_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -82,12 +82,12 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'json': ['jq'] }
 
 let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'sh': ['shellcheck'],
-      \ 'go': ['golangci-lint'],
-      \ 'rust': ['rustfmt'],
-      \ 'python': ['pylint']
-      \}
+  \ 'javascript': ['eslint'],
+  \ 'sh': ['shellcheck'],
+  \ 'go': ['golangci-lint'],
+  \ 'rust': ['rustfmt'],
+  \ 'python': ['pylint']
+  \}
 
 " NetRW Settings
 let g:netrw_banner = 0

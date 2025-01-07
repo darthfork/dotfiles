@@ -8,6 +8,7 @@ tap 'hashicorp/tap'
 # GUI Apps from cask
 cask 'balenaetcher'
 cask 'chatgpt'
+cask 'discord'
 cask 'docker'
 cask 'google-chrome'
 cask 'iterm2'
