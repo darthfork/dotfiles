@@ -30,17 +30,20 @@ vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
 vim.opt.undolevels = 10000
 vim.opt.undofile = true
 
--- Plugin manager setup
+-- Local variables
 local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
+local fzf_path = vim.fn.system('brew --prefix fzf'):gsub('\n', '')
+
+-- Plugin manager setup
 if not (vim.uv or vim.loop).fs_stat(pckr_path) then
   vim.fn.system({
-      'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim', pckr_path
-    })
+    'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim', pckr_path
+  })
 end
 
 -- Runtime path configuration
 vim.opt.rtp:prepend(pckr_path)
-vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))
+vim.opt.rtp:append(fzf_path)
 
 -- Install plugins
 require('pckr').add{
@@ -73,6 +76,7 @@ vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true , des
 vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true , desc = 'Show all available commands' })
 vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
 vim.keymap.set('n', '<leader>rg', ':RG<CR>', { silent = true , desc = 'Search through files with RipGrep' })
+vim.keymap.set('n', '<leader>ht', ':Helptags<CR>', { silent = true , desc = 'Search Vim documentation' })
 
 -- FZF configuration
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
@@ -170,3 +174,13 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     command = 'setlocal keywordprg=:help',
     group = 'filetypesettings',
   })
+
+-- Set relativenumber on buffer enter and insert leave
+vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {
+    pattern = "*",
+    command = "set relativenumber cursorline"
+})
+vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {
+    pattern = "*",
+    command = "set norelativenumber nocursorline"
+})

@@ -8,7 +8,7 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-export TERM="xterm-256color"
+export TERM="tmux-256color"
 export EDITOR="nvim"
 export AWS_PAGER=""
 export GPG_TTY=$(tty)
