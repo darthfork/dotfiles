@@ -24,7 +24,7 @@ ln -s "$PWD/.config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
 ln -s "$PWD/.config/tmux/vscode.conf" "$HOME/.config/tmux/vscode.conf"
 ln -s "$PWD/.config/utils/compose.yaml" "$HOME/.config/utils/compose.yaml"
 ln -s "$PWD/.config/utils/kubernetes.yaml" "$HOME/.config/utils/kubernetes.yaml"
-ln -s "$PWD/.config/utils/agnoster-modifications.diff" "$HOME/.config/utils/agnoster-modifications.diff"
+ln -s "$PWD/.config/utils/agnoster.zsh.patch" "$HOME/.config/utils/agnoster.zsh.patch"
 ln -s "$PWD/.config/yamllint/config" "$HOME/.config/yamllint/config"
 ln -s "$PWD/.config/ripgrep/config" "$HOME/.config/ripgrep/config"
 
@@ -50,10 +50,10 @@ bash -c "$(curl -fssl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/t
 
 # Apply agnoster theme changes
 printf "Applying agnoster theme changes...\n"
-cp ".config/utils/agnoster-modifications.diff" "$HOME/.oh-my-zsh/"
+cp ".config/utils/agnoster.zsh.patch" "$HOME/.oh-my-zsh/"
 pushd "$HOME/.oh-my-zsh/" || exit
-git apply agnoster-modifications.diff
-rm agnoster-modifications.diff
+git apply agnoster.zsh.patch
+rm agnoster.zsh.patch
 popd || exit
 
 # Install zsh syntax completion

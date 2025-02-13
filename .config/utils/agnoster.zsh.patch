@@ -1,11 +1,11 @@
 diff --git a/themes/agnoster.zsh-theme b/themes/agnoster.zsh-theme
-index c2a5421..37763e0 100644
+index 67db2cf..6fee0b7 100644
 --- a/themes/agnoster.zsh-theme
 +++ b/themes/agnoster.zsh-theme
 @@ -29,6 +29,11 @@
  # jobs are running in this shell will all be displayed automatically when
  # appropriate.
-
+ 
 +MULTILINE_FIRST_PROMPT_PREFIX='\u256D\U2500'     # ╭─
 +MULTILINE_NEWLINE_PROMPT_PREFIX='\u251C\U2500'   # ├─
 +MULTILINE_LAST_PROMPT_PREFIX='\u2570\U2500 '     # ╰─
@@ -13,11 +13,20 @@ index c2a5421..37763e0 100644
 +
  ### Segment drawing
  # A few utility functions to make it easy and re-usable to draw segmented prompts
-
-@@ -72,14 +77,30 @@ prompt_segment() {
+ 
+@@ -73,7 +78,7 @@ esac
+ 
+ # VirtualEnv colors
+ : ${AGNOSTER_VENV_FG:=black}
+-: ${AGNOSTER_VENV_BG:=blue}
++: ${AGNOSTER_VENV_BG:=magenta}
+ 
+ # AWS Profile colors
+ : ${AGNOSTER_AWS_PROD_FG:=yellow}
+@@ -129,14 +134,30 @@ prompt_segment() {
    [[ -n $3 ]] && echo -n $3
  }
-
+ 
 +# Start the prompt
 +prompt_start() {
 +  if [ -n "${MUXCODE}" ]; then
@@ -46,8 +55,8 @@ index c2a5421..37763e0 100644
 +  echo -n $END_PROMPT
    CURRENT_BG=''
  }
-
-@@ -144,7 +165,7 @@ prompt_git() {
+ 
+@@ -223,7 +244,7 @@ prompt_git() {
      zstyle ':vcs_info:*' get-revision true
      zstyle ':vcs_info:*' check-for-changes true
      zstyle ':vcs_info:*' stagedstr '✚'
@@ -56,26 +65,10 @@ index c2a5421..37763e0 100644
      zstyle ':vcs_info:*' formats ' %u%c'
      zstyle ':vcs_info:*' actionformats ' %u%c'
      vcs_info
-@@ -223,7 +244,7 @@ prompt_dir() {
- # Virtualenv: current working virtualenv
- prompt_virtualenv() {
-   if [[ -n "$VIRTUAL_ENV" && -n "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
--    prompt_segment blue black "(${VIRTUAL_ENV:t:gs/%/%%})"
-+    prompt_segment magenta black "(${VIRTUAL_ENV:t:gs/%/%%})"
-   fi
- }
-
-@@ -249,17 +270,46 @@ prompt_status() {
- prompt_aws() {
-   [[ -z "$AWS_PROFILE" || "$SHOW_AWS_PROMPT" = false ]] && return
-   case "$AWS_PROFILE" in
--    *-prod|*production*) prompt_segment red yellow  "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
--    *) prompt_segment green black "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
-+    *-prod|*production*) prompt_segment red black "AWS: $AWS_PROFILE" ;;
-+    *) prompt_segment green black "AWS: $AWS_PROFILE" ;;
+@@ -343,12 +364,41 @@ prompt_aws() {
    esac
  }
-
+ 
 +prompt_kubernetes_icon() {
 +  KUBERNETES_SYMBOL=$'\xE2\x8E\x88'
 +  KUBERNETES_CONTEXT=$1

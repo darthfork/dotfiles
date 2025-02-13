@@ -87,7 +87,7 @@ source <(helm completion zsh)
 │   │   ├── tmux.conf
 │   │   └── vscode.conf
 │   ├── utils
-│   │   ├── agnoster-modifications.diff
+│   │   ├── agnoster.zsh.patch
 │   │   ├── compose.yaml
 │   │   └── kubernetes.yaml
 │   └── yamllint
