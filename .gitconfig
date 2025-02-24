@@ -28,6 +28,12 @@
 	gpgSign = true
 [pull]
 	rebase = false
+[rerere]
+	enabled = true
+[column]
+	ui = auto
+[branch]
+    sort = -committerdate
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [init]
