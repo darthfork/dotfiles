@@ -81,6 +81,7 @@ brew 'yq'
 # Mac App Store Apps
 if OS.mac?
     mas 'Amphetamine', id: 937984704
+    mas "Goodnotes", id: 1444383602
 end
 
 # VSCode Extensions
