@@ -82,7 +82,6 @@ brew 'yq'
 # Mac App Store Apps
 if OS.mac?
     mas 'Amphetamine', id: 937984704
-    mas "Goodnotes", id: 1444383602
 end
 
 # VSCode Extensions
@@ -97,8 +96,6 @@ vscode 'bierner.markdown-yaml-preamble'
 vscode 'coder.coder-remote'
 vscode 'emily-curry.base16-tomorrow-dark-vscode'
 vscode 'file-icons.file-icons'
-vscode 'github.copilot'
-vscode 'github.copilot-chat'
 vscode 'golang.go'
 vscode 'hashicorp.terraform'
 vscode 'ms-azuretools.vscode-docker'
