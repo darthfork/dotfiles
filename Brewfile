@@ -7,6 +7,7 @@ tap 'hashicorp/tap'
 
 # GUI Apps from cask
 cask 'balenaetcher'
+cask 'brave-browser'
 cask 'chatgpt'
 cask 'cursor'
 cask 'discord'
