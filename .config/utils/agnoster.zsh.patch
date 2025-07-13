@@ -1,5 +1,5 @@
 diff --git a/themes/agnoster.zsh-theme b/themes/agnoster.zsh-theme
-index 67db2cf..6fee0b7 100644
+index 6345237..f855cb3 100644
 --- a/themes/agnoster.zsh-theme
 +++ b/themes/agnoster.zsh-theme
 @@ -29,6 +29,11 @@
@@ -14,7 +14,7 @@ index 67db2cf..6fee0b7 100644
  ### Segment drawing
  # A few utility functions to make it easy and re-usable to draw segmented prompts
  
-@@ -73,7 +78,7 @@ esac
+@@ -79,7 +84,7 @@ esac
  
  # VirtualEnv colors
  : ${AGNOSTER_VENV_FG:=black}
@@ -23,7 +23,7 @@ index 67db2cf..6fee0b7 100644
  
  # AWS Profile colors
  : ${AGNOSTER_AWS_PROD_FG:=yellow}
-@@ -129,14 +134,30 @@ prompt_segment() {
+@@ -136,14 +141,30 @@ prompt_segment() {
    [[ -n $3 ]] && echo -n $3
  }
  
@@ -56,7 +56,7 @@ index 67db2cf..6fee0b7 100644
    CURRENT_BG=''
  }
  
-@@ -223,7 +244,7 @@ prompt_git() {
+@@ -230,7 +251,7 @@ prompt_git() {
      zstyle ':vcs_info:*' get-revision true
      zstyle ':vcs_info:*' check-for-changes true
      zstyle ':vcs_info:*' stagedstr '✚'
@@ -65,10 +65,13 @@ index 67db2cf..6fee0b7 100644
      zstyle ':vcs_info:*' formats ' %u%c'
      zstyle ':vcs_info:*' actionformats ' %u%c'
      vcs_info
-@@ -343,12 +364,41 @@ prompt_aws() {
-   esac
- }
- 
+@@ -357,15 +378,45 @@ prompt_terraform() {
+   local terraform_info=$(tf_prompt_info)
+   [[ -z "$terraform_info" ]] && return
+   prompt_segment magenta yellow "TF: $terraform_info"
++
++}
++
 +prompt_kubernetes_icon() {
 +  KUBERNETES_SYMBOL=$'\xE2\x8E\x88'
 +  KUBERNETES_CONTEXT=$1
@@ -94,8 +97,8 @@ index 67db2cf..6fee0b7 100644
 +  prompt_kubernetes_icon "$KUBERNETES_CONTEXT"
 +  prompt_segment $CURRENT_BG default "$KUBERNETES_CONTEXT$KUBERNETES_NAMESPACE"
 +
-+}
-+
+ }
+ 
  ## Main prompt
  build_prompt() {
    RETVAL=$?
@@ -103,6 +106,7 @@ index 67db2cf..6fee0b7 100644
    prompt_status
    prompt_virtualenv
    prompt_aws
+   prompt_terraform
 +  prompt_kubecontext
    prompt_context
    prompt_dir
