@@ -24,34 +24,22 @@ vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
 vim.opt.undolevels = 10000
 vim.opt.undofile = true
 
--- Local variables
-local pckr_path = vim.fn.stdpath('data') .. '/pckr/pckr.nvim'
-local fzf_path = vim.fn.system('brew --prefix fzf'):gsub('\n', '')
-
--- Plugin manager setup
-if not (vim.uv or vim.loop).fs_stat(pckr_path) then
-  vim.fn.system({
-    'git', 'clone', '--filter=blob:none', 'https://github.com/lewis6991/pckr.nvim', pckr_path
-  })
-end
-
 -- Runtime path configuration
-vim.opt.rtp:prepend(pckr_path)
-vim.opt.rtp:append(fzf_path)
+vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))
 
 -- Install plugins
-require('pckr').add{
-  'darthfork/git-blame.vim';
-  'github/copilot.vim';
-  'dense-analysis/ale';
-  'junegunn/fzf.vim';
-  'mhinz/vim-signify';
-  {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'};
-  'MeanderingProgrammer/render-markdown.nvim';
-  'akinsho/bufferline.nvim';
-  'nvim-lualine/lualine.nvim';
-  'nvim-tree/nvim-web-devicons';
-}
+vim.pack.add({
+  'https://github.com/darthfork/git-blame.vim',
+  'https://github.com/github/copilot.vim',
+  'https://github.com/dense-analysis/ale',
+  'https://github.com/junegunn/fzf.vim',
+  'https://github.com/mhinz/vim-signify',
+  'https://github.com/nvim-treesitter/nvim-treesitter',
+  'https://github.com/MeanderingProgrammer/render-markdown.nvim',
+  'https://github.com/akinsho/bufferline.nvim',
+  'https://github.com/nvim-lualine/lualine.nvim',
+  'https://github.com/nvim-tree/nvim-web-devicons',
+})
 
 -- Set colorscheme
 vim.cmd('colorscheme retrobox')
@@ -117,8 +105,8 @@ require("bufferline").setup{
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup{
   ensure_installed = {
-    "bash", "c", "go", "helm", "json", "lua", "markdown", "python",
-    "rust", "starlark", "terraform", "vim", "vimdoc", "yaml",
+    "bash", "c", "go", "helm", "html", "json", "latex", "lua", "markdown",
+    "python", "rust", "starlark", "terraform", "vim", "vimdoc", "yaml",
   },
   highlight = { enable = true },
 }
