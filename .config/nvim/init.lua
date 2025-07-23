@@ -54,10 +54,10 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true, desc = '
 vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true , desc = 'Open netrw' })
 vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true , desc = 'Find files' })
 vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true , desc = 'Show all open buffers' })
+vim.keymap.set('n', '<C-f>', ':RG<CR>', { silent = true , desc = 'Search through files with RipGrep' })
 vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true , desc = 'Search through tags' })
 vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true , desc = 'Show all available commands' })
 vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
-vim.keymap.set('n', '<leader>rg', ':RG<CR>', { silent = true , desc = 'Search through files with RipGrep' })
 vim.keymap.set('n', '<leader>ht', ':Helptags<CR>', { silent = true , desc = 'Search Vim documentation' })
 
 -- FZF configuration
