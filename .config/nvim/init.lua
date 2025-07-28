@@ -107,7 +107,14 @@ require('nvim-treesitter.configs').setup{
     "bash", "c", "go", "helm", "html", "json", "latex", "lua", "markdown",
     "python", "rust", "starlark", "terraform", "vim", "vimdoc", "yaml",
   },
-  highlight = { enable = true },
+  auto_install = false,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  incremental_selection = {
+    enable = true,
+  },
 }
 
 -- Render Markdown configuration
