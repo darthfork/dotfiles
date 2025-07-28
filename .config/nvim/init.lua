@@ -30,7 +30,6 @@ vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))
 -- Install plugins
 vim.pack.add({
   'https://github.com/darthfork/git-blame.vim',
-  'https://github.com/github/copilot.vim',
   'https://github.com/dense-analysis/ale',
   'https://github.com/junegunn/fzf.vim',
   'https://github.com/mhinz/vim-signify',
