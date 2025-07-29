@@ -1,7 +1,5 @@
 -- init.lua - configuration file for Neovim
 
--- luacheck: globals vim
-
 -- Set leader key
 vim.g.mapleader = " "
 
@@ -30,7 +28,6 @@ vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))
 -- Install plugins
 vim.pack.add({
   'https://github.com/darthfork/git-blame.vim',
-  'https://github.com/dense-analysis/ale',
   'https://github.com/junegunn/fzf.vim',
   'https://github.com/mhinz/vim-signify',
   'https://github.com/nvim-treesitter/nvim-treesitter',
@@ -59,25 +56,11 @@ vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true ,
 vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
 vim.keymap.set('n', '<leader>ht', ':Helptags<CR>', { silent = true , desc = 'Search Vim documentation' })
 
+-- Load basic LSP configuration
+require('lsp').setup()
+
 -- FZF configuration
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
-
--- ALE configuration
-vim.g.ale_fix_on_save = 1
-vim.g.ale_fixers = {
-  ['*'] = { 'remove_trailing_lines', 'trim_whitespace' },
-  go = { 'gofmt', 'goimports' },
-  json = { 'jq' },
-}
-
-vim.g.ale_linters = {
-  javascript = { 'eslint' },
-  sh = { 'shellcheck' },
-  go = { 'golangci-lint' },
-  rust = { 'rustfmt' },
-  python = { 'pylint' },
-  bzl = { 'buildifier' },
-}
 
 -- Lualine configuration
 require("lualine").setup{

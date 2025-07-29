@@ -80,7 +80,12 @@ source <(helm completion zsh)
 .
 ├── .config
 │   ├── nvim
-│   │   └── init.lua
+│   │   ├── init.lua
+│   │   └── lua
+│   │       ├── go.lua
+│   │       ├── lsp.lua
+│   │       ├── lua.lua
+│   │       └── python.lua
 │   ├── ripgrep
 │   │   └── config
 │   ├── tmux
@@ -111,7 +116,7 @@ source <(helm completion zsh)
 │   └── vimrc
 ├── .zshrc
 ├── Brewfile
+├── install.sh
 ├── LICENSE
-├── README.md
-└── install.sh
+└── README.md
 ```
