@@ -35,6 +35,8 @@ vim.pack.add({
   'https://github.com/akinsho/bufferline.nvim',
   'https://github.com/nvim-lualine/lualine.nvim',
   'https://github.com/nvim-tree/nvim-web-devicons',
+  'https://github.com/greggh/claude-code.nvim',
+  'https://github.com/nvim-lua/plenary.nvim',
 })
 
 -- Set colorscheme
@@ -55,9 +57,31 @@ vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true , des
 vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true , desc = 'Show all available commands' })
 vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
 vim.keymap.set('n', '<leader>ht', ':Helptags<CR>', { silent = true , desc = 'Search Vim documentation' })
+vim.keymap.set('n', '<leader>cc', ':ClaudeCodeResume<CR>', { noremap = true, silent = true, desc = 'Resume Claude Code' })
 
 -- Load basic LSP configuration
 require('lsp').setup()
+
+-- Claude configuration
+require("claude-code").setup({
+  window = {
+    split_ratio = 0.3,
+    position = "vertical",
+    enter_insert = true,
+    hide_numbers = true,
+    hide_signcolumn = true
+  },
+  command = "claude",
+  keymaps = {
+    toggle = {
+      normal = "<C-,>",
+      terminal = "<C-,>"
+    }
+  },
+  git = {
+    use_git_root = true,
+  },
+})
 
 -- FZF configuration
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
@@ -116,42 +140,42 @@ vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
 -- Filetype specific settings
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { '*', 'c', 'cpp', 'python', 'bash', 'rust' , 'starlark' },
-    command = 'setlocal ai ts=4 sw=4 si sta et',
-    group = 'filetypesettings',
-  })
+  pattern = { '*', 'c', 'cpp', 'python', 'bash', 'rust' , 'starlark' },
+  command = 'setlocal ai ts=4 sw=4 si sta et',
+  group = 'filetypesettings',
+})
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'lua', 'html', 'terraform', 'javascript', 'typescript', 'markdown', 'ruby', 'yaml' },
-    command = 'setlocal ai ts=2 sw=2 si sta et',
-    group = 'filetypesettings',
-  })
+  pattern = { 'lua', 'html', 'terraform', 'javascript', 'typescript', 'markdown', 'ruby', 'yaml' },
+  command = 'setlocal ai ts=2 sw=2 si sta et',
+  group = 'filetypesettings',
+})
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'markdown', 'rst' },
-    command = 'setlocal spell spelllang=en_us',
-    group = 'filetypesettings',
-  })
+  pattern = { 'markdown', 'rst' },
+  command = 'setlocal spell spelllang=en_us',
+  group = 'filetypesettings',
+})
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'make', 'go' },
-    command = 'setlocal ai ts=8 sw=8 si sta noet list',
-    group = 'filetypesettings',
-  })
+  pattern = { 'make', 'go' },
+  command = 'setlocal ai ts=8 sw=8 si sta noet list',
+  group = 'filetypesettings',
+})
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-    pattern = { 'Tiltfile', '*.tilt', 'BUILD', '*.bazel', 'WORKSPACE', '*.bzl' },
-    command = 'set filetype=starlark',
-    group = 'filetypesettings',
-  })
+  pattern = { 'Tiltfile', '*.tilt', 'BUILD', '*.bazel', 'WORKSPACE', '*.bzl' },
+  command = 'set filetype=starlark',
+  group = 'filetypesettings',
+})
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-    pattern = { 'vimrc', 'init.lua' },
-    command = 'setlocal keywordprg=:help',
-    group = 'filetypesettings',
-  })
+  pattern = { 'vimrc', 'init.lua' },
+  command = 'setlocal keywordprg=:help',
+  group = 'filetypesettings',
+})
 
 -- Set relativenumber on buffer enter and insert leave
 vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {
-    pattern = "*",
-    command = "set relativenumber cursorline"
+  pattern = "*",
+  command = "set relativenumber cursorline"
 })
 vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {
-    pattern = "*",
-    command = "set norelativenumber nocursorline"
+  pattern = "*",
+  command = "set norelativenumber nocursorline"
 })

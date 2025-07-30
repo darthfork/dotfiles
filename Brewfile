@@ -85,10 +85,10 @@ if OS.mac?
 end
 
 # VSCode Extensions
+vscode 'anthropic.claude-code'
 vscode 'bazelbuild.vscode-bazel'
 vscode 'bierner.github-markdown-preview'
 vscode 'bierner.markdown-checkbox'
-vscode 'bierner.markdown-emoji'
 vscode 'bierner.markdown-footnotes'
 vscode 'bierner.markdown-mermaid'
 vscode 'bierner.markdown-preview-github-styles'
