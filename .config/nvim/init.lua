@@ -43,23 +43,23 @@ vim.pack.add({
 vim.cmd('colorscheme retrobox')
 
 -- Key mappings
-vim.keymap.set('n', 'n', 'nzz', { noremap = true, silent = true , desc = 'Move to next search result' })
-vim.keymap.set('n', 'N', 'Nzz', { noremap = true, silent = true , desc = 'Move to previous search result' })
+vim.keymap.set('n', 'n', 'nzz', { noremap = true, silent = true, desc = 'Move to next search result' })
+vim.keymap.set('n', 'N', 'Nzz', { noremap = true, silent = true, desc = 'Move to previous search result' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true, desc = 'Move down a buffer' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true, desc = 'Move up a buffer' })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true, desc = 'Move left a buffer' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true, desc = 'Move right a buffer' })
-vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true , desc = 'Open netrw' })
-vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true , desc = 'Find files' })
-vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true , desc = 'Show all open buffers' })
-vim.keymap.set('n', '<C-f>', ':RG<CR>', { silent = true , desc = 'Search through files with RipGrep' })
-vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true , desc = 'Search through tags' })
-vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true , desc = 'Show all available commands' })
-vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true , desc = 'Show Git Blame for current line' })
-vim.keymap.set('n', '<leader>ht', ':Helptags<CR>', { silent = true , desc = 'Search Vim documentation' })
+vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true, desc = 'Open netrw' })
+vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true, desc = 'Find files' })
+vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true, desc = 'Show all open buffers' })
+vim.keymap.set('n', '<C-f>', ':RG<CR>', { silent = true, desc = 'Search through files with RipGrep' })
+vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true, desc = 'Search through tags' })
+vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true, desc = 'Show all available commands' })
+vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true, desc = 'Show Git Blame for current line' })
+vim.keymap.set('n', '<leader>ht', ':Helptags<CR>', { silent = true, desc = 'Search Vim documentation' })
 vim.keymap.set('n', '<leader>cc', ':ClaudeCodeResume<CR>', { noremap = true, silent = true, desc = 'Resume Claude Code' })
 
--- Load basic LSP configuration
+-- Load LSP configuration
 require('lsp').setup()
 
 -- Claude configuration
@@ -87,17 +87,17 @@ require("claude-code").setup({
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
 
 -- Lualine configuration
-require("lualine").setup{
+require("lualine").setup {
   options = {
     icons_enabled = true,
     theme = 'codedark',
-    component_separators = { left = '\\', right = '/'},
+    component_separators = { left = '\\', right = '/' },
     section_separators = { left = '', right = '' },
   },
 }
 
 -- Bufferline configuration
-require("bufferline").setup{
+require("bufferline").setup {
   options = {
     numbers = 'ordinal',
     show_buffer_close_icons = false,
@@ -109,7 +109,7 @@ require("bufferline").setup{
 }
 
 -- Treesitter configuration
-require('nvim-treesitter.configs').setup{
+require('nvim-treesitter.configs').setup {
   ensure_installed = {
     "bash", "c", "go", "helm", "html", "json", "latex", "lua", "markdown",
     "python", "rust", "starlark", "terraform", "vim", "vimdoc", "yaml",
@@ -140,7 +140,7 @@ vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
 -- Filetype specific settings
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '*', 'c', 'cpp', 'python', 'bash', 'rust' , 'starlark' },
+  pattern = { '*', 'c', 'cpp', 'python', 'bash', 'rust', 'starlark' },
   command = 'setlocal ai ts=4 sw=4 si sta et',
   group = 'filetypesettings',
 })
@@ -171,11 +171,11 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 })
 
 -- Set relativenumber on buffer enter and insert leave
-vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
   pattern = "*",
   command = "set relativenumber cursorline"
 })
-vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
   pattern = "*",
   command = "set norelativenumber nocursorline"
 })

@@ -23,8 +23,12 @@ function LSP.on_attach(client, bufnr)
   vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 end
 
--- Configure diagnostic display
-local function setup_diagnostics()
+
+
+-- Main setup function for basic LSP functionality
+function LSP.setup()
+
+  -- Configure diagnostic display
   vim.diagnostic.config({
     virtual_text = {
       prefix = '●',
@@ -50,10 +54,7 @@ local function setup_diagnostics()
       prefix = '',
     },
   })
-end
 
--- Simple built-in completion setup
-local function setup_completion()
   -- Enable built-in completion
   vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
@@ -71,12 +72,6 @@ local function setup_completion()
       end
     end,
   })
-end
-
--- Main setup function for basic LSP functionality
-function LSP.setup()
-  setup_diagnostics()
-  setup_completion()
 
   -- Remove trailing whitespace on save
   vim.api.nvim_create_autocmd("BufWritePre", {
@@ -88,7 +83,7 @@ function LSP.setup()
   vim.api.nvim_create_autocmd('FileType', {
     pattern = 'go',
     callback = function()
-      require('go').setup()
+      require('go')
     end,
     desc = 'Setup Go LSP'
   })
@@ -97,7 +92,7 @@ function LSP.setup()
   vim.api.nvim_create_autocmd('FileType', {
     pattern = 'lua',
     callback = function()
-      require('lua').setup()
+      require('lua')
     end,
     desc = 'Setup Lua LSP'
   })
