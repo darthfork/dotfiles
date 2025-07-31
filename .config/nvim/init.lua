@@ -169,13 +169,3 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   command = 'setlocal keywordprg=:help',
   group = 'filetypesettings',
 })
-
--- Set relativenumber on buffer enter and insert leave
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
-  pattern = "*",
-  command = "set relativenumber cursorline"
-})
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
-  pattern = "*",
-  command = "set norelativenumber nocursorline"
-})
