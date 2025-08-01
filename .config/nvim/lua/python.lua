@@ -11,19 +11,17 @@ vim.lsp.start({
     pylsp = {
       plugins = {
         -- Linting
-        pycodestyle = { enabled = true },
-        pyflakes = { enabled = true },
-        pylint = { enabled = true },
+        ruff = { enabled = true },
+        pylint = { enabled = false }, -- Enable if ruff can't be installed
 
         -- Code formatting
-        autopep8 = { enabled = true },
-        black = { enabled = false }, -- Enable for black
+        black = { enabled = true },
 
         -- Import sorting
         isort = { enabled = true },
 
         -- Type checking
-        mypy = { enabled = false }, -- Enable for mypy
+        mypy = { enabled = true },
 
         -- Completion and hover
         jedi_completion = {
@@ -34,10 +32,6 @@ vim.lsp.start({
         jedi_references = { enabled = true },
         jedi_signature_help = { enabled = true },
         jedi_symbols = { enabled = true },
-
-        -- Rope for refactoring
-        rope_completion = { enabled = false },
-        rope_autoimport = { enabled = false },
       },
     },
   },

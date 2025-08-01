@@ -101,7 +101,7 @@ function LSP.setup()
   vim.api.nvim_create_autocmd('FileType', {
     pattern = 'python',
     callback = function()
-      require('python').setup()
+      require('python')
     end,
     desc = 'Setup Python LSP'
   })
