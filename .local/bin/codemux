@@ -18,7 +18,7 @@ set -euo pipefail
 # Locate tmux binary
 TMUX=$(command -v tmux || { echo "tmux not found. Please install it."; exit 1; })
 TMUX_SERVER="vscode"
-CONFIG_FILE="$HOME/.config/tmux/vscode.conf"
+CONFIG_FILE="$HOME/.config/tmux/tmux.conf"
 
 # Determine session name
 SESSION_NAME=${1:-"vscode"}

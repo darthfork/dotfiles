@@ -1,20 +1,8 @@
 diff --git a/themes/agnoster.zsh-theme b/themes/agnoster.zsh-theme
-index 6345237..f855cb3 100644
+index 6345237..71b67b9 100644
 --- a/themes/agnoster.zsh-theme
 +++ b/themes/agnoster.zsh-theme
-@@ -29,6 +29,11 @@
- # jobs are running in this shell will all be displayed automatically when
- # appropriate.
- 
-+MULTILINE_FIRST_PROMPT_PREFIX='\u256D\U2500'     # ╭─
-+MULTILINE_NEWLINE_PROMPT_PREFIX='\u251C\U2500'   # ├─
-+MULTILINE_LAST_PROMPT_PREFIX='\u2570\U2500 '     # ╰─
-+CURRENT_BG='NONE'
-+
- ### Segment drawing
- # A few utility functions to make it easy and re-usable to draw segmented prompts
- 
-@@ -79,7 +84,7 @@ esac
+@@ -79,7 +79,7 @@ esac
  
  # VirtualEnv colors
  : ${AGNOSTER_VENV_FG:=black}
@@ -23,40 +11,7 @@ index 6345237..f855cb3 100644
  
  # AWS Profile colors
  : ${AGNOSTER_AWS_PROD_FG:=yellow}
-@@ -136,14 +141,30 @@ prompt_segment() {
-   [[ -n $3 ]] && echo -n $3
- }
- 
-+# Start the prompt
-+prompt_start() {
-+  if [ -n "${MUXCODE}" ]; then
-+    START_PROMPT="${MULTILINE_FIRST_PROMPT_PREFIX}"
-+  else
-+    START_PROMPT=""
-+  fi
-+  echo -n $START_PROMPT
-+}
-+
-+
- # End the prompt, closing any open segments
- prompt_end() {
-+  if [ -n "${MUXCODE}" ]; then
-+    END_PROMPT="%{%k%}\n%{%k%F{white}%}${MULTILINE_LAST_PROMPT_PREFIX}→"
-+  else
-+    END_PROMPT="%{%k%}"
-+  fi
-   if [[ -n $CURRENT_BG ]]; then
-     echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
-   else
--    echo -n "%{%k%}"
-+    echo -n $END_PROMPT
-   fi
--  echo -n "%{%f%}"
-+  echo -n $END_PROMPT
-   CURRENT_BG=''
- }
- 
-@@ -230,7 +251,7 @@ prompt_git() {
+@@ -230,7 +230,7 @@ prompt_git() {
      zstyle ':vcs_info:*' get-revision true
      zstyle ':vcs_info:*' check-for-changes true
      zstyle ':vcs_info:*' stagedstr '✚'
@@ -65,7 +20,7 @@ index 6345237..f855cb3 100644
      zstyle ':vcs_info:*' formats ' %u%c'
      zstyle ':vcs_info:*' actionformats ' %u%c'
      vcs_info
-@@ -357,15 +378,45 @@ prompt_terraform() {
+@@ -357,6 +357,34 @@ prompt_terraform() {
    local terraform_info=$(tf_prompt_info)
    [[ -z "$terraform_info" ]] && return
    prompt_segment magenta yellow "TF: $terraform_info"
@@ -100,10 +55,7 @@ index 6345237..f855cb3 100644
  }
  
  ## Main prompt
- build_prompt() {
-   RETVAL=$?
-+  prompt_start
-   prompt_status
+@@ -366,6 +394,7 @@ build_prompt() {
    prompt_virtualenv
    prompt_aws
    prompt_terraform
