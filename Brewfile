@@ -44,7 +44,6 @@ brew 'git'
 brew 'gnu-sed' if OS.mac?
 brew 'gnupg'
 brew 'goenv'
-brew 'golangci-lint', ignore_deps: true
 brew 'grip'
 brew 'hadolint'
 brew 'hashicorp/tap/terraform-ls'

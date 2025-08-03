@@ -89,8 +89,7 @@ source <(helm completion zsh)
 │   ├── ripgrep
 │   │   └── config
 │   ├── tmux
-│   │   ├── tmux.conf
-│   │   └── vscode.conf
+│   │   └── tmux.conf
 │   ├── utils
 │   │   ├── agnoster.zsh.patch
 │   │   ├── compose.yaml

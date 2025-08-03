@@ -72,12 +72,6 @@ require("claude-code").setup({
     hide_signcolumn = true
   },
   command = "claude",
-  keymaps = {
-    toggle = {
-      normal = "<C-,>",
-      terminal = "<C-,>"
-    }
-  },
   git = {
     use_git_root = true,
   },
