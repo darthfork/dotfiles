@@ -20,9 +20,9 @@ vim.opt.showmatch = true
 vim.opt.smartcase = true
 vim.opt.cursorline = true
 vim.opt.fillchars = { eob = " " }
+vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
 vim.opt.undolevels = 10000
-vim.opt.undofile = true
 
 -- Runtime path configuration
 vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))
@@ -42,10 +42,11 @@ vim.pack.add({
   'https://github.com/dense-analysis/ale',
   'https://github.com/nvim-neo-tree/neo-tree.nvim',
   'https://github.com/MunifTanjim/nui.nvim',
+  'https://github.com/rebelot/kanagawa.nvim',
 })
 
 -- Set colorscheme
-vim.cmd('colorscheme retrobox')
+vim.cmd('colorscheme kanagawa-dragon')
 
 -- Key mappings
 vim.keymap.set('n', 'n', 'nzz', { noremap = true, silent = true, desc = 'Move to next search result' })
@@ -62,7 +63,7 @@ vim.keymap.set('n', '<C-t>', ':Tags <CR>', { noremap = true, silent = true, desc
 vim.keymap.set('n', '<C-_>', ':Commands <CR>', { noremap = true, silent = true, desc = 'Show all available commands' })
 vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true, desc = 'Show Git Blame for current line' })
 vim.keymap.set('n', '<leader>ht', ':Helptags<CR>', { silent = true, desc = 'Search Vim documentation' })
-vim.keymap.set('n', '<leader>cc', ':ClaudeCodeResume<CR>', { noremap = true, silent = true, desc = 'Resume Claude Code' })
+vim.keymap.set('n', '<leader>cc', ':ClaudeCodeResume<CR>', { noremap = true, silent = true, desc = 'Resume Claude' })
 
 -- Claude configuration
 require("claude-code").setup({
@@ -86,16 +87,21 @@ vim.g.ale_fixers = {
   ['*'] = { 'remove_trailing_lines', 'trim_whitespace' },
   go = { 'gofmt', 'goimports' },
   json = { 'jq' },
+  python = { 'black' },
+  terraform = { 'terraform' },
 }
 
 vim.g.ale_linters = {
   bzl = { 'buildifier' },
+  dockefile = { 'hadolint' },
   go = { 'golangci-lint' },
   javascript = { 'eslint' },
   lua = { 'luacheck' },
-  python = { 'pylint' },
+  python = { 'ruff' },
   rust = { 'rustfmt' },
   sh = { 'shellcheck' },
+  terraform = { 'tflint' },
+  yaml = { 'yamllint' },
 }
 
 -- FZF configuration
@@ -159,9 +165,6 @@ require('neo-tree').setup({
     },
   },
 })
-
--- Highlight Bad Whitespace
-vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
 
 -- Filetype specific settings
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })

@@ -79,15 +79,7 @@ let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclu
 let g:fzf_layout = { 'down':  '40%'}
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'json': ['jq'] }
-
-let g:ale_linters = {
-            \ 'go': ['golangci-lint'],
-            \ 'javascript': ['eslint'],
-            \ 'lua': ['luacheck'],
-            \ 'python': ['pylint'],
-            \ 'rust': ['rustfmt'],
-            \ 'sh': ['shellcheck'],
-            \}
+let g:ale_linters = { 'sh': ['shellcheck'], }
 
 " NetRW Settings
 let g:netrw_banner = 0
