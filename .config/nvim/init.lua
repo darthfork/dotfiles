@@ -1,5 +1,7 @@
 -- init.lua - configuration file for Neovim
 
+-- luacheck: globals vim
+
 -- Set leader key
 vim.g.mapleader = " "
 
@@ -37,6 +39,7 @@ vim.pack.add({
   'https://github.com/nvim-tree/nvim-web-devicons',
   'https://github.com/greggh/claude-code.nvim',
   'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/dense-analysis/ale',
 })
 
 -- Set colorscheme
@@ -59,9 +62,6 @@ vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', { silent = true, desc = 'Show
 vim.keymap.set('n', '<leader>ht', ':Helptags<CR>', { silent = true, desc = 'Search Vim documentation' })
 vim.keymap.set('n', '<leader>cc', ':ClaudeCodeResume<CR>', { noremap = true, silent = true, desc = 'Resume Claude Code' })
 
--- Load LSP configuration
-require('lsp').setup()
-
 -- Claude configuration
 require("claude-code").setup({
   window = {
@@ -76,6 +76,25 @@ require("claude-code").setup({
     use_git_root = true,
   },
 })
+
+-- ALE configuration
+vim.g.ale_fix_on_save = 1
+
+vim.g.ale_fixers = {
+  ['*'] = { 'remove_trailing_lines', 'trim_whitespace' },
+  go = { 'gofmt', 'goimports' },
+  json = { 'jq' },
+}
+
+vim.g.ale_linters = {
+  bzl = { 'buildifier' },
+  go = { 'golangci-lint' },
+  javascript = { 'eslint' },
+  lua = { 'luacheck' },
+  python = { 'pylint' },
+  rust = { 'rustfmt' },
+  sh = { 'shellcheck' },
+}
 
 -- FZF configuration
 vim.g.fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform'
