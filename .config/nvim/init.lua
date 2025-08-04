@@ -40,6 +40,8 @@ vim.pack.add({
   'https://github.com/greggh/claude-code.nvim',
   'https://github.com/nvim-lua/plenary.nvim',
   'https://github.com/dense-analysis/ale',
+  'https://github.com/nvim-neo-tree/neo-tree.nvim',
+  'https://github.com/MunifTanjim/nui.nvim',
 })
 
 -- Set colorscheme
@@ -52,7 +54,7 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true, desc = '
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true, desc = 'Move up a buffer' })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true, desc = 'Move left a buffer' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true, desc = 'Move right a buffer' })
-vim.keymap.set('n', '<C-n>', ':Lexplore<CR>', { noremap = true, silent = true, desc = 'Open netrw' })
+vim.keymap.set('n', '<C-n>', ':Neotree toggle<CR>', { noremap = true, silent = true, desc = 'Toggle Neo-tree' })
 vim.keymap.set('n', '<C-p>', ':FZF --bind ctrl-p:abort<CR>', { noremap = true, silent = true, desc = 'Find files' })
 vim.keymap.set('n', '<C-b>', ':Buffers<CR>', { noremap = true, silent = true, desc = 'Show all open buffers' })
 vim.keymap.set('n', '<C-f>', ':RG<CR>', { silent = true, desc = 'Search through files with RipGrep' })
@@ -140,12 +142,23 @@ require('nvim-treesitter.configs').setup {
 -- Render Markdown configuration
 require('render-markdown').setup({})
 
--- NetRW configuration
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 0
-vim.g.netrw_altv = 1
-vim.g.netrw_winsize = -28
+-- Neo-tree configuration
+require('neo-tree').setup({
+  close_if_last_window = false,
+  enable_git_status = true,
+  enable_diagnostics = true,
+  filesystem = {
+    follow_current_file = {
+      enabled = true,
+    },
+    use_libuv_file_watcher = true,
+    filtered_items = {
+      visible = true,
+      hide_dotfiles = false,
+      hide_gitignored = false,
+    },
+  },
+})
 
 -- Highlight Bad Whitespace
 vim.api.nvim_set_hl(0, 'BadWhitespace', { ctermbg = 'red', bg = 'red' })
