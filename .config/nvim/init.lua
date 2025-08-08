@@ -23,6 +23,8 @@ vim.opt.fillchars = { eob = " " }
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
 vim.opt.undolevels = 10000
+vim.opt.signcolumn = "yes"
+vim.opt.winborder = "rounded"
 
 -- Runtime path configuration
 vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))

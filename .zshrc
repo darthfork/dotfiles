@@ -20,6 +20,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 export MANPAGER="vim -M +MANPAGER - "
 export SHELLCHECK_OPTS="-e SC2155 -e SC1008 -e SC2181"
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # This allows agnoster to handle the venv prompt
+export OLLAMA_API_BASE=http://127.0.0.1:11434
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 source start_ssh_agent.sh
