@@ -90,7 +90,8 @@ vim.g.ale_fixers = {
   ['*'] = { 'remove_trailing_lines', 'trim_whitespace' },
   go = { 'gofmt', 'goimports' },
   json = { 'jq' },
-  python = { 'black' },
+  python = { 'ruff_format' },
+  ruby = { 'rubocop' },
   terraform = { 'terraform' },
 }
 
@@ -101,6 +102,7 @@ vim.g.ale_linters = {
   javascript = { 'eslint' },
   lua = { 'luacheck' },
   python = { 'ruff' },
+  ruby = { 'rubocop' },
   rust = { 'rustfmt' },
   sh = { 'shellcheck' },
   terraform = { 'tflint' },

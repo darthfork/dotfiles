@@ -54,7 +54,7 @@ brew 'imagemagick' if OS.mac?
 brew 'jq'
 brew 'kind'
 brew 'kubernetes-cli'
-brew 'lua-language-server'
+brew 'luarocks'
 brew 'mas' if OS.mac?
 brew 'neovim'
 brew 'nodenv'

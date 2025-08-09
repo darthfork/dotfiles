@@ -8,14 +8,16 @@
 
 export SSH_ENV="$HOME/.ssh/environment"
 
+source "$HOME/.config/utils/common.sh"
+
 function start_agent {
-    echo "Initializing new SSH agent..."
+    log_info "Initializing new SSH agent..."
     # Start a new ssh-agent and save the environment variables to SSH_ENV
     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
     if [ $? -eq 0 ]; then
-        echo "SSH agent started successfully."
+        log_info "SSH agent started successfully."
     else
-        echo "Failed to start SSH agent." >&2
+        log_error "Failed to start SSH agent."
         return 1
     fi
 
@@ -27,10 +29,10 @@ function start_agent {
 
     # Add default SSH key(s) to the agent
     ssh-add || {
-        echo "Failed to add SSH key(s) to the agent." >&2
+        log_error "Failed to add SSH key(s) to the agent."
         return 1
     }
-    echo "SSH key(s) added successfully."
+    log_info "SSH key(s) added successfully."
 }
 
 # Check if the SSH environment file exists
@@ -40,10 +42,10 @@ if [ -f "${SSH_ENV}" ]; then
 
     # Verify if the SSH agent process is still running
     if ! ps -p "${SSH_AGENT_PID}" > /dev/null 2>&1; then
-        echo "SSH agent is not running. Starting a new one..."
+        log_info "SSH agent is not running. Starting a new one..."
         start_agent || exit 1
     fi
 else
-    echo "SSH environment file not found. Starting a new SSH agent..."
+    log_info "SSH environment file not found. Starting a new SSH agent..."
     start_agent || exit 1
 fi

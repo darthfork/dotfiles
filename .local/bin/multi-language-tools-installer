@@ -1,0 +1,235 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# multi-language-tools-installer: Install common system-wide language tooling (linters, formatters, LSPs)
+
+# Configuration file path
+CONFIG_FILE="$HOME/.config/utils/packages.sh"
+
+source "$HOME/.config/utils/common.sh"
+
+# Show usage information
+usage() {
+    echo "Usage: $0 [go|python|node|ruby|lua|all]"
+    echo "  go      - Install Go tools only"
+    echo "  python  - Install Python tools only"
+    echo "  node    - Install Node.js/npm tools only"
+    echo "  ruby    - Install Ruby gems only"
+    echo "  lua     - Install Lua rocks only"
+    echo "  all     - Install all tools"
+    echo ""
+}
+
+# Source the configuration file
+load_config() {
+    local config_file="$1"
+
+    if [[ ! -f "$config_file" ]]; then
+        log_error "Config file not found: $config_file"
+        return 1
+    fi
+
+    # Source the configuration file
+    source "$config_file"
+}
+
+# Install Go tools
+install_go_tools() {
+    if ! command_exists go; then
+        log_error "Go is not installed. Please install Go first."
+        return 1
+    fi
+
+    log_info "Go version: $(go version)"
+
+    if [[ ${#GO_TOOLS[@]} -eq 0 ]]; then
+        log_warning "No Go packages found in config file"
+        return 0
+    fi
+
+    log_info "Installing Go tools..."
+    for tool in "${GO_TOOLS[@]}"; do
+        tool_name=$(basename "${tool%%@*}")
+        log_info "Installing $tool_name..."
+        if go install "$tool"; then
+            log_success "✓ $tool_name installed"
+        else
+            log_error "✗ Failed to install $tool_name"
+        fi
+    done
+}
+
+# Install Node.js/npm tools
+install_node_tools() {
+    if ! command_exists node; then
+        log_error "Node.js is not installed. Please install Node.js first."
+        return 1
+    fi
+
+    if ! command_exists npm; then
+        log_error "npm is not installed. Please install npm first."
+        return 1
+    fi
+
+    log_info "Node.js version: $(node --version)"
+    log_info "npm version: $(npm --version)"
+
+    if [[ ${#NODE_TOOLS[@]} -eq 0 ]]; then
+        log_warning "No Node.js packages found in config file"
+        return 0
+    fi
+
+    log_info "Installing Node.js tools..."
+    for tool in "${NODE_TOOLS[@]}"; do
+        log_info "Installing $tool..."
+        if npm install -g "$tool"; then
+            log_success "✓ $tool installed"
+        else
+            log_error "✗ Failed to install $tool"
+        fi
+    done
+}
+
+# Install Python tools
+install_python_tools() {
+    if ! command_exists python3; then
+        log_error "Python3 is not installed. Please install Python3 first."
+        return 1
+    fi
+
+    log_info "Python version: $(python3 --version)"
+
+    # Check if pip is available
+    if ! command_exists pip3 && ! python3 -m pip --version >/dev/null 2>&1; then
+        log_error "pip is not available. Please install pip first."
+        return 1
+    fi
+
+    if [[ ${#PYTHON_TOOLS[@]} -eq 0 ]]; then
+        log_warning "No Python packages found in config file"
+        return 0
+    fi
+
+    log_info "Installing Python tools..."
+    for tool in "${PYTHON_TOOLS[@]}"; do
+        log_info "Installing $tool..."
+        if python3 -m pip install "$tool"; then
+            log_success "✓ $tool installed"
+        else
+            log_error "✗ Failed to install $tool"
+        fi
+    done
+}
+
+# Install Ruby tools
+install_ruby_tools() {
+    if ! command_exists ruby; then
+        log_error "Ruby is not installed. Please install Ruby first."
+        return 1
+    fi
+
+    if ! command_exists gem; then
+        log_error "gem is not installed. Please install RubyGems first."
+        return 1
+    fi
+
+    log_info "Ruby version: $(ruby --version)"
+    log_info "gem version: $(gem --version)"
+
+    if [[ ${#RUBY_TOOLS[@]} -eq 0 ]]; then
+        log_warning "No Ruby packages found in config file"
+        return 0
+    fi
+
+    log_info "Installing Ruby tools..."
+    for tool in "${RUBY_TOOLS[@]}"; do
+        log_info "Installing $tool..."
+        if gem install "$tool"; then
+            log_success "✓ $tool installed"
+        else
+            log_error "✗ Failed to install $tool"
+        fi
+    done
+}
+
+# Install Lua tools
+install_lua_tools() {
+    if ! command_exists lua; then
+        log_error "Lua is not installed. Please install Lua first."
+        return 1
+    fi
+
+    if ! command_exists luarocks; then
+        log_error "luarocks is not installed. Please install LuaRocks first."
+        return 1
+    fi
+
+    log_info "Lua version: $(lua -v)"
+    log_info "luarocks version: $(luarocks --version | head -n1)"
+
+    if [[ ${#LUA_TOOLS[@]} -eq 0 ]]; then
+        log_warning "No Lua packages found in config file"
+        return 0
+    fi
+
+    log_info "Installing Lua tools..."
+    for tool in "${LUA_TOOLS[@]}"; do
+        log_info "Installing $tool..."
+        if luarocks install --global "$tool"; then
+            log_success "✓ $tool installed"
+        else
+            log_error "✗ Failed to install $tool"
+        fi
+    done
+}
+
+# Main function
+main() {
+    echo "Multi-Language Tools Installer"
+    echo "=============================="
+
+    # Load configuration
+    load_config "$CONFIG_FILE"
+
+    case "${1:-help}" in
+        "go")
+            install_go_tools
+            ;;
+        "python")
+            install_python_tools
+            ;;
+        "node"|"npm")
+            install_node_tools
+            ;;
+        "ruby")
+            install_ruby_tools
+            ;;
+        "lua")
+            install_lua_tools
+            ;;
+        "all")
+            install_go_tools
+            echo
+            install_python_tools
+            echo
+            install_node_tools
+            echo
+            install_ruby_tools
+            echo
+            install_lua_tools
+            ;;
+        "-h"|"--help"|"help")
+            usage
+            exit 0
+            ;;
+        *)
+            log_error "Unknown option: $1"
+            usage
+            exit 1
+            ;;
+    esac
+
+    log_success "Installation complete!"
+}
+
+main "$@"
