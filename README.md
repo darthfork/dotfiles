@@ -4,14 +4,6 @@
 
 Vim/NeoVim, tmux, shell config files and utility scripts for macOS and Linux.
 
-## Installation
-
-To install the dotfiles, utility scripts and packages run the following commands:
-
-```bash
-./install.sh
-```
-
 ## Utility Scripts and Kubernetes Plugins
 
 - [**kubectl-shell**](.local/bin/kubectl-shell)
@@ -32,6 +24,9 @@ To install the dotfiles, utility scripts and packages run the following commands
 - [**mfa**](.local/bin/mfa)
   - Description: Utility script to generate 2FA tokens from yubikey
   - Usage: `mfa <service-name>`
+- [**mltix**](.local/bin/multi-language-tools-installer)
+  - Description: Utility for managing common system-wide language tooling (linters, formatters, LSPs) through dotfiles
+  - Usage `multi-language-tools-installer [go|python|node|ruby|lua|all]`
 - [**codemux**](.local/bin/codemux)
   - Description: Utility script to open a tmux session with vscode specific layout and configurations
   - Usage: `codemux <workspace-name>`. This launches a vscode session named `<workspace-name>`. To use with vscode add the following to your vscode settings.json
@@ -80,20 +75,17 @@ source <(helm completion zsh)
 .
 ├── .config
 │   ├── nvim
-│   │   ├── init.lua
-│   │   └── lua
-│   │       ├── go.lua
-│   │       ├── lsp.lua
-│   │       ├── lua.lua
-│   │       └── python.lua
+│   │   └── init.lua
 │   ├── ripgrep
 │   │   └── config
 │   ├── tmux
 │   │   └── tmux.conf
 │   ├── utils
 │   │   ├── agnoster.zsh.patch
+│   │   ├── common.sh
 │   │   ├── compose.yaml
-│   │   └── kubernetes.yaml
+│   │   ├── kubernetes.yaml
+│   │   └── packages.sh
 │   └── yamllint
 │       └── config
 ├── .gitconfig
@@ -107,6 +99,7 @@ source <(helm completion zsh)
 │       ├── kubectl-setns
 │       ├── kubectl-shell
 │       ├── mfa
+│       ├── multi-language-tools-installer
 │       ├── start_ssh_agent.sh
 │       ├── tmux-battery-info
 │       ├── tmux-spotify-info
@@ -115,7 +108,6 @@ source <(helm completion zsh)
 │   └── vimrc
 ├── .zshrc
 ├── Brewfile
-├── install.sh
 ├── LICENSE
 └── README.md
 ```

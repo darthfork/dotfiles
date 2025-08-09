@@ -4,6 +4,9 @@
 
 YAML_FILE="$HOME/.config/utils/kubernetes.yaml"
 
+# Source common utilities
+source "$HOME/.config/utils/common.sh"
+
 # display usage information
 function usage() {
     echo "Usage: kubectl dorker {up|down}"
@@ -12,24 +15,24 @@ function usage() {
 
 # bring up the dorker pod
 function up() {
-    echo "Applying dorker configuration..."
+    log_info "Applying dorker configuration"
     if ! kubectl apply -f "$YAML_FILE"; then
-        echo "Error: Failed to apply the Kubernetes configuration." >&2
+        log_error "Failed to apply the Kubernetes configuration"
         exit 1
     fi
 
     # Wait for the pod to be ready
-    echo "Waiting for the dorker pod to be ready..."
+    log_info "Waiting for the dorker pod to be ready..."
     if ! kubectl wait --for=condition=ready pod/dorker --timeout=120s; then
-        echo "Error: Timeout while waiting for the dorker pod to be ready." >&2
+        log_error "Timeout while waiting for the dorker pod to be ready"
         down
         exit 1
     fi
 
     # Open a shell inside the 'dorker' container
-    echo "Opening shell in the dorker container..."
+    log_info "Opening shell in the dorker container..."
     if ! kubectl exec -it dorker --container dorker -- /bin/bash; then
-        echo "Error: Failed to open a shell in the dorker container." >&2
+        log_error "Failed to open a shell in the dorker container"
         down
         exit 1
     fi
@@ -37,17 +40,17 @@ function up() {
 
 # bring down the dorker pod and resources
 function down() {
-    echo "Deleting all resources deployed by dorker..."
+    log_info "Deleting all resources deployed by dorker"
     if ! kubectl delete -f "$YAML_FILE"; then
-        echo "Error: Failed to delete the Kubernetes resources." >&2
+        log_error "Failed to delete the Kubernetes resources"
         exit 1
     fi
-    echo "Resources deleted successfully."
+    log_info "Resources deleted successfully"
 }
 
 # Ensure the YAML file exists
 if [ ! -f "$YAML_FILE" ]; then
-    echo "Error: Kubernetes configuration file $YAML_FILE does not exist." >&2
+    log_error "Kubernetes configuration file $YAML_FILE does not exist"
     exit 1
 fi
 

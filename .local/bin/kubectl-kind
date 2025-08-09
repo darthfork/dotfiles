@@ -5,26 +5,23 @@
 set -euo pipefail
 CLUSTER_NAME="local"
 
-# Function to print messages with formatting
-print_message() {
-    printf "\n== %s ==\n\n" "$1"
-}
+source "$HOME/.config/utils/common.sh"
 
 # Function to handle errors
 error_exit() {
-    echo "Error: $1" >&2
+    log_error "Error: $1" >&2
     exit 1
 }
 
-print_message "Deleting existing kind cluster (if it exists)"
+log_info "Deleting existing kind cluster (if it exists)"
 
 if kind delete cluster -n "$CLUSTER_NAME"; then
-    echo "Cluster deleted successfully."
+    log_info "Cluster deleted successfully."
 else
-    echo "No existing cluster to delete or deletion failed. Proceeding with cluster creation..."
+    log_warning "No existing cluster to delete or deletion failed. Proceeding with cluster creation..."
 fi
 
-print_message "Creating new kind cluster"
+log_info "Creating new kind cluster"
 
 # Define the cluster configuration and apply it using ctlptl
 cat <<HEREDOC | ctlptl apply -f - || error_exit "Failed to create kind cluster"
@@ -45,4 +42,4 @@ kindV1Alpha4Cluster:
     - role: control-plane
 HEREDOC
 
-echo "Kind cluster '$CLUSTER_NAME' created successfully."
+log_info "Kind cluster '$CLUSTER_NAME' created successfully."

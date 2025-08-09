@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# mltix: Multi-Language Tools Installer - Manage common system-wide language tooling (linters, formatters, LSPs) through dotfiles
+
+# Configuration file path
+CONFIG_FILE="$HOME/.config/utils/packages.sh"
+
+source "$HOME/.config/utils/common.sh"
+
+# Show usage information
+usage() {
+    echo "Usage: $0 [go|python|node|ruby|lua|all]"
+    echo "  go      - Install Go tools only"
+    echo "  python  - Install Python tools only"
+    echo "  node    - Install Node.js/npm tools only"
+    echo "  ruby    - Install Ruby gems only"
+    echo "  lua     - Install Lua rocks only"
+    echo "  all     - Install all tools"
+    echo ""
+}
+
+# Language configuration structure
+declare -A LANGUAGES
+LANGUAGES[go]="go:go version:go install:GO_TOOLS"
+LANGUAGES[python]="python3:python3 --version:python3 -m pip install:PYTHON_TOOLS:pip3:python3 -m pip --version"
+LANGUAGES[node]="node:node --version:npm install -g:NODE_TOOLS:npm:npm --version"
+LANGUAGES[ruby]="ruby:ruby --version:gem install:RUBY_TOOLS:gem:gem --version"
+LANGUAGES[lua]="lua:lua -v:luarocks install --global:LUA_TOOLS:luarocks:luarocks --version | head -n1"
+
+# Source the configuration file
+load_config() {
+    local config_file="$1"
+
+    if [[ ! -f "$config_file" ]]; then
+        log_error "Config file not found: $config_file"
+        return 1
+    fi
+
+    # Source the configuration file
+    source "$config_file"
+}
+
+install_tools() {
+    local lang="$1"
+    local config="${LANGUAGES[$lang]}"
+
+    IFS=':' read -ra LANG_CONFIG <<< "$config"
+    local primary_cmd="${LANG_CONFIG[0]}"
+    local version_cmd="${LANG_CONFIG[1]}"
+    local install_cmd="${LANG_CONFIG[2]}"
+    local tools_var="${LANG_CONFIG[3]}"
+    local secondary_cmd="${LANG_CONFIG[4]:-}"
+    local secondary_version="${LANG_CONFIG[5]:-}"
+
+    # Check primary command exists
+    if ! command_exists "$primary_cmd"; then
+        log_error "${primary_cmd^} is not installed. Please install ${primary_cmd^} first."
+        return 1
+    fi
+
+    # Check secondary command if specified
+    if [[ -n "$secondary_cmd" ]] && ! command_exists "$secondary_cmd"; then
+        # Special case for Python pip check
+        if [[ "$lang" == "python" ]] && ! python3 -m pip --version >/dev/null 2>&1; then
+            log_error "pip is not available. Please install pip first."
+            return 1
+        elif [[ "$lang" != "python" ]]; then
+            log_error "$secondary_cmd is not installed. Please install $secondary_cmd first."
+            return 1
+        fi
+    fi
+
+    # Show version info
+    log_info "${primary_cmd^} version: $(eval "$version_cmd")"
+    if [[ -n "$secondary_cmd" && -n "$secondary_version" ]]; then
+        log_info "$secondary_cmd version: $(eval "$secondary_version")"
+    fi
+
+    # Get tools array using indirect reference
+    local -n tools_array="$tools_var"
+
+    if [[ ${#tools_array[@]} -eq 0 ]]; then
+        log_warning "No $lang packages found in config file"
+        return 0
+    fi
+
+    log_info "Installing $lang tools..."
+    for tool in "${tools_array[@]}"; do
+        log_info "Installing $tool..."
+        if eval "$install_cmd \"$tool\""; then
+            log_success "✓ $tool installed"
+        else
+            log_error "✗ Failed to install $tool"
+        fi
+    done
+}
+
+main() {
+    echo "Multi-Language Tools Installer"
+    echo "=============================="
+
+    # Load configuration
+    load_config "$CONFIG_FILE"
+
+    case "${1:-help}" in
+        "node"|"go"|"python"|"ruby"|"lua")
+            install_tools "$1"
+            ;;
+        "all")
+            for lang in go python node ruby lua; do
+                install_tools "$lang"
+                echo
+            done
+            ;;
+        "-h"|"--help"|"help")
+            usage
+            exit 0
+            ;;
+        *)
+            log_error "Unknown option: $1"
+            usage
+            exit 1
+            ;;
+    esac
+
+    log_success "Installation complete!"
+}
+
+main "$@"

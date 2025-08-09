@@ -23,6 +23,8 @@ function usage() {
     exit 1
 }
 
+source "$HOME/.config/utils/common.sh"
+
 # Initialize variables
 pod_name=""
 container=""
@@ -33,7 +35,7 @@ while [[ $# -gt 0 ]]; do
     case $1 in
         -s)
             if [[ -z ${2:-} ]]; then
-                echo "Error: Missing argument for -s (shell)" >&2
+                log_error "Missing argument for -s (shell)"
                 usage
             fi
             shell="$2"
@@ -41,21 +43,21 @@ while [[ $# -gt 0 ]]; do
             ;;
         -c)
             if [[ -z ${2:-} ]]; then
-                echo "Error: Missing argument for -c (container)" >&2
+                log_error "Missing argument for -c (container)"
                 usage
             fi
             container="$2"
             shift 2
             ;;
         -*)
-            echo "Error: Unknown option: $1" >&2
+            log_error "Unknown option: $1"
             usage
             ;;
         *)
             if [[ -z "$pod_name" ]]; then
                 pod_name="$1"
             else
-                echo "Error: Too many arguments" >&2
+                log_error "Too many arguments"
                 usage
             fi
             shift
@@ -65,7 +67,7 @@ done
 
 # Check if the pod name is provided
 if [[ -z "$pod_name" ]]; then
-    echo "Error: Pod name is required" >&2
+    log_error "Pod name is required"
     usage
 fi
 
@@ -73,7 +75,7 @@ fi
 namespace=$(kubectl get pods --all-namespaces --field-selector metadata.name="$pod_name" -o jsonpath='{.items[0].metadata.namespace}' 2>/dev/null || true)
 
 if [[ -z "$namespace" ]]; then
-    printf "Error: Unable to find namespace for pod \"%s\". Ensure the pod exists.\n" "$pod_name" >&2
+    log_error "Error: Unable to find namespace for pod $pod_name Ensure the pod exists."
     exit 1
 fi
 
@@ -85,5 +87,5 @@ fi
 exec_command+=("--" "$shell")
 
 # Execute the command
-echo "Executing: ${exec_command[*]}"
+log_info "Opening a $shell shell in $pod_name"
 "${exec_command[@]}"

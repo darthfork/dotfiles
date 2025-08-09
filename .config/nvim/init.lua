@@ -90,7 +90,8 @@ vim.g.ale_fixers = {
   ['*'] = { 'remove_trailing_lines', 'trim_whitespace' },
   go = { 'gofmt', 'goimports' },
   json = { 'jq' },
-  python = { 'black' },
+  python = { 'ruff_format' },
+  ruby = { 'rubocop' },
   terraform = { 'terraform' },
 }
 
@@ -101,6 +102,7 @@ vim.g.ale_linters = {
   javascript = { 'eslint' },
   lua = { 'luacheck' },
   python = { 'ruff' },
+  ruby = { 'rubocop' },
   rust = { 'rustfmt' },
   sh = { 'shellcheck' },
   terraform = { 'tflint' },
@@ -171,33 +173,36 @@ require('neo-tree').setup({
 
 -- Filetype specific settings
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '*', 'c', 'cpp', 'python', 'bash', 'rust', 'starlark' },
+vim.api.nvim_create_autocmd('FileType', { -- Default for all filetypes including c/cpp, python, bash etc.
+  pattern = { '*' },
   command = 'setlocal ai ts=4 sw=4 si sta et',
   group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd('FileType', { -- Override tabstop to 2 spaces for lua, ruby etc.
   pattern = { 'lua', 'html', 'terraform', 'javascript', 'typescript', 'markdown', 'ruby', 'yaml' },
   command = 'setlocal ai ts=2 sw=2 si sta et',
   group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd('FileType', { -- Enable spellcheck for markdown and rst
   pattern = { 'markdown', 'rst' },
   command = 'setlocal spell spelllang=en_us',
   group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd('FileType', { -- Use tabs instead of spaces for golang and Makefiles
   pattern = { 'make', 'go' },
   command = 'setlocal ai ts=8 sw=8 si sta noet list',
   group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { -- Set filetype to startlark for bazel and tilt
   pattern = { 'Tiltfile', '*.tilt', 'BUILD', '*.bazel', 'WORKSPACE', '*.bzl' },
   command = 'set filetype=starlark',
   group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { -- Set keywordprg to :help for vim and neovim configs
   pattern = { 'vimrc', 'init.lua' },
   command = 'setlocal keywordprg=:help',
   group = 'filetypesettings',
+})
+vim.api.nvim_create_autocmd({'VimEnter'}, { -- Open Neotree when entering neovim
+  command = 'Neotree',
 })
