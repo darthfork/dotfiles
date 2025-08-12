@@ -38,6 +38,7 @@ load_config() {
     fi
 
     # Source the configuration file
+     # shellcheck source=$HOME/.config/utils/packages.sh
     source "$config_file"
 }
 

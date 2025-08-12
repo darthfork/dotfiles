@@ -5,8 +5,8 @@
 # shellcheck disable=SC2034  # Variables are used by the mltix script
 
 GO_TOOLS=(
-    "github.com/golangci/golangci-lint/cmd/golangci-lint@latest"
-    "github.com/securego/gosec/v2/cmd/gosec@latest"
+    "github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.3.1"
+    "github.com/securego/gosec/v2/cmd/gosec@v2.22.7"
     "golang.org/x/vuln/cmd/govulncheck@latest"
     "golang.org/x/tools/gopls@latest"
     "golang.org/x/tools/cmd/goimports@latest"
