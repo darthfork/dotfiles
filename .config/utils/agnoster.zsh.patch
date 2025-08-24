@@ -1,5 +1,5 @@
 diff --git a/themes/agnoster.zsh-theme b/themes/agnoster.zsh-theme
-index 6345237..71b67b9 100644
+index 6345237..6ce57af 100644
 --- a/themes/agnoster.zsh-theme
 +++ b/themes/agnoster.zsh-theme
 @@ -79,7 +79,7 @@ esac
@@ -32,9 +32,9 @@ index 6345237..71b67b9 100644
 +  KUBERNETES_CONTEXT=$1
 +
 +  case "$KUBERNETES_CONTEXT" in
-+    *prod*|*spork*) prompt_segment black red "$KUBERNETES_SYMBOL";;
-+    *dev*|*staging*|*qa*) prompt_segment black green "$KUBERNETES_SYMBOL";;
-+    *) prompt_segment black yellow "$KUBERNETES_SYMBOL";;
++    *prod*) prompt_segment black red "$KUBERNETES_SYMBOL";;
++    *staging*) prompt_segment black yellow "$KUBERNETES_SYMBOL";;
++    *) prompt_segment black green "$KUBERNETES_SYMBOL";;
 +  esac
 +
 +}
