@@ -24,7 +24,7 @@ Vim/NeoVim, tmux, shell config files and utility scripts for macOS and Linux.
 - [**mfa**](.local/bin/mfa)
   - Description: Utility script to generate 2FA tokens from yubikey
   - Usage: `mfa <service-name>`
-- [**mltix**](.local/bin/multi-language-tools-installer)
+- [**mltix**](.local/bin/mltix)
   - Description: Utility for managing common system-wide language tooling (linters, formatters, LSPs) through dotfiles
   - Usage `multi-language-tools-installer [go|python|node|ruby|lua|all]`
 - [**codemux**](.local/bin/codemux)
@@ -74,6 +74,8 @@ source <(helm completion zsh)
 ```bash
 .
 ├── .config
+│   ├── ghostty
+│   │   └── config
 │   ├── nvim
 │   │   └── init.lua
 │   ├── ripgrep
@@ -99,7 +101,7 @@ source <(helm completion zsh)
 │       ├── kubectl-setns
 │       ├── kubectl-shell
 │       ├── mfa
-│       ├── multi-language-tools-installer
+│       ├── mltix
 │       ├── start_ssh_agent.sh
 │       ├── tmux-battery-info
 │       ├── tmux-spotify-info

@@ -1,0 +1,4 @@
+font-family = "SauceCodePro Nerd Font"
+theme = "Tomorrow Night Bright"
+cursor-style = "underline"
+shell-integration = "zsh"
