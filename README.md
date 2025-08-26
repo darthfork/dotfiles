@@ -106,8 +106,6 @@ source <(helm completion zsh)
 │       ├── tmux-battery-info
 │       ├── tmux-spotify-info
 │       └── tmux-system-info
-├── .vim
-│   └── vimrc
 ├── .zshrc
 ├── Brewfile
 ├── LICENSE
