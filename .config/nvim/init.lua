@@ -203,6 +203,3 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { -- Set keywordprg to 
   command = 'setlocal keywordprg=:help',
   group = 'filetypesettings',
 })
-vim.api.nvim_create_autocmd({'VimEnter'}, { -- Open Neotree when entering neovim
-  command = 'Neotree',
-})
