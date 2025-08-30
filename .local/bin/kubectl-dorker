@@ -16,7 +16,7 @@ function usage() {
 # bring up the dorker pod
 function up() {
     log_info "Applying dorker configuration"
-    if ! kubectl apply -f "$YAML_FILE"; then
+    if ! envsubst < "$YAML_FILE" | kubectl apply -f -; then
         log_error "Failed to apply the Kubernetes configuration"
         exit 1
     fi
@@ -41,7 +41,7 @@ function up() {
 # bring down the dorker pod and resources
 function down() {
     log_info "Deleting all resources deployed by dorker"
-    if ! kubectl delete -f "$YAML_FILE"; then
+    if ! kubectl delete -f "$YAML_FILE" ; then
         log_error "Failed to delete the Kubernetes resources"
         exit 1
     fi

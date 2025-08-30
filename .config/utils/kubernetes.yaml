@@ -32,6 +32,16 @@ roleRef:
   name: dorker
 ---
 apiVersion: v1
+kind: Secret
+metadata:
+  name: credentials
+  namespace: default
+type: Opaque
+stringData:
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: dorker
@@ -46,4 +56,7 @@ spec:
       command: ["sh", "-c", "while true; do sleep 3600; done"]
       tty: true
       stdin: true
+      envFrom:
+        - secretRef:
+            name: credentials
 ---
