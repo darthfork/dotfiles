@@ -20,9 +20,9 @@ function mac_battery_info() {
     time_remaining=$(awk '{print $5 " " $6}' <<< "$batt_info")
 
     if [[ "$charge_status" == "charging" || "$charge_status" == "charged" || "$charge_status" == "finishing" ]]; then
-        echo "#[fg=colour112] 🔌  $percentage #[fg=white]$charge_status"
+        echo "#[fg=colour112] 🔌  $percentage #[fg=colour7]$charge_status"
     else
-        echo "#[fg=colour172] 🔋  $percentage #[fg=white]$time_remaining"
+        echo "#[fg=colour172] 🔋  $percentage #[fg=colour7]$time_remaining"
     fi
 }
 
@@ -42,9 +42,9 @@ function linux_battery_info() {
     time_remaining=$(awk '{print $6}' <<< "$batt_info")
 
     if [[ "$charge_status" == "Charging" || "$charge_status" == "Full" ]]; then
-        echo "#[fg=colour112] 🔌  $percentage #[fg=white]$charge_status"
+        echo "#[fg=colour112] 🔌  $percentage #[fg=colour7]$charge_status"
     else
-        echo "#[fg=colour172] 🔋  $percentage #[fg=white]$time_remaining"
+        echo "#[fg=colour172] 🔋  $percentage #[fg=colour7]$time_remaining"
     fi
 }
 
