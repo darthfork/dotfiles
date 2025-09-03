@@ -117,7 +117,7 @@ require("lualine").setup {
   options = {
     icons_enabled = true,
     theme = 'codedark',
-    component_separators = { left = "\\", right = "/" },
+    component_separators = { left = "╲", right = "╱" },
     section_separators = { left = "", right = "" },
   },
 }
@@ -133,6 +133,7 @@ require("bufferline").setup {
     separator_style = 'slope',
   },
 }
+
 
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup {
