@@ -25,6 +25,7 @@ vim.opt.undodir = vim.fn.expand('$HOME/.config/nvim/undo/')
 vim.opt.undolevels = 10000
 vim.opt.signcolumn = "yes"
 vim.opt.winborder = "rounded"
+vim.opt.completeopt = { "menuone", "noselect", "popup" }
 
 -- Runtime path configuration
 vim.opt.rtp:append(vim.fn.system('brew --prefix fzf'):gsub('\n', ''))
@@ -44,6 +45,7 @@ vim.pack.add({
   'https://github.com/dense-analysis/ale',
   'https://github.com/nvim-neo-tree/neo-tree.nvim',
   'https://github.com/MunifTanjim/nui.nvim',
+  'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/rebelot/kanagawa.nvim',
 })
 
@@ -171,6 +173,9 @@ require('neo-tree').setup({
     },
   },
 })
+
+-- Setup LSP
+require('lsp')
 
 -- Filetype specific settings
 vim.api.nvim_create_augroup('filetypesettings', { clear = true })
