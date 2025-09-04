@@ -77,7 +77,9 @@ source <(helm completion zsh)
 │   ├── ghostty
 │   │   └── config
 │   ├── nvim
-│   │   └── init.lua
+│   │   ├── init.lua
+│   │   └── lua
+│   │       └── lsp.lua
 │   ├── ripgrep
 │   │   └── config
 │   ├── tmux
