@@ -31,18 +31,14 @@ cask 'zoom'
 
 # Homebrew packages
 brew 'awscli'
-brew 'bash'
 brew 'bazelisk'
 brew 'btop'
 brew 'ctlptl'
-brew 'curl'
 brew 'dive'
-brew 'docker-compose'
 brew 'fd'
 brew 'fzf'
 brew 'gh'
 brew 'git'
-brew 'gnu-sed' if OS.mac?
 brew 'gnupg'
 brew 'goenv'
 brew 'grip'
@@ -50,16 +46,13 @@ brew 'hadolint'
 brew 'hashicorp/tap/terraform-ls'
 brew 'helm'
 brew 'huggingface-cli'
-brew 'imagemagick' if OS.mac?
 brew 'jq'
 brew 'kind'
 brew 'kubernetes-cli'
 brew 'luarocks'
-brew 'mas' if OS.mac?
 brew 'neovim'
 brew 'nodenv'
 brew 'pcre'
-brew 'pinentry-mac' if OS.mac?
 brew 'pyenv'
 brew 'rbenv'
 brew 'redis', restart_service: :changed
@@ -69,17 +62,24 @@ brew 'tfenv'
 brew 'tflint'
 brew 'tilt'
 brew 'tmux'
-brew 'tree'
 brew 'tree-sitter'
 brew 'universal-ctags'
 brew 'watch'
-brew 'wget'
 brew 'yamllint'
 brew 'ykman'
 brew 'yq'
 
-# Mac App Store Apps
+# Mac only packages and utilities
 if OS.mac?
+    brew 'bash'
+    brew 'curl'
+    brew 'docker-compose'
+    brew 'gnu-sed'
+    brew 'imagemagick'
+    brew 'mas'
+    brew 'pinentry-mac'
+    brew 'tree'
+    brew 'wget'
     mas 'Amphetamine', id: 937984704
 end
 
