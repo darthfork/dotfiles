@@ -175,7 +175,9 @@ require("neo-tree").setup({
 })
 
 -- Setup LSP
-require("lsp")
+require("lsp").setup({
+  servers = { "gopls", "pylsp" }
+})
 
 -- Filetype specific settings
 vim.api.nvim_create_augroup("filetypesettings", { clear = true })

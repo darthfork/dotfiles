@@ -2,11 +2,7 @@
 
 -- luacheck: globals vim
 
--- LSP servers to enable
-local lsp_servers = {
-  "gopls",
-  "pylsp",
-}
+local M = {}
 
 -- Common LSP attach function
 local function on_lsp_attach(args)
@@ -25,11 +21,20 @@ local function on_lsp_attach(args)
   vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, { buffer = args.buf, desc = "trigger autocompletion" })
 end
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = on_lsp_attach
-})
+-- Setup function to initialize LSP configuration
+function M.setup(opts)
+  opts = opts or {}
+  local servers = opts.servers or {}
 
--- Enable all configured LSP servers
-for _, server in ipairs(lsp_servers) do
-  vim.lsp.enable(server)
+  -- Set up the LspAttach autocmd
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = on_lsp_attach
+  })
+
+  -- Enable all configured LSP servers
+  for _, server in ipairs(servers) do
+    vim.lsp.enable(server)
+  end
 end
+
+return M
