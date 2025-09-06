@@ -1,0 +1,7 @@
+# Global gitignore
+**/.claude/settings.local.json
+tags
+.claude/
+.DS_Store
+.aider*
+.cache/
