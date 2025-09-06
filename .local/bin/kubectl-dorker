@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-# kubectl-dorker - Kubernetes wrapper for creating a pod with debugging tools
+# kubectl-dorker - Kubernetes plugin for creating a pod with debugging tools
+#
+# Usage:
+#   kubectl dorker {up|down}
 
-YAML_FILE="$HOME/.config/utils/kubernetes.yaml"
+CONFIG_YAML="$HOME/.config/utils/kubernetes.yaml"
 
 # Source common utilities
 source "$HOME/.config/utils/common.sh"
@@ -16,7 +19,7 @@ function usage() {
 # bring up the dorker pod
 function up() {
     log_info "Applying dorker configuration"
-    if ! envsubst < "$YAML_FILE" | kubectl apply -f -; then
+    if ! envsubst < "$CONFIG_YAML" | kubectl apply -f -; then
         log_error "Failed to apply the Kubernetes configuration"
         exit 1
     fi
@@ -41,7 +44,7 @@ function up() {
 # bring down the dorker pod and resources
 function down() {
     log_info "Deleting all resources deployed by dorker"
-    if ! kubectl delete -f "$YAML_FILE" ; then
+    if ! kubectl delete -f "$CONFIG_YAML" ; then
         log_error "Failed to delete the Kubernetes resources"
         exit 1
     fi
@@ -49,8 +52,8 @@ function down() {
 }
 
 # Ensure the YAML file exists
-if [ ! -f "$YAML_FILE" ]; then
-    log_error "Kubernetes configuration file $YAML_FILE does not exist"
+if [ ! -f "$CONFIG_YAML" ]; then
+    log_error "Kubernetes configuration file $CONFIG_YAML does not exist"
     exit 1
 fi
 

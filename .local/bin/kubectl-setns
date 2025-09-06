@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# kubectl-setns - Kubernetes wrapper for setting the current namespace
+# kubectl-setns - Kubernetes plugin for setting the current namespace
 #
-# Usage: kubectl-setns <namespace>
+# Usage: kubectl setns <namespace>
 # If no namespace is provided, the default namespace will be used.
 
 set -euo pipefail

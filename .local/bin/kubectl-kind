@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-# kubectl-kind - Kubernetes wrapper for creating a kind cluster
+# kubectl-kind - Kubernetes plugin for creating a kind cluster
+#
+# Usage:
+#   kubectl kind
 
 set -euo pipefail
 CLUSTER_NAME="local"

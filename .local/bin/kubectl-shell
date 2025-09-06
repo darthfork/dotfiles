@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# kubectl-shell - Kubernetes wrapper for exec-ing into a pod
+# kubectl-shell - Kubernetes plugin for opening a shell environment in a pod
 #
 # Usage:
-#   kubectl-shell <pod-name> [-c container] [-s shell]
+#   kubectl shell <pod-name> [-c container] [-s shell]
 #
 # Arguments:
 #   pod-name  (required) Name of the pod.

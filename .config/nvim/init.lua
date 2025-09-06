@@ -176,7 +176,7 @@ require("neo-tree").setup({
 
 -- Setup LSP
 require("lsp").setup({
-  servers = { "gopls", "pylsp" }
+  servers = { "gopls", "pylsp", "terraformls" }
 })
 
 -- Filetype specific settings
