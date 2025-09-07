@@ -4,7 +4,34 @@
 
 local M = {}
 
--- Common LSP attach function
+-- Open next/previous diagnostic
+local function open_diagnostic(direction)
+  local count = direction == 'next' and 1 or direction == 'previous' and -1
+  if not count then
+    vim.notify("Invalid direction: " .. tostring(direction), vim.log.levels.ERROR)
+    return
+  end
+
+  -- Check if there are any diagnostics before jumping
+  local diagnostics = vim.diagnostic.get(0)
+  if #diagnostics == 0 then
+    vim.notify("No diagnostics found in current buffer", vim.log.levels.INFO)
+    return
+  end
+
+  vim.diagnostic.jump({
+    count = count,
+    wrap = true,  -- Wrap around when reaching end/beginning
+    on_jump = function()
+      vim.diagnostic.open_float({
+        focusable = false,
+        border = 'rounded'
+      })
+    end
+  })
+end
+
+-- LSP attach function
 local function on_lsp_attach(args)
   local client = vim.lsp.get_client_by_id(args.data.client_id)
   if not client then return end
@@ -21,8 +48,8 @@ local function on_lsp_attach(args)
   local bufopts = { noremap = true, silent = true, buffer = args.buf }
 
   -- Set up keymaps
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '[d', function() open_diagnostic('previous') end, opts)
+  vim.keymap.set('n', ']d', function() open_diagnostic('next') end, opts)
   vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, bufopts)
   vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)

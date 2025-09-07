@@ -76,23 +76,27 @@ source <(helm completion zsh)
 ├── .config
 │   ├── ghostty
 │   │   └── config
+│   ├── git
+│   │   ├── config
+│   │   └── ignore
 │   ├── nvim
 │   │   ├── init.lua
 │   │   └── lua
-│   │       └── lsp.lua
+│   │       ├── lsp.lua
+│   │       └── plugins.lua
 │   ├── ripgrep
 │   │   └── config
 │   ├── tmux
 │   │   └── tmux.conf
 │   ├── utils
 │   │   ├── agnoster.zsh.patch
+│   │   ├── claude-statusline.sh
 │   │   ├── common.sh
 │   │   ├── compose.yaml
 │   │   ├── kubernetes.yaml
 │   │   └── packages.sh
 │   └── yamllint
 │       └── config
-├── .gitconfig
 ├── .gitignore
 ├── .local
 │   └── bin
