@@ -9,7 +9,7 @@ source "$HOME/.config/utils/common.sh"
 # clean up the Docker Compose environment
 function cleanup() {
     log_info "Cleaning up..."
-    docker-compose -f "$CONFIG_FILE" down --remove-orphans || {
+    docker compose -f "$CONFIG_FILE" down --remove-orphans || {
         log_error "Failed to clean up Docker Compose resources."
     }
 }
@@ -24,7 +24,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
 fi
 
 # Run the Docker Compose service
-docker-compose -f "$CONFIG_FILE" run --rm dorker || {
+docker compose -f "$CONFIG_FILE" run --rm dorker || {
     log_error "Error: Failed to run the Docker Compose service."
     exit 1
 }

@@ -27,10 +27,4 @@ alias vim="nvim"
 alias vimdiff="nvim -d"
 alias tmux="tmux attach -t Base || tmux new -s Base"
 
-eval "$(pyenv init -)"
-eval "$(goenv init -)"
-eval "$(rbenv init -)"
-eval "$(nodenv init -)"
-source <(fzf --zsh)
-
 # Use ~/.zshenv for secrets and system specific aliases

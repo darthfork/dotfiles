@@ -112,6 +112,7 @@ source <(helm completion zsh)
 │       ├── tmux-battery-info
 │       ├── tmux-spotify-info
 │       └── tmux-system-info
+├── .zprofile
 ├── .zshrc
 ├── Brewfile
 ├── LICENSE

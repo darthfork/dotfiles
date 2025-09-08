@@ -4,6 +4,7 @@
 tap 'hashicorp/tap'
 
 # GUI Apps from cask
+cask 'alfred'
 cask 'balenaetcher'
 cask 'brave-browser'
 cask 'chatgpt'
@@ -12,6 +13,7 @@ cask 'discord'
 cask 'docker-desktop'
 cask 'ghostty'
 cask 'google-chrome'
+cask 'google-drive'
 cask 'microsoft-teams'
 cask 'obsidian'
 cask 'ollama-app'
