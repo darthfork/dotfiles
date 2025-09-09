@@ -27,4 +27,9 @@ alias vim="nvim"
 alias vimdiff="nvim -d"
 alias tmux="tmux attach -t Base || tmux new -s Base"
 
+# Source zprofile when connected via SSH
+if [[ -n "$SSH_CONNECTION" ]] && [[ -f "$HOME/.zprofile" ]]; then
+    source "$HOME/.zprofile"
+fi
+
 # Use ~/.zshenv for secrets and system specific aliases

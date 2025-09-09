@@ -10,30 +10,8 @@ fi
 #Source FZF
 source <(fzf --zsh)
 
-# Lazy load pyenv
-pyenv() {
-    unset -f pyenv
-    eval "$(command pyenv init -)"
-    pyenv "$@"
-}
-
-# Lazy load goenv
-goenv() {
-    unset -f goenv
-    eval "$(command goenv init -)"
-    goenv "$@"
-}
-
-# Lazy load nodenv
-nodenv() {
-    unset -f nodenv
-    eval "$(command nodenv init -)"
-    nodenv "$@"
-}
-
-# Lazy load rbenv
-rbenv() {
-    unset -f rbenv
-    eval "$(command rbenv init -)"
-    rbenv "$@"
-}
+# Source language versions managers
+eval "$(command pyenv init -)"
+eval "$(command goenv init -)"
+eval "$(command nodenv init -)"
+eval "$(command rbenv init -)"
