@@ -7,11 +7,9 @@ if [[ -f /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-#Source FZF
-source <(fzf --zsh)
 
-# Source language versions managers
-eval "$(command pyenv init -)"
-eval "$(command goenv init -)"
-eval "$(command nodenv init -)"
-eval "$(command rbenv init -)"
+# Source language versions managers (with guards to prevent double-initialization)
+[[ -z "$PYENV_SHELL" ]] && eval "$(command pyenv init -)"
+[[ -z "$GOENV_SHELL" ]] && eval "$(command goenv init -)"
+[[ -z "$NODENV_SHELL" ]] && eval "$(command nodenv init -)"
+[[ -z "$RBENV_ROOT" ]] || [[ ":$PATH:" != *":$HOME/.rbenv/shims:"* ]] && eval "$(command rbenv init -)"
