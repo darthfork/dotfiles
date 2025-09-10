@@ -70,6 +70,7 @@ brew 'watch'
 brew 'yamllint'
 brew 'ykman'
 brew 'yq'
+brew 'zsh-syntax-highlighting'
 
 # Mac only packages and utilities
 if OS.mac?

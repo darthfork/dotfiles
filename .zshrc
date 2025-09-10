@@ -2,11 +2,8 @@
 
 # .zshrc - Zsh configuration file
 
-ZSH_THEME="agnoster"
-DEFAULT_USER=$(whoami)
-plugins=(
-  zsh-syntax-highlighting
-)
+# Load custom prompt
+source "$HOME/.config/utils/prompt.zsh"
 
 export EDITOR="nvim"
 export AWS_PAGER=""
@@ -18,9 +15,11 @@ export FZF_DEFAULT_OPTS="--tmux --layout=reverse --border"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 export MANPAGER="nvim +Man!"
 export SHELLCHECK_OPTS="-e SC2155 -e SC1008 -e SC2181 -e SC1091"
-export VIRTUAL_ENV_DISABLE_PROMPT=1 # This allows agnoster to handle the venv prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=1 # This allows venv prompt to be handled by the custom prompt
 
-source $HOME/.oh-my-zsh/oh-my-zsh.sh
+if [[ -f $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 source start_ssh_agent.sh
 
 #Source FZF

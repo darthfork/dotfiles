@@ -82,6 +82,7 @@ source <(helm completion zsh)
 │   ├── nvim
 │   │   ├── init.lua
 │   │   └── lua
+│   │       ├── base.lua
 │   │       ├── lsp.lua
 │   │       └── plugins.lua
 │   ├── ripgrep
@@ -89,12 +90,12 @@ source <(helm completion zsh)
 │   ├── tmux
 │   │   └── tmux.conf
 │   ├── utils
-│   │   ├── agnoster.zsh.patch
 │   │   ├── claude-statusline.sh
 │   │   ├── common.sh
 │   │   ├── compose.yaml
 │   │   ├── kubernetes.yaml
-│   │   └── packages.sh
+│   │   ├── packages.sh
+│   │   └── prompt.zsh
 │   └── yamllint
 │       └── config
 ├── .gitignore
