@@ -30,5 +30,4 @@ alias vim="nvim"
 alias vimdiff="nvim -d"
 alias tmux="tmux attach -t Base || tmux new -s Base"
 
-
 # Use ~/.zshenv for secrets and system specific aliases
