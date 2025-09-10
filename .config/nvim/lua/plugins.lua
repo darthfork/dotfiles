@@ -21,6 +21,10 @@ vim.pack.add({
   "https://github.com/rebelot/kanagawa.nvim",
 })
 
+-- Set colorscheme
+vim.cmd("colorscheme kanagawa-dragon")
+
+
 -- Claude configuration
 require("claude-code").setup({
   window = {
