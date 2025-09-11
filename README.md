@@ -6,6 +6,9 @@ Vim/NeoVim, tmux, shell config files and utility scripts for macOS and Linux.
 
 ## Utility Scripts and Kubernetes Plugins
 
+- [**prompt.zsh**](.config/utils/prompt.zsh)
+  - Description: Custom zsh prompt with oh-my-zsh like styling and features without the performance penalty
+  - Usage: `source $HOME/.config/utils/prompt.zsh`
 - [**kubectl-shell**](.local/bin/kubectl-shell)
   - Description: kubectl plugin to open a shell in a pod in a Kubernetes cluster
   - Usage: `kubectl shell <pod-name>`
@@ -44,12 +47,6 @@ Vim/NeoVim, tmux, shell config files and utility scripts for macOS and Linux.
     ```
 
 ## Enable completion for zsh
-
-**autoload setting** (pre-requisite for enabling completion)
-
-```zsh
-autoload -U +X compinit && compinit
-```
 
 **kubectl**
 

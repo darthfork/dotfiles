@@ -4,7 +4,6 @@
 tap 'hashicorp/tap'
 
 # GUI Apps from cask
-cask 'alfred'
 cask 'balenaetcher'
 cask 'brave-browser'
 cask 'chatgpt'
