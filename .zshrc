@@ -17,10 +17,10 @@ export MANPAGER="nvim +Man!"
 export SHELLCHECK_OPTS="-e SC2155 -e SC1008 -e SC2181 -e SC1091"
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # This allows venv prompt to be handled by the custom prompt
 
+# Source zsh syntax highlighting
 if [[ -f $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
   source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
-source start_ssh_agent.sh
 
 #Source FZF
 source <(fzf --zsh)
