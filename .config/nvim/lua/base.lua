@@ -25,7 +25,7 @@ vim.opt.undodir = vim.fn.expand("$HOME/.config/nvim/undo/")
 vim.opt.undolevels = 10000
 vim.opt.signcolumn = "yes"
 vim.opt.winborder = "rounded"
-vim.opt.completeopt = { "menuone", "noselect", "popup" }
+vim.opt.completeopt = { "menuone", "fuzzy", "noselect", "popup", "preview" }
 
 -- Runtime path configuration
 vim.opt.rtp:append(vim.fn.system("brew --prefix fzf"):gsub("\n", ""))
