@@ -2,6 +2,14 @@
 
 # .zprofile - Zsh profile for sourcing shell utilities at login
 
+# XDG Base Directory Specification
+export XDG_CACHE_HOME="$HOME"/.cache
+export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_DATA_HOME="$HOME"/.local/share
+
+# GOPATH setup
+export GOENV_GOPATH_PREFIX="$XDG_DATA_HOME/go"
+
 # Cache brew shellenv for faster startup
 if [[ -f /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"

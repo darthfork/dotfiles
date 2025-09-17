@@ -51,17 +51,17 @@ vim.keymap.set("n", "<leader>cc", ":ClaudeCodeResume<CR>", { noremap = true, sil
 vim.api.nvim_create_augroup("filetypesettings", { clear = true })
 vim.api.nvim_create_autocmd("FileType", { -- Default for all filetypes including c/cpp, python, bash etc.
   pattern = { "*" },
-  command = "setlocal ai ts=4 sw=4 si sta et",
+  command = "setlocal autoindent tabstop=4 shiftwidth=4 smartindent smarttab expandtab",
   group = "filetypesettings",
 })
 vim.api.nvim_create_autocmd("FileType", { -- Override tabstop to 2 spaces for lua, ruby etc.
   pattern = { "lua", "html", "terraform", "javascript", "typescript", "markdown", "ruby", "yaml" },
-  command = "setlocal ai ts=2 sw=2 si sta et",
+  command = "setlocal autoindent tabstop=2 shiftwidth=2 smartindent smarttab expandtab",
   group = "filetypesettings",
 })
 vim.api.nvim_create_autocmd("FileType", { -- Use tabs instead of spaces for golang and Makefiles
   pattern = { "make", "go" },
-  command = "setlocal ai ts=8 sw=8 si sta noet list",
+  command = "setlocal autoindent tabstop=8 shiftwidth=8 smartindent smarttab noexpandtab list",
   group = "filetypesettings",
 })
 vim.api.nvim_create_autocmd("FileType", { -- Enable spellcheck for markdown and rst
