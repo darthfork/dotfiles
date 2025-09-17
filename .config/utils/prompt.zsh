@@ -61,6 +61,7 @@ bindkey '^X^E' edit-command-line
 # Unicode character definitions (global scope)
 typeset -g STAGED_SYMBOL=$'\u271A'      # ✚ (Heavy Greek Cross)
 typeset -g UNSTAGED_SYMBOL=$'\u25CF'    # ● (Black Circle)
+typeset -g STASH_SYMBOL=$'\u2691'       # ⚑ (Black Flag)
 typeset -g PROMPT_ARROW=$'\u276F'       # ❯ (Heavy Right-Pointing Angle Quotation Mark)
 typeset -g KUBERNETES_SYMBOL=$'\u2388'  # ⎈ (Helm Symbol)
 typeset -g GIT_SYMBOL=$'\ue0a0'         #  (git branch symbol)
@@ -72,6 +73,24 @@ typeset -g _PROMPT_CACHE_GIT=""
 typeset -g _PROMPT_CACHE_GIT_TIME=0
 typeset -g _PROMPT_CACHE_GIT_PWD=""
 typeset -g PROMPT_CACHE_TTL=2  # Cache for 2 seconds
+
+# Configure vcs_info for git
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr "${UNSTAGED_SYMBOL}"
+zstyle ':vcs_info:*' stagedstr "${STAGED_SYMBOL}"
+zstyle ':vcs_info:*' formats '%b %u%c%m'
+zstyle ':vcs_info:*' actionformats '%b [%a]%u%c%m'
+
+# Add stash detection hook
++vi-git-stash() {
+  local stash_count=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
+  if [[ $stash_count -gt 0 ]]; then
+    hook_com[misc]="${STASH_SYMBOL}"
+  fi
+}
+zstyle ':vcs_info:git*+set-message:*' hooks git-stash
 
 # Get AWS profile
 get_aws_profile() {
@@ -129,7 +148,7 @@ get_venv_info() {
   fi
 }
 
-# Get git information with advanced status and coloring (with caching)
+# Get git information using vcs_info (with caching)
 get_git_info() {
   # Smart git detection - only check if we're actually in a git repo
   [[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 || return
@@ -143,60 +162,24 @@ get_git_info() {
     return
   fi
 
-  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    local branch=$(git branch --show-current 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
-    [[ -z $branch ]] && return  # Exit if we can't get branch info
+  # Use vcs_info to get git information
+  vcs_info
+  [[ -z $vcs_info_msg_0_ ]] && return
 
-    local git_status=""
-    local git_color="magenta"  # default color
-
-    # Use git status --porcelain to get detailed status
-    local status_output=$(git status --porcelain 2>/dev/null)
-
-    if [[ -n $status_output ]]; then
-      local has_staged=false
-      local has_unstaged=false
-      local has_untracked=false
-
-      # Check for staged files (first column) - using zsh pattern matching
-      if [[ $status_output =~ '(^|\n)[MADRC]' ]]; then
-        has_staged=true
-      fi
-
-      # Check for unstaged changes (second column) - using zsh pattern matching
-      if [[ $status_output =~ '(^|\n).[MD]' ]]; then
-        has_unstaged=true
-      fi
-
-      # Check for untracked files - using zsh pattern matching
-      if [[ $status_output == *$'\n??'* || $status_output == '??'* ]]; then
-        has_untracked=true
-      fi
-
-      # Set status symbols based on combinations
-      if [[ "$has_staged" == true && "$has_unstaged" == true ]]; then
-        git_status="${UNSTAGED_SYMBOL}${STAGED_SYMBOL}"  # Mixed: some staged, some unstaged
-      elif [[ "$has_staged" == true ]]; then
-        git_status="${STAGED_SYMBOL}"   # All staged
-      elif [[ "$has_unstaged" == true ]]; then
-        git_status="${UNSTAGED_SYMBOL}"   # All unstaged
-      fi
-
-      # Set color based on any changes (like agnoster)
-      git_color="yellow"  # Any changes present (staged/unstaged/untracked)
-    else
-      git_color="green"   # Clean repo - everything committed
-    fi
-
-    local result="%F{${git_color}}${GIT_SYMBOL} ${branch} ${git_status}%f"
-
-    # Cache the result
-    _PROMPT_CACHE_GIT="$result"
-    _PROMPT_CACHE_GIT_TIME=$current_time
-    _PROMPT_CACHE_GIT_PWD="$current_pwd"
-
-    echo "$result"
+  # Determine color based on git state
+  local git_color="green"  # Default to clean
+  if [[ -n ${vcs_info_msg_0_//[^${STAGED_SYMBOL}${UNSTAGED_SYMBOL}${STASH_SYMBOL}]/} ]]; then
+    git_color="yellow"  # Has changes or stashes
   fi
+
+  local result="%F{${git_color}}${GIT_SYMBOL} ${vcs_info_msg_0_}%f"
+
+  # Cache the result
+  _PROMPT_CACHE_GIT="$result"
+  _PROMPT_CACHE_GIT_TIME=$current_time
+  _PROMPT_CACHE_GIT_PWD="$current_pwd"
+
+  echo "$result"
 }
 
 # Prompt status
