@@ -73,6 +73,7 @@ brew 'watch'
 brew 'yamllint'
 brew 'ykman'
 brew 'yq'
+brew 'yubikey-personalization'
 brew 'zsh-syntax-highlighting'
 
 # Mac only packages and utilities

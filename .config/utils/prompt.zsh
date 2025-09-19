@@ -72,25 +72,37 @@ typeset -g _PROMPT_CACHE_K8S_TIME=0
 typeset -g _PROMPT_CACHE_GIT=""
 typeset -g _PROMPT_CACHE_GIT_TIME=0
 typeset -g _PROMPT_CACHE_GIT_PWD=""
+typeset -g _PROMPT_HAS_UNTRACKED=0
 typeset -g PROMPT_CACHE_TTL=2  # Cache for 2 seconds
 
 # Configure vcs_info for git
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' unstagedstr "${UNSTAGED_SYMBOL}"
 zstyle ':vcs_info:*' stagedstr "${STAGED_SYMBOL}"
 zstyle ':vcs_info:*' formats '%b %u%c%m'
 zstyle ':vcs_info:*' actionformats '%b [%a]%u%c%m'
 
-# Add stash detection hook
+# Add comprehensive git status hooks
 +vi-git-stash() {
   local stash_count=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
   if [[ $stash_count -gt 0 ]]; then
-    hook_com[misc]="${STASH_SYMBOL}"
+    hook_com[misc]+="${STASH_SYMBOL}"
   fi
 }
-zstyle ':vcs_info:git*+set-message:*' hooks git-stash
+
++vi-git-untracked() {
+  if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == 'true' ]] && \
+     [[ -n $(git ls-files --others --exclude-standard 2>/dev/null) ]]; then
+    _PROMPT_HAS_UNTRACKED=1
+  else
+    _PROMPT_HAS_UNTRACKED=0
+  fi
+}
+
+zstyle ':vcs_info:git*+set-message:*' hooks git-stash git-untracked
 
 # Get AWS profile
 get_aws_profile() {
@@ -168,8 +180,8 @@ get_git_info() {
 
   # Determine color based on git state
   local git_color="green"  # Default to clean
-  if [[ -n ${vcs_info_msg_0_//[^${STAGED_SYMBOL}${UNSTAGED_SYMBOL}${STASH_SYMBOL}]/} ]]; then
-    git_color="yellow"  # Has changes or stashes
+  if [[ -n ${vcs_info_msg_0_//[^${STAGED_SYMBOL}${UNSTAGED_SYMBOL}${STASH_SYMBOL}]/} ]] || [[ ${_PROMPT_HAS_UNTRACKED:-0} -eq 1 ]]; then
+    git_color="yellow"  # Has changes, stashes, or untracked files
   fi
 
   local result="%F{${git_color}}${GIT_SYMBOL} ${vcs_info_msg_0_}%f"
