@@ -31,20 +31,16 @@ function generate_code() {
         ykman oath accounts code
     else
         log_info "Generating 2FA code for account: $1"
-        ykman oath accounts code "$1" | tee /dev/tty | awk '{print $2}' | tr -d '\n' | ${COPY}
+        ykman oath accounts code "$1" | tee /dev/tty | awk -F' ' '{print $2}' | tr -d '\n' | ${COPY}
         log_info "Code copied to clipboard."
     fi
 }
 
-function main() {
-    check_yubikey
-    set_copy_command
+check_yubikey
+set_copy_command
 
-    if [ $# -eq 0 ]; then
-        generate_code
-    else
-        generate_code "$1"
-    fi
-}
-
-main "$@"
+if [ $# -eq 0 ]; then
+    generate_code
+else
+    generate_code "$1"
+fi
