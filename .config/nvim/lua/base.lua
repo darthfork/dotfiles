@@ -44,7 +44,6 @@ vim.keymap.set("n", "<C-b>", ":Buffers<CR>", { noremap = true, silent = true, de
 vim.keymap.set("n", "<C-f>", ":RG<CR>", { silent = true, desc = "Search through files with RipGrep" })
 vim.keymap.set("n", "<C-t>", ":Tags <CR>", { noremap = true, silent = true, desc = "Search through tags" })
 vim.keymap.set("n", "<C-_>", ":Commands <CR>", { noremap = true, silent = true, desc = "Search available commands" })
-vim.keymap.set("n", "<leader>fl", ":lopen<CR>", { noremap = true, silent = true, desc = "Open Quickfix List" })
 vim.keymap.set("n", "<leader>gb", ":GitBlame<CR>", { silent = true, desc = "Show Git Blame for current line" })
 vim.keymap.set("n", "<leader>ht", ":Helptags<CR>", { silent = true, desc = "Search Vim documentation" })
 vim.keymap.set("n", "<leader>cc", ":ClaudeCodeResume<CR>", { noremap = true, silent = true, desc = "Resume Claude" })

@@ -8,5 +8,5 @@ require("plugins")
 
 -- Setup LSP
 require("lsp").setup({
-  servers = { "gopls", "pylsp", "terraformls" }
+  servers = { "gopls", "pylsp", "terraformls" , "zls" }
 })

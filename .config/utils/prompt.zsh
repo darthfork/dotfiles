@@ -241,7 +241,7 @@ build_prompt() {
   [[ $RETVAL -ne 0 ]] && arrow_color="red"
   prompt_line+=" %F{${arrow_color}}${PROMPT_ARROW}%f"
 
-  echo "$prompt_line"
+  echo "%B$prompt_line%b"
 }
 
 # Build the right prompt with AWS and K8s info
@@ -275,7 +275,7 @@ build_rprompt() {
     rprompt_line+="$segments[$i]"
   done
 
-  echo "$rprompt_line"
+  echo "%B$rprompt_line%b"
 }
 
 # Set up the prompt
