@@ -10,7 +10,7 @@ vim.pack.add({
   "https://github.com/darthfork/git-blame.vim",
   "https://github.com/dense-analysis/ale",
   "https://github.com/greggh/claude-code.nvim",
-  "https://github.com/junegunn/fzf.vim",
+  "https://github.com/nvim-telescope/telescope.nvim",
   "https://github.com/mhinz/vim-signify",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/nvim-lua/plenary.nvim",
@@ -66,8 +66,15 @@ vim.g.ale_linters = {
   yaml = { "yamllint" },
 }
 
--- FZF configuration
-vim.g.fzf_tags_command = "ctags -R --exclude=.git --exclude=node_modules --exclude=.venv --exclude=.terraform"
+-- Telescope Configuration
+local telescope = require('telescope.builtin')
+vim.keymap.set("n", "<C-p>", telescope.find_files, { noremap = true, silent = true, desc = "Find files" })
+vim.keymap.set("n", "<C-b>", telescope.buffers, { noremap = true, silent = true, desc = "Search open buffers" })
+vim.keymap.set("n", "<C-f>", telescope.live_grep, { silent = true, desc = "Search through files with Grep" })
+vim.keymap.set("n", "<C-t>", telescope.tags, { noremap = true, silent = true, desc = "Search through tags" })
+vim.keymap.set("n", "<C-_>", telescope.commands, { noremap = true, silent = true, desc = "Search available commands" })
+vim.keymap.set("n", "<leader>jl", telescope.jumplist, { silent = true, desc = "Open jumplist" })
+vim.keymap.set("n", "<leader>ht", telescope.help_tags, { silent = true, desc = "Search Vim documentation" })
 
 -- Lualine configuration
 require("lualine").setup {
@@ -110,6 +117,7 @@ require("nvim-treesitter.configs").setup {
     "vim",
     "vimdoc",
     "yaml",
+    "zig",
   },
   auto_install = false,
   highlight = {

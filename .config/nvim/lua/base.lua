@@ -28,9 +28,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.winborder = "rounded"
 vim.opt.completeopt = { "menuone", "fuzzy", "noselect", "popup", "preview" }
 
--- Runtime path configuration
-vim.opt.rtp:append(vim.fn.system("brew --prefix fzf"):gsub("\n", ""))
-
 -- Key mappings
 vim.keymap.set("n", "n", "nzz", { noremap = true, silent = true, desc = "Move to next search result" })
 vim.keymap.set("n", "N", "Nzz", { noremap = true, silent = true, desc = "Move to previous search result" })
@@ -39,13 +36,8 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true, desc = "
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true, desc = "Move left a buffer" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true, desc = "Move right a buffer" })
 vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", { noremap = true, silent = true, desc = "Toggle Neo-tree" })
-vim.keymap.set("n", "<C-p>", ":FZF --bind ctrl-p:abort<CR>", { noremap = true, silent = true, desc = "Find files" })
-vim.keymap.set("n", "<C-b>", ":Buffers<CR>", { noremap = true, silent = true, desc = "Search open buffers" })
-vim.keymap.set("n", "<C-f>", ":RG<CR>", { silent = true, desc = "Search through files with RipGrep" })
-vim.keymap.set("n", "<C-t>", ":Tags <CR>", { noremap = true, silent = true, desc = "Search through tags" })
-vim.keymap.set("n", "<C-_>", ":Commands <CR>", { noremap = true, silent = true, desc = "Search available commands" })
+vim.keymap.set("n", "<C-g>", ":Telescope<CR>", { noremap = true, silent = true, desc = "Open Telescope" })
 vim.keymap.set("n", "<leader>gb", ":GitBlame<CR>", { silent = true, desc = "Show Git Blame for current line" })
-vim.keymap.set("n", "<leader>ht", ":Helptags<CR>", { silent = true, desc = "Search Vim documentation" })
 vim.keymap.set("n", "<leader>cc", ":ClaudeCodeResume<CR>", { noremap = true, silent = true, desc = "Resume Claude" })
 
 -- Filetype specific settings
