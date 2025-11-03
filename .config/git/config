@@ -10,6 +10,7 @@
 [core]
 	editor = nvim
 	excludesFile = ~/.config/git/ignore
+	fsmonitor = true
 [alias]
 	pull-submodules = "submodule update --init --recursive"
 	pr = "!f() { git checkout main; git branch -D pr/$1 || true; git fetch origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"

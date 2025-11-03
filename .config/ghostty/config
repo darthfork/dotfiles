@@ -9,3 +9,4 @@ macos-titlebar-style = "tabs"
 shell-integration = "zsh"
 theme = "Tomorrow Night Bright"
 window-colorspace = "display-p3"
+keybind = shift+enter=text:\x1b\r
