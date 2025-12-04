@@ -6,7 +6,7 @@
 vim.g.mapleader = " "
 
 -- Configuration Options
-vim.opt.guicursor = ""
+vim.opt.guicursor = "a:hor20"
 vim.opt.regexpengine = 2
 vim.opt.backspace = { "indent", "eol", "start" }
 vim.opt.colorcolumn = "120"

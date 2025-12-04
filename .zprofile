@@ -22,7 +22,6 @@ source $HOME/.local/bin/start_ssh_agent.sh
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 autoload -Uz compinit && compinit
 
-
 # Source language versions managers
 [[ -z "$PYENV_SHELL" ]] && eval "$(command pyenv init -)"
 [[ -z "$GOENV_SHELL" ]] && eval "$(command goenv init -)"

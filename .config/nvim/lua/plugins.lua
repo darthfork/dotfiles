@@ -4,18 +4,18 @@
 
 -- Install plugins
 vim.pack.add({
-  "https://github.com/MeanderingProgrammer/render-markdown.nvim",
-  "https://github.com/MunifTanjim/nui.nvim",
   "https://github.com/akinsho/bufferline.nvim",
   "https://github.com/darthfork/git-blame.vim",
   "https://github.com/dense-analysis/ale",
   "https://github.com/greggh/claude-code.nvim",
-  "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/MeanderingProgrammer/render-markdown.nvim",
   "https://github.com/mhinz/vim-signify",
+  "https://github.com/MunifTanjim/nui.nvim",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/nvim-lualine/lualine.nvim",
   "https://github.com/nvim-neo-tree/neo-tree.nvim",
+  "https://github.com/nvim-telescope/telescope.nvim",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/rebelot/kanagawa.nvim",
