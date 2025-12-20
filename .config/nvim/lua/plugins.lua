@@ -107,7 +107,6 @@ require("nvim-treesitter.configs").setup {
     "helm",
     "html",
     "json",
-    "latex",
     "lua",
     "markdown",
     "python",

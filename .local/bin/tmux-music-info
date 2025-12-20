@@ -1,0 +1,28 @@
+#!/usr/bin/env osascript
+
+# tmux-music-info - Display the current Apple Music track in tmux status bar
+
+tell application "Music"
+    if it is running then
+        if player state is playing or player state is paused then
+            try
+                set trackName to name of current track
+                set artistName to artist of current track
+                set songInfo to "♫ " & artistName & " - " & trackName & " "
+
+                if length of songInfo > 50 then
+                    set truncatedSong to text 1 thru 45 of songInfo
+                    return truncatedSong & "... "
+                else
+                    return songInfo
+                end if
+            on error errMsg number errNum
+                return ""
+            end try
+        else
+            return ""
+        end if
+    else
+        return ""
+    end if
+end tell

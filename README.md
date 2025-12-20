@@ -108,7 +108,7 @@ source <(helm completion zsh)
 │       ├── mltix
 │       ├── start_ssh_agent.sh
 │       ├── tmux-battery-info
-│       ├── tmux-spotify-info
+│       ├── tmux-music-info
 │       └── tmux-system-info
 ├── .zprofile
 ├── .zshrc
