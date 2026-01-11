@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Brewfile - Brewfile for setting up and managing packages
 
 # Tap additional repositories
@@ -10,6 +12,7 @@ cask 'brave-browser'
 cask 'chatgpt'
 cask 'claude'
 cask 'claude-code'
+cask 'codex'
 # cask 'container'
 cask 'discord'
 cask 'docker-desktop'
@@ -92,17 +95,18 @@ if OS.mac?
 end
 
 # VSCode Extensions
-vscode 'anthropic.claude-code'
 vscode 'bazelbuild.vscode-bazel'
 vscode 'bierner.github-markdown-preview'
-vscode 'coder.coder-remote'
+vscode 'bierner.markdown-checkbox'
+vscode 'bierner.markdown-footnotes'
+vscode 'bierner.markdown-mermaid'
+vscode 'bierner.markdown-preview-github-styles'
 vscode 'emily-curry.base16-tomorrow-dark-vscode'
 vscode 'file-icons.file-icons'
-vscode 'github.copilot'
-vscode 'github.copilot-chat'
 vscode 'golang.go'
 vscode 'hashicorp.terraform'
 vscode 'ms-python.python'
+vscode 'openai.chatgpt'
 vscode 'pomdtr.excalidraw-editor'
 vscode 'tilt-dev.tiltfile'
 vscode 'tim-koehler.helm-intellisense'

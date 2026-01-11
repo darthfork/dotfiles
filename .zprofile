@@ -23,7 +23,7 @@ fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 autoload -Uz compinit && compinit
 
 # Source language versions managers
-[[ -z "$PYENV_SHELL" ]] && eval "$(command pyenv init -)"
-[[ -z "$GOENV_SHELL" ]] && eval "$(command goenv init -)"
-[[ -z "$NODENV_SHELL" ]] && eval "$(command nodenv init -)"
-[[ -z "$RBENV_ROOT" ]] || [[ ":$PATH:" != *":$HOME/.rbenv/shims:"* ]] && eval "$(command rbenv init -)"
+eval "$(command pyenv init -)"
+eval "$(command goenv init -)"
+eval "$(command nodenv init -)"
+[[ ":$PATH:" != *":$HOME/.rbenv/shims:"* ]] && eval "$(command rbenv init -)"
