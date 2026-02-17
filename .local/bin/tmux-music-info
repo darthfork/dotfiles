@@ -23,6 +23,6 @@ tell application "Music"
             return ""
         end if
     else
-        return ""
+        return "No music playing "
     end if
 end tell
