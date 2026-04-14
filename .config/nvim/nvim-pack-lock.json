@@ -12,6 +12,14 @@
       "rev": "c9a31e51069977edaad9560473b5d031fcc5d38b",
       "src": "https://github.com/greggh/claude-code.nvim"
     },
+    "copilot.vim": {
+      "rev": "12995dffe10282b29b8335650bf3e7457f4870e7",
+      "src": "ssh://git@github.com/github/copilot.vim"
+    },
+    "fzf.vim": {
+      "rev": "879db51d0965515cdaef9b7f6bdeb91c65d2829e",
+      "src": "ssh://git@github.com/junegunn/fzf.vim"
+    },
     "git-blame.vim": {
       "rev": "8a7f66b3b51780f58e133f990df563f075c81155",
       "src": "https://github.com/darthfork/git-blame.vim"
