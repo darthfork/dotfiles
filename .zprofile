@@ -21,6 +21,7 @@ source $HOME/.local/bin/start_ssh_agent.sh
 # Enable tab completion
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 autoload -Uz compinit && compinit
+source "$HOME/.openclaw/completions/openclaw.zsh"
 
 # Source language versions managers
 eval "$(command pyenv init -)"
