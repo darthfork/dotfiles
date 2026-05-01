@@ -33,7 +33,11 @@ require("claude-code").setup({
     hide_numbers = true,
     hide_signcolumn = true
   },
-  command = "claude",
+  command = "codex",
+  command_variants = {
+    resume = "resume",
+  },
+
   git = {
     use_git_root = true,
   },

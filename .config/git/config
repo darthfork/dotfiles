@@ -4,9 +4,7 @@
 [user]
 	name = Abhishek Rai
 	email = mail@raiabhishek.com
-	signingkey = ~/.ssh/id_rsa.pub
-	# run `git config --global --unset gpg.format` before using gpg key
-	# signingKey = 72471FC55B6D8AC3008B71EB22E13F39CDE58A8C
+	signingKey = 72471FC55B6D8AC3008B71EB22E13F39CDE58A8C
 [core]
 	editor = nvim
 	excludesFile = ~/.config/git/ignore
@@ -39,10 +37,10 @@
 	insteadOf = https://github.com/
 [init]
 	defaultBranch = main
-[gpg]
-	format = ssh
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[gpg]
+	program = /Users/abhishekrai/.local/bin/hermes-gpg-wrapper
