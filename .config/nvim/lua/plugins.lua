@@ -45,6 +45,7 @@ require("claude-code").setup({
 
 -- ALE configuration
 vim.g.ale_fix_on_save = 1
+vim.g.ale_set_quickfix = 1
 vim.g.ale_echo_msg_format = "[%linter%] %code: %%s [%severity%]"
 
 vim.g.ale_fixers = {

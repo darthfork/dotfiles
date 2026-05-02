@@ -27,6 +27,10 @@ source <(fzf --zsh)
 
 alias vim="nvim"
 alias vimdiff="nvim -d"
-alias tmux="tmux attach -t Base || tmux new -s Base"
+
+function tmux() {
+  local session="${1:-Base}"
+  command /opt/homebrew/bin/tmux attach -t "$session" || command /opt/homebrew/bin/tmux new -s "$session"
+}
 
 # Use ~/.zshenv for secrets and system specific aliases
