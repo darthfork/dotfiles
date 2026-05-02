@@ -19,7 +19,6 @@ PYTHON_TOOLS=(
 )
 
 NODE_TOOLS=(
-    "@anthropic-ai/claude-code@latest"
     "eslint@latest"
 )
 

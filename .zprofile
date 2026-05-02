@@ -26,4 +26,4 @@ autoload -Uz compinit && compinit
 eval "$(command pyenv init -)"
 eval "$(command goenv init -)"
 eval "$(command nodenv init -)"
-[[ ":$PATH:" != *":$HOME/.rbenv/shims:"* ]] && eval "$(command rbenv init -)"
+eval "$(command rbenv init -)"
