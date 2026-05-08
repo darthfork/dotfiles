@@ -9,6 +9,32 @@ ruby   = "3.3.5"
 "aqua:golangci/golangci-lint" = "2.3.1"
 "aqua:securego/gosec"         = "2.22.7"
 
+# General CLI tools (prebuilt binaries via aqua)
+"aqua:BurntSushi/ripgrep"             = "latest"
+"aqua:antonmedv/fx"                   = "latest"
+"aqua:bazelbuild/bazel-watcher"       = "latest"
+"aqua:bazelbuild/bazelisk"            = "latest"
+"aqua:bazelbuild/buildtools/buildifier" = "latest"
+"aqua:bazelbuild/buildtools/buildozer"  = "latest"
+"aqua:cli/cli"                        = "latest"
+"aqua:hadolint/hadolint"              = "latest"
+"aqua:hashicorp/terraform-ls"         = "latest"
+"aqua:helm/helm"                      = "latest"
+"aqua:jqlang/jq"                      = "latest"
+"aqua:junegunn/fzf"                   = "latest"
+"aqua:koalaman/shellcheck"            = "latest"
+"aqua:kubernetes-sigs/kind"           = "latest"
+"aqua:kubernetes/kubernetes/kubectl"  = "latest"
+"aqua:mikefarah/yq"                   = "latest"
+"aqua:sharkdp/fd"                     = "latest"
+"aqua:terraform-linters/tflint"       = "latest"
+"aqua:tilt-dev/ctlptl"                = "latest"
+"aqua:tilt-dev/tilt"                  = "latest"
+"aqua:wagoodman/dive"                 = "latest"
+
+# Lua
+"aqua:LuaLS/lua-language-server" = "latest"
+
 # Go - no prebuilt binaries, install via go toolchain
 "go:golang.org/x/vuln/cmd/govulncheck" = "latest"
 "go:golang.org/x/tools/gopls"          = "latest"
@@ -17,6 +43,7 @@ ruby   = "3.3.5"
 # Python
 ruff                     = "latest"
 uv                       = "latest"
+"pipx:jc"                = "latest"
 "pipx:python-lsp-server" = "1.9"
 
 # Node
