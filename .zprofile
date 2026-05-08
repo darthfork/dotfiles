@@ -22,8 +22,5 @@ source $HOME/.local/bin/start_ssh_agent.sh
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 autoload -Uz compinit && compinit
 
-# Source language versions managers
-eval "$(command pyenv init -)"
-eval "$(command goenv init -)"
-eval "$(command nodenv init -)"
-eval "$(command rbenv init -)"
+# Manage language versions and tooling via mise
+eval "$(command mise activate zsh)"

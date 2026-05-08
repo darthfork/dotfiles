@@ -1,0 +1,31 @@
+[tools]
+# Language runtimes
+go     = "1.25.9"
+node   = "22.22.0"
+python = "3.12.13"
+ruby   = "3.3.5"
+
+# Go - prebuilt binaries via aqua
+"aqua:golangci/golangci-lint" = "2.3.1"
+"aqua:securego/gosec"         = "2.22.7"
+
+# Go - no prebuilt binaries, install via go toolchain
+"go:golang.org/x/vuln/cmd/govulncheck" = "latest"
+"go:golang.org/x/tools/gopls"          = "latest"
+"go:golang.org/x/tools/cmd/goimports"  = "latest"
+
+# Python
+ruff                     = "latest"
+uv                       = "latest"
+"pipx:python-lsp-server" = "1.9"
+
+# Node
+"npm:eslint" = "latest"
+
+# Ruby
+"gem:github_changelog_generator" = "1.16.4"
+"gem:rubocop"                    = "latest"
+
+[settings]
+trusted_config_paths = ["/Users/abhishekrai/workspace/dotfiles/.config/mise"]
+idiomatic_version_file_enable_tools = ["go", "python"]
