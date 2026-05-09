@@ -54,5 +54,5 @@ uv                       = "latest"
 "gem:rubocop"                    = "latest"
 
 [settings]
-trusted_config_paths = ["/Users/abhishekrai/workspace/dotfiles/.config/mise"]
+trusted_config_paths = ["/Users/abhishekrai/workspace/dotfiles/.config/mise", "/Users/abhishek/workspace/darthfork/dotfiles/.config/mise"]
 idiomatic_version_file_enable_tools = ["go", "python"]
