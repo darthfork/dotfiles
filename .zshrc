@@ -33,4 +33,7 @@ function tmux() {
   command /opt/homebrew/bin/tmux attach -t "$session" || command /opt/homebrew/bin/tmux new -s "$session"
 }
 
+# Reset cursor to underscore
+precmd() { printf '\e[4 q'; }
+
 # Use ~/.zshenv for secrets and system specific aliases
