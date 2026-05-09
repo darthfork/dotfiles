@@ -43,42 +43,28 @@ Vim/NeoVim, tmux, shell config files and utility scripts for macOS and Linux.
       }
     ```
 
-## Enable completion for zsh
-
-**kubectl**
-
-```zsh
-source <(kubectl completion zsh)
-```
-
-**aws**
-
-```zsh
-complete -C '$(command -v aws_completer)' aws
-```
-
-**helm**
-
-```zsh
-source <(helm completion zsh)
-```
-
 ## Repo Structure
 
 ```bash
 .
 ├── .config
+│   ├── claude
+│   │   ├── CLAUDE.md
+│   │   └── settings.json
 │   ├── ghostty
 │   │   └── config
 │   ├── git
 │   │   ├── config
 │   │   └── ignore
+│   ├── mise
+│   │   └── config.toml
 │   ├── nvim
 │   │   ├── init.lua
-│   │   └── lua
-│   │       ├── base.lua
-│   │       ├── lsp.lua
-│   │       └── plugins.lua
+│   │   ├── lua
+│   │   │   ├── base.lua
+│   │   │   ├── lsp.lua
+│   │   │   └── plugins.lua
+│   │   └── nvim-pack-lock.json
 │   ├── ripgrep
 │   │   └── config
 │   ├── tmux
