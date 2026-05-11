@@ -1,3 +1,7 @@
+[settings]
+trusted_config_paths = ["/Users/abhishekrai/workspace/dotfiles/.config/mise", "/Users/abhishek/workspace/darthfork/dotfiles/.config/mise"]
+idiomatic_version_file_enable_tools = ["go", "python"]
+
 [tools]
 # Language runtimes
 go     = "1.25.9"
@@ -52,7 +56,3 @@ uv                       = "latest"
 # Ruby
 "gem:github_changelog_generator" = "1.16.4"
 "gem:rubocop"                    = "latest"
-
-[settings]
-trusted_config_paths = ["/Users/abhishekrai/workspace/dotfiles/.config/mise", "/Users/abhishek/workspace/darthfork/dotfiles/.config/mise"]
-idiomatic_version_file_enable_tools = ["go", "python"]
