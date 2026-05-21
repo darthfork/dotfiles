@@ -51,7 +51,8 @@ uv                       = "latest"
 "pipx:jc"                = "latest"
 "pipx:python-lsp-server" = "1.9"
 
-# Node
+# Node / Bun
+bun          = "latest"
 "npm:eslint" = "latest"
 
 # Ruby
