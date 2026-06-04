@@ -8,7 +8,6 @@ vim.pack.add({
   "https://github.com/darthfork/git-blame.vim",
   "https://github.com/dense-analysis/ale",
   "https://github.com/greggh/claude-code.nvim",
-  "https://github.com/johnseth97/codex.nvim",
   "https://github.com/MeanderingProgrammer/render-markdown.nvim",
   "https://github.com/mhinz/vim-signify",
   "https://github.com/MunifTanjim/nui.nvim",
@@ -42,21 +41,6 @@ require("claude-code").setup({
   git = {
     use_git_root = true,
   },
-})
-
--- Codex configuration
-require("codex").setup({
-  keymaps = {
-    toggle = nil,
-    quit = "<C-q>",
-  },
-  border = "rounded",
-  width = 0.3,
-  height = 0.8,
-  cmd = { "codex", "resume" },
-  autoinstall = false,
-  panel = true,
-  use_buffer = false,
 })
 
 -- ALE configuration
