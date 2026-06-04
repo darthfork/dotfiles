@@ -39,6 +39,7 @@ vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", { noremap = true, silent = t
 vim.keymap.set("n", "<C-g>", ":Telescope<CR>", { noremap = true, silent = true, desc = "Open Telescope" })
 vim.keymap.set("n", "<leader>gb", ":GitBlame<CR>", { silent = true, desc = "Show Git Blame for current line" })
 vim.keymap.set("n", "<leader>cc", ":ClaudeCodeResume<CR>", { noremap = true, silent = true, desc = "Resume Claude" })
+vim.keymap.set("n", "<leader>co", "<Cmd>CodexToggle<CR>", { noremap = true, silent = true, desc = "Toggle Codex" })
 
 -- Filetype specific settings
 vim.api.nvim_create_augroup("filetypesettings", { clear = true })

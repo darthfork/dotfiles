@@ -52,7 +52,7 @@ spec:
   serviceAccountName: dorker
   containers:
     - name: dorker
-      image: darthfork/dorker:fedora40
+      image: ghcr.io/darthfork/dorker:noble
       command: ["sh", "-c", "while true; do sleep 3600; done"]
       tty: true
       stdin: true

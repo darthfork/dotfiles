@@ -4,7 +4,7 @@
 
 services:
   dorker:
-    image: darthfork/dorker:fedora40
+    image: ghcr.io/darthfork/dorker:latest
     hostname: dorker
     stdin_open: true
     tty: true
