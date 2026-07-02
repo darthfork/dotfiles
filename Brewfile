@@ -48,6 +48,7 @@ brew 'luacheck'
 brew 'luarocks'
 brew 'mailsy'
 brew 'mise'
+brew 'moreutils'
 brew 'neovim'
 brew 'pcre'
 brew 'redis', restart_service: :changed
