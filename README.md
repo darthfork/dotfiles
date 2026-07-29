@@ -60,11 +60,10 @@ Vim/NeoVim, tmux, shell config files and utility scripts for macOS and Linux.
 │   │   └── config.toml
 │   ├── nvim
 │   │   ├── init.lua
-│   │   ├── lua
-│   │   │   ├── base.lua
-│   │   │   ├── lsp.lua
-│   │   │   └── plugins.lua
-│   │   └── nvim-pack-lock.json
+│   │   └── lua
+│   │       ├── base.lua
+│   │       ├── lsp.lua
+│   │       └── plugins.lua
 │   ├── ripgrep
 │   │   └── config
 │   ├── tmux
