@@ -35,6 +35,7 @@ cask 'whatsapp'
 cask 'yubico-authenticator'
 
 # Homebrew packages
+brew 'asciinema'
 brew 'awscli'
 brew 'btop'
 brew 'git'
@@ -47,7 +48,6 @@ brew 'mailsy'
 brew 'mise'
 brew 'moreutils'
 brew 'neovim'
-brew 'pcre'
 brew 'redis', restart_service: :changed
 brew 'tmux'
 brew 'tree-sitter'
@@ -55,7 +55,6 @@ brew 'universal-ctags'
 brew 'watch'
 brew 'yamllint'
 brew 'ykman'
-brew 'yubikey-personalization'
 brew 'zsh-syntax-highlighting'
 
 # Mac only packages and utilities
