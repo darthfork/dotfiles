@@ -15,7 +15,6 @@ ruby   = "3.3.5"
 
 # General CLI tools (prebuilt binaries via aqua)
 "aqua:BurntSushi/ripgrep"             = "latest"
-"aqua:antonmedv/fx"                   = "latest"
 "aqua:bazelbuild/bazel-watcher"       = "latest"
 "aqua:bazelbuild/bazelisk"            = "latest"
 "aqua:bazelbuild/buildtools/buildifier" = "latest"
