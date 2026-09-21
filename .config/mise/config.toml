@@ -1,5 +1,5 @@
 [settings]
-trusted_config_paths = ["/Users/abhishekrai/workspace/dotfiles/.config/mise", "/Users/abhishek/workspace/darthfork/dotfiles/.config/mise", "/home/abhishek/workspace/dotfiles/.config/mise"]
+trusted_config_paths = ["/Users/abhishekrai/workspace/dotfiles/.config/mise", "/Users/abhishekrai/workspace/darthfork/dotfiles/.config/mise", "/home/abhishek/workspace/dotfiles/.config/mise"]
 
 [tools]
 # Language runtimes
