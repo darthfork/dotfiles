@@ -33,9 +33,9 @@ require("claude-code").setup({
     hide_numbers = true,
     hide_signcolumn = true
   },
-  command = "codex",
+  command = "claude",
   command_variants = {
-    resume = "resume",
+    resume = "--resume",
   },
 
   git = {
@@ -104,34 +104,33 @@ require("bufferline").setup {
 }
 
 -- Treesitter configuration
-require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-    "bash",
-    "c",
-    "go",
-    "helm",
-    "html",
-    "json",
-    "lua",
-    "markdown",
-    "python",
-    "rust",
-    "starlark",
-    "terraform",
-    "vim",
-    "vimdoc",
-    "yaml",
-    "zig",
-  },
-  auto_install = false,
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true,
-  },
-}
+-- Incremental selection is built into Neovim 0.12 (visual mode `an`/`in`/`]n`/`[n`).
+require("nvim-treesitter").install({
+  "bash",
+  "c",
+  "go",
+  "helm",
+  "html",
+  "json",
+  "lua",
+  "markdown",
+  "python",
+  "rust",
+  "starlark",
+  "terraform",
+  "vim",
+  "vimdoc",
+  "yaml",
+  "zig",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("treesitter_start", { clear = true }),
+  callback = function(args)
+    -- Fails silently for filetypes without an installed parser
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})
 
 -- Render Markdown configuration
 require("render-markdown").setup({})
