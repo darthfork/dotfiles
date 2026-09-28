@@ -108,6 +108,8 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-stash git-untracked
 get_aws_profile() {
   if [[ -n "$AWS_PROFILE" ]]; then
     echo "aws:${AWS_PROFILE}"
+  elif [[ -n "$AWS_ACTIVE_PROFILE" ]]; then
+    echo "aws:${AWS_ACTIVE_PROFILE}"
   elif [[ -n "$AWS_DEFAULT_PROFILE" ]]; then
     echo "aws:${AWS_DEFAULT_PROFILE}"
   else
