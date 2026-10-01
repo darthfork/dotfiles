@@ -24,3 +24,6 @@ autoload -Uz compinit && compinit
 
 # Manage language versions and tooling via mise
 eval "$(command mise activate zsh)"
+
+# Eval zoxide
+eval "$(zoxide init zsh)"

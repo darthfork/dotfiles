@@ -60,6 +60,7 @@ brew 'universal-ctags'
 brew 'watch'
 brew 'yamllint'
 brew 'ykman'
+brew 'zoxide'
 brew 'zsh-syntax-highlighting'
 
 # Mac only packages and utilities
