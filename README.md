@@ -48,8 +48,8 @@ Vim/NeoVim, tmux, shell config files and utility scripts for macOS and Linux.
 ```bash
 .
 ├── .config
+│   ├── AGENTS.md
 │   ├── claude
-│   │   ├── CLAUDE.md
 │   │   └── settings.json
 │   ├── ghostty
 │   │   └── config
