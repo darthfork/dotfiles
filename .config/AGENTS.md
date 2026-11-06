@@ -45,7 +45,7 @@ Verbosity governs prose only. It never truncates code, file paths, command outpu
 ## Code Style
 
 - **Naming**: Variable and function names should generally be complete words.
-- **Comments**: Prefer self-documenting code over excessive comments. Only comment when something is surprising, unclear, or not following typical patterns.
+- **Comments**: Prefer self-documenting code over excessive comments. Only comment when something is surprising, unclear, or not following typical patterns. DO NOT leak our conversation, prompt, or iteration history into code comments, pull request descriptions, or other maintainer-facing prose. Write for readers who have not seen our conversation.
 
 ## Code Quality
 
